@@ -1,0 +1,169 @@
+/*body {*/
+/*  margin: 0;*/
+/*  background-color: rgb(230, 230, 230);*/
+/*  font-family:  sans-serif;*/
+/*  text-align: center;*/
+/*}*/
+
+/*!**/
+/* * Navigation bar*/
+/* *!*/
+
+/*nav {*/
+/*  display: flex;*/
+/*  align-items: center;*/
+/*  justify-content: space-between;*/
+
+/*  background-color: #141d28;*/
+/*  color: white;*/
+/*  margin-bottom: 25px;*/
+/*  padding: 10px 50px;*/
+/*}*/
+
+/*nav label {*/
+/*  font-size: 30px;*/
+/*}*/
+
+/*nav label span {*/
+/*  color: #0073ff;*/
+/*}*/
+
+/*nav ul {*/
+/*  margin: 0;*/
+/*}*/
+
+/*nav ul li {*/
+/*  display: inline-block;*/
+/*  margin: 0 10px;*/
+/*  padding: 10px 0;*/
+/*}*/
+
+/*nav ul li a {*/
+/*  color: white;*/
+/*}*/
+
+/*a {*/
+/*  text-decoration: none;*/
+/*}*/
+
+/*.dropdown {*/
+/*  background-color: #141d28;*/
+/*  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);*/
+/*  display: none;*/
+/*  max-width: 120px;*/
+/*  position: absolute;*/
+/*  text-align: left;*/
+/*  top: 45px;*/
+/*}*/
+
+/*.dropdown ul {*/
+/*  padding: 0;*/
+/*}*/
+
+/*.dropdown ul li {*/
+/*  padding-bottom: 10px;*/
+/*}*/
+
+/*.dropdown-hover:hover .dropdown {*/
+/*  display: block;*/
+/*}*/
+
+/*!**/
+/* * Content*/
+/* *!*/
+
+/*.container {*/
+/*  display: flex;*/
+/*  justify-content: center;*/
+/*}*/
+
+/*.menu-window {*/
+/*  align-self: flex-start;*/
+
+/*  background-color: rgb(255, 255, 255);*/
+/*  border-radius: 10px;*/
+/*  float: left;*/
+/*  margin: 10px;*/
+/*  padding: 30px;*/
+/*  text-align: center;*/
+/*}*/
+
+/*.menu-window span {*/
+/*  background-color: #0073ff;*/
+/*  border-radius: 50%;*/
+/*  display: inline-block;*/
+/*  height: 75px;*/
+/*  width: 75px;*/
+/*}*/
+
+/*.menu-window span img {*/
+/*  margin: 25%;*/
+/*  width: 50%;*/
+/*}*/
+
+/*.menu-window p {*/
+/*  font-weight: 400;*/
+/*  font-size: 28px;*/
+/*  margin-top: 15px;*/
+/*}*/
+
+/*.input-field {*/
+/*  text-align: left;*/
+/*}*/
+
+/*.input-field label {*/
+/*  display: block;*/
+/*  font-size: 16px;*/
+/*  margin-bottom: 5px;*/
+/*}*/
+
+/*.menu-window .input {*/
+/*  border: 1px solid #cecece;*/
+/*  border-radius: 3px;*/
+/*  display: block;*/
+/*  margin-bottom: 10px;*/
+/*  padding: 10px;*/
+/*  width: 250px;*/
+/*}*/
+
+/*.menu-window .button {*/
+/*  background-color: #0073ff;*/
+/*  border: none;*/
+/*  border-radius: 3px;*/
+/*  color: white;*/
+/*  cursor: pointer;*/
+/*  display: block;*/
+/*  padding: 13px;*/
+/*  width: 100%;*/
+/*}*/
+
+/*.menu-window .button:hover {*/
+/*  opacity: 80%;*/
+/*}*/
+
+/*.menu-window h1 {*/
+/*  text-align: left;*/
+/*}*/
+
+/*table {*/
+/*  border-collapse: collapse;*/
+/*}*/
+
+/*th {*/
+/*  background-color: #0073ff;*/
+/*  color: white;*/
+/*}*/
+
+/*th, td {*/
+/*  border: 1px solid #dddddd;*/
+/*  text-align: left;*/
+/*  padding: 8px;*/
+/*}*/
+
+/*tr:nth-child(even) {*/
+/*  background-color: #dddddd;*/
+/*}*/
+
+/*tr:hover {*/
+/*  background-color: rgb(180, 180, 180);*/
+/*}*/

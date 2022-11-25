@@ -1,0 +1,30 @@
+<div class="menu-bar">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"/>
+  <h1 class="logo">Eletric<span>Go</span></h1>
+  <ul>
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Login <i class="fas fa-caret-down"></i></a>
+
+      <div class="dropdown-menu">
+        <ul>
+          <li><a href="#" [routerLink]="['/warehouse-manager']">Warehouse Manager</a></li>
+          <li><a href="#" [routerLink]="['/create-truck']">Create Truck</a></li>
+          <li><a href="#">Fleet Manager</a></li>
+          <li><a href="#">Logistic Manager</a></li>
+        </ul>
+      </div>
+
+    <li><a href="#">Contact us <i class="fas fa-caret-down"></i></a>
+      <div class="dropdown-menu">
+        <ul>
+          <li><a href="#">G70</a></li>
+        </ul>
+      </div>
+  </ul>
+</div>
+
+<div class="homePage">
+  <img class="warehouseHomePage-img" src="assets/warehouseHomePage.png">
+
+  <h1 class="welcomeMessage">Welcome to Eletric<span>Go!</span></h1>
+</div>

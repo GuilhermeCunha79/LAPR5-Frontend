@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+<nav>
+  <label>Eletric<span>Go</span></label>
+  <ul>
+    <li><a href="#">Home</a></li>
+    <li class="dropdown-hover">
+      <a href="#">Login<i class="fas"></i></a>
+      <div class="dropdown">
+        <ul>
+          <li><a href="#" [routerLink]="['/warehouse-manager']">Warehouse Manager</a></li>
+          <li><a href="#">Fleet Manager</a></li>
+          <li><a href="#">Logistics Manager</a></li>
+        </ul>
+      </div>
+    <li><a href="#">Contact</a></li>
+  </ul>
+</nav>
+<div class="container">
+  <div class="menu-window">
+            <span>
+                <img src="../../assets/icon-warehouse.png" alt="account-icon">
+            </span>
+    <p>Create Warehouse</p>
+    <div class="input-field">
+      <label>Warehouse ID</label>
+      <input class="input" type="text" name="warehouseIdentifier" required [(ngModel)]="warehouseIdentifier">
+    </div>
+    <div class="input-field">
+      <label>Designation</label>
+      <input class="input" type="text" name="designation" required [(ngModel)]="designation">
+    </div>
+    <div class="input-field">
+      <label>Street Name</label>
+      <input class="input" type="text" name="street" required [(ngModel)]="street">
+    </div>
+    <div class="input-field">
+      <label>Street Number</label>
+      <input class="input" type="number" name="number" required [(ngModel)]="number">
+    </div>
+    <div class="input-field">
+      <label>Postal Code</label>
+      <input class="input" type="text" name="postalCode" required [(ngModel)]="postalCode">
+    </div>
+    <div class="input-field">
+      <label>City</label>
+      <input class="input" type="text" name="country" required [(ngModel)]="country">
+    </div>
+    <div class="input-field">
+      <label>Latitude</label>
+      <input class="input" type="number" name="latitude" required [(ngModel)]="latitude">
+    </div>
+    <div class="input-field">
+      <label>Longitude</label>
+      <input class="input" type="number" name="longitude" required [(ngModel)]="longitude">
+    </div>
+    <div class="input-field">
+      <label>Altitude</label>
+      <input class="input" type="number" name="altitude" required [(ngModel)]="altitude">
+    </div>
+    <div>
+      <button class="button" type="submit" (click)="createWarehouse()" onclick="window.location.reload()">Submit</button>
+    </div>
+  </div>
+  <div class="menu-window">
+    <h1>Warehouse list</h1>
+    <table id="tbody">
+      <tr>
+        <th>Warehouse ID</th>
+        <th>Designation</th>
+        <th>Street Name</th>
+        <th>Street Number</th>
+        <th>Street Postal Code</th>
+        <th>City</th>
+        <th>Latitude</th>
+        <th>Longitude</th>
+        <th>Altitude</th>
+      </tr>
+    </table>
+  </div>
+</div>
+</body>
+
+</html>

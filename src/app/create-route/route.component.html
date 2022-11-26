@@ -1,0 +1,53 @@
+<div class="container">
+  <div class="menu-window">
+    <span>
+        <img src="../../assets/icon-route.png" alt="account-icon">
+    </span>
+    <p>Create Route</p>
+    <div class="input-field">
+      <label>Route ID</label>
+      <input class="input" type="text" name="routeId" required [(ngModel)]="routeId">
+    </div>
+    <div class="input-field">
+      <label>Origin</label>
+      <input class="input" type="text" name="origin" required [(ngModel)]="origin">
+    </div>
+    <div class="input-field">
+      <label>Destination</label>
+      <input class="input" type="text" name="destination" required [(ngModel)]="destination">
+    </div>
+    <div class="input-field">
+      <label>Distance</label>
+      <input class="input" type="number" name="distance" required [(ngModel)]="distance">
+    </div>
+    <div class="input-field">
+      <label>Time Distance</label>
+      <input class="input" type="number" name="timeDistance" required [(ngModel)]="timeDistance">
+    </div>
+    <div class="input-field">
+      <label>Energy Spent</label>
+      <input class="input" type="number" name="energySpent" required [(ngModel)]="energySpent">
+    </div>
+    <div class="input-field">
+      <label>Extra Battery Time</label>
+      <input class="input" type="number" name="extraBatteryTime" required [(ngModel)]="extraTimeBattery">
+    </div>
+    <div>
+      <button class="button" type="submit" (click)="createRoute()">Submit</button>
+    </div>
+  </div>
+  <div class="menu-window">
+    <h1>Route list</h1>
+    <table id="list-table">
+      <tr>
+        <th>Route ID</th>
+        <th>Origin</th>
+        <th>Destination</th>
+        <th>Distance</th>
+        <th>Time Distance</th>
+        <th>Energy Spent</th>
+        <th>Extra Battery Time</th>
+      </tr>
+    </table>
+  </div>
+</div>

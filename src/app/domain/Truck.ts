@@ -5,5 +5,4 @@ class Truck {
   capacityTransportation: number;
   battery: number;
   tare: number;
-
 }

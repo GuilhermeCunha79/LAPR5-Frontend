@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {RouteService} from "./route.service";
+import {RouteService} from "../services/RouteService";
 
 @Component({
   selector: 'app-route',
@@ -28,6 +28,7 @@ export class RouteComponent implements OnInit {
     this.routesService.createRoute(  this.routeId, this.origin, this.destination, this.distance, this.timeDistance, this.energySpent, this.extraTimeBattery).subscribe(obj => {
       this.route = obj;
     });
+    setTimeout(window.location.reload.bind(window.location),200);
   }
 
   public fillRouteTable(): void {

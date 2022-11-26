@@ -1,52 +1,35 @@
-
-<nav>
-  <label>Eletric<span>Go</span></label>
-  <ul>
-    <li><a href="#">Home</a></li>
-    <li class="dropdown-hover">
-      <a href="#">Login<i class="fas"></i></a>
-      <div class="dropdown">
-        <ul>
-          <li><a href="#" [routerLink]="['/warehouse-manager']">Warehouse Manager</a></li>
-          <li><a href="#" [routerLink]="['/create-truck']">Create Truck</a></li>
-          <li><a href="#">Logistics Manager</a></li>
-        </ul>
-      </div>
-    <li><a href="#">Contact</a></li>
-  </ul>
-</nav>
 <div class="container">
   <div class="menu-window">
-            <span>
-                <img src="../../assets/icon-truck.png" alt="account-icon">
-            </span>
+    <span>
+      <img src="../../assets/icon-truck.png" alt="account-icon">
+    </span>
     <p>Create Truck</p>
     <div class="input-field">
-      <label >License Plate</label>
+      <label>License Plate</label>
       <input class="input" type="text" name="licensePlate" required [(ngModel)]="licensePlate">
     </div>
     <div class="input-field">
-      <label >Autonomy</label>
-      <input class="input" type="text" name="autonomy" required [(ngModel)]="autonomy">
+      <label>Autonomy</label>
+      <input class="input" type="number" name="autonomy" required [(ngModel)]="autonomy">
     </div>
     <div class="input-field">
-      <label >Capacity Cargo</label>
-      <input class="input" type="text" name="capacityCargo" required [(ngModel)]="capacityCargo">
+      <label>Capacity Cargo</label>
+      <input class="input" type="number" name="capacityCargo" required [(ngModel)]="capacityCargo">
     </div>
     <div class="input-field">
-      <label for>Capacity Transportation</label>
-      <input class="input" type="text" name="capacityTransportation" required [(ngModel)]="capacityTransportation">
+      <label>Capacity Transportation</label>
+      <input class="input" type="number" name="capacityTransportation" required [(ngModel)]="capacityTransportation">
     </div>
     <div class="input-field">
-      <label >Battery</label>
-      <input class="input" type="text" name="battery" required [(ngModel)]="battery">
+      <label>Battery</label>
+      <input class="input" type="number" name="battery" required [(ngModel)]="battery">
     </div>
     <div class="input-field">
-      <label for=>Tare</label>
-      <input class="input" type="text" name="tare" required [(ngModel)]="tare">
+      <label>Tare</label>
+      <input class="input" type="number" name="tare" required [(ngModel)]="tare">
     </div>
     <div>
-      <button class="button" type="submit" (click)="createTruck()" onclick="window.location.reload()">Submit</button>
+      <button class="button" type="submit" (click)="createTruck()">Submit</button>
     </div>
   </div>
   <div class="menu-window">
@@ -63,4 +46,3 @@
     </table>
   </div>
 </div>
-

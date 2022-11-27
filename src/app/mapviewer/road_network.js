@@ -116,6 +116,16 @@ export default class RoadNetwork {
             this.warehouseArray.push(warehouse);
             this.scene.add(warehouse.object);
         });
+
+        ////////////////////////////////
+        // Create the warehouse links //
+        ////////////////////////////////
+        this.createLinks(
+            new THREE.MeshStandardMaterial({
+                color: 0x000000,
+                side: THREE.DoubleSide
+            })
+        );
     }
 
     // Draws solid lines
@@ -135,6 +145,81 @@ export default class RoadNetwork {
             line = new THREE.LineSegments(geometry, material);
             line.computeLineDistances();
             this.scene.add(line);
+        }
+    }
+
+    // Creates all the links between each warehouse
+    createLinks(material) {
+
+        let points, geometry, mesh;
+
+        const normals = new Float32Array([
+            0, 0, 1,
+            0, 0, 1,
+            0, 0, 1,
+            0, 0, 1,
+            0, 0, 1,
+            0, 0, 1
+        ]);
+        const indexes = [
+            0, 2, 1,
+            1, 2, 3,
+            2, 6, 3,
+            3, 6, 7,
+            6, 4, 7,
+            7, 4, 5
+        ];
+
+        for (let i = 0; i < this.warehouseArray.length - 1; i++) {
+            for (let j = 0; j < this.warehouseArray[i].links.length; j++) {
+
+                const warehouseO = this.warehouseArray[i];
+                const warehouseD = this.warehouseArray[this.warehouseArray[i].links[j]];
+
+                const lengthO = warehouseO.radius * 1.5;
+                const lengthD = warehouseD.radius * 1.5;
+                const width = 0.45;
+
+                const direction = new THREE.Vector3(
+                    warehouseD.position.x - warehouseO.position.x,
+                    0,
+                    warehouseD.position.z - warehouseO.position.z
+                ).clampLength(0, 1);
+
+                const crossDirection = new THREE.Vector3(
+                    direction.x,
+                    0,
+                    direction.z
+                ).cross(new THREE.Vector3(0, 1, 0));
+
+                points = [
+                    new THREE.Vector3(warehouseO.position.x + crossDirection.x * (width / 2), warehouseO.position.y, warehouseO.position.z + crossDirection.z * (width / 2)),
+                    new THREE.Vector3(warehouseO.position.x - crossDirection.x * (width / 2), warehouseO.position.y, warehouseO.position.z - crossDirection.z * (width / 2))
+                ];
+
+                points.push(
+                    new THREE.Vector3(points[0].x + direction.x * lengthO, warehouseO.position.y, points[0].z + direction.z * lengthO),
+                    new THREE.Vector3(points[1].x + direction.x * lengthO, warehouseO.position.y, points[1].z + direction.z * lengthO)
+                );
+
+                points.push(
+                    new THREE.Vector3(warehouseD.position.x + crossDirection.x * (width / 2), warehouseD.position.y, warehouseD.position.z + crossDirection.z * (width / 2)),
+                    new THREE.Vector3(warehouseD.position.x - crossDirection.x * (width / 2), warehouseD.position.y, warehouseD.position.z - crossDirection.z * (width / 2))
+                );
+
+                points.push(
+                    new THREE.Vector3(points[4].x - direction.x * lengthD, warehouseD.position.y, points[4].z - direction.z * lengthD),
+                    new THREE.Vector3(points[5].x - direction.x * lengthD, warehouseD.position.y, points[5].z - direction.z * lengthD)
+                );
+
+                geometry = new THREE.BufferGeometry().setFromPoints(points);
+                geometry.setAttribute('normal', new THREE.BufferAttribute(normals, 3));
+                geometry.setIndex(indexes);
+
+                mesh = new THREE.Mesh(geometry, material);
+
+                this.scene.add(mesh);
+            }
         }
     }
 

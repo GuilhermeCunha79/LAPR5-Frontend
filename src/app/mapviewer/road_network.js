@@ -1,4 +1,7 @@
 import * as THREE from 'three';
+import { OrbitControls } from 'https://unpkg.com/three@0.146.0/examples/jsm/controls/OrbitControls.js';
+
+import Warehouse from "./warehouse.js";
 
 export default class RoadNetwork {
     constructor(warehouseData) {
@@ -19,6 +22,15 @@ export default class RoadNetwork {
         this.renderer.setSize(window.innerWidth, window.innerHeight);
 
         document.body.appendChild(this.renderer.domElement);
+
+        // Orbit controls
+        this.controls = new OrbitControls(this.camera, this.renderer.domElement);
+        this.controls.enableDamping = true;
+        this.controls.dampingFactor = 0.2;
+
+        this.controls.maxPolarAngle = Math.PI;
+        this.controls.target.set(0, 2, 0);
+        this.controls.update();
 
         // Scene
         this.sceneSetup(warehouseData);

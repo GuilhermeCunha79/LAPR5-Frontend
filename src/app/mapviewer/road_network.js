@@ -8,6 +8,12 @@ export default class RoadNetwork {
         // Create Scene
         this.scene = new THREE.Scene();
 
+        // Camera
+        this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 10000);
+        this.camera.position.set(0, 90, 0);
+
+        window.addEventListener('resize', event => this.windowResize(event));
+
         // Renderer
         this.renderer = new THREE.WebGLRenderer({ antialias: true });
         this.renderer.setSize(window.innerWidth, window.innerHeight);
@@ -45,6 +51,14 @@ export default class RoadNetwork {
         mesh.position.y = -0.2;
 
         this.scene.add(mesh);
+    }
+
+    // Updates the camera aspect ratio and the renderer size when the window is resized
+    windowResize() {
+
+        this.camera.aspect = window.innerWidth / window.innerHeight;
+        this.camera.updateProjectionMatrix();
+        this.renderer.setSize(window.innerWidth, window.innerHeight);
     }
 
     // Renders the next frame of the scene

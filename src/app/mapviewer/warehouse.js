@@ -5,6 +5,7 @@ export default class Warehouse {
 
         this.links = warehouse.links;
         this.object = new THREE.Group();
+        this.position = this.coordinatesToCartesian(warehouse);
         this.radius = 0.75 + this.links.length * 0.15;
 
         let geometry, material, mesh;
@@ -30,5 +31,17 @@ export default class Warehouse {
         mesh.castShadow = true;
 
         this.object.add(mesh);
+
+        // Sets the position of the warehouse
+        this.object.position.set(this.position.x, this.position.y, this.position.z);
+    }
+
+    // Converts latitude, longitude and altitude to cartesian coordinates
+    coordinatesToCartesian(warehouse) {
+        return {
+            x: ((100 / (8.7613 - 8.2451)) * (warehouse.lon - 8.2451) - 50),
+            y: ((50 / 800) * warehouse.alt) / 8,
+            z: ((100 / (42.1115 - 40.8387)) * (warehouse.lat - 40.8387) - 50)
+        };
     }
 }

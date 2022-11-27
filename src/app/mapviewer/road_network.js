@@ -107,6 +107,15 @@ export default class RoadNetwork {
             dashSize: 4,
             gapSize: 1
         }));
+
+        ///////////////////////////
+        // Create the warehouses //
+        ///////////////////////////
+        warehouseData.forEach(obj => {
+            const warehouse = new Warehouse(obj);
+            this.warehouseArray.push(warehouse);
+            this.scene.add(warehouse.object);
+        });
     }
 
     // Draws solid lines

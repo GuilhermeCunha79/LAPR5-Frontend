@@ -11,6 +11,14 @@ export default class RoadNetwork {
         // Create Scene
         this.scene = new THREE.Scene();
         this.scene.fog = new THREE.FogExp2(0x34583d, 0.005);
+        this.scene.background = new THREE.CubeTextureLoader().load([
+            'skybox/xpos.png',
+            'skybox/xneg.png',
+            'skybox/ypos.png',
+            'skybox/yneg.png',
+            'skybox/zpos.png',
+            'skybox/zneg.png'
+        ]);
 
         // Camera
         this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 10000);

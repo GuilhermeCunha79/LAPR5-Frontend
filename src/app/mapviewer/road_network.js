@@ -21,6 +21,9 @@ export default class RoadNetwork {
         this.renderer = new THREE.WebGLRenderer({ antialias: true });
         this.renderer.setSize(window.innerWidth, window.innerHeight);
 
+        this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+        this.renderer.shadowMap.enabled = true;
+
         document.body.appendChild(this.renderer.domElement);
 
         // Orbit controls
@@ -40,6 +43,24 @@ export default class RoadNetwork {
 
         let mesh;
 
+        //////////////
+        // Lighting //
+        //////////////
+        const light = new THREE.DirectionalLight(0xffffff, 1);
+        light.position.set(0, 10, 0);
+
+        light.castShadow = true;
+
+        light.shadow.mapSize.width = 2048;
+        light.shadow.mapSize.height = 2048;
+
+        light.shadow.camera.top = 55;
+        light.shadow.camera.bottom = -55;
+        light.shadow.camera.left = -55;
+        light.shadow.camera.right = 55;
+
+        this.scene.add(light);
+
         ////////////////////////////
         // Create the graph plane //
         ////////////////////////////
@@ -49,6 +70,7 @@ export default class RoadNetwork {
         );
 
         mesh.position.y = -0.1;
+        mesh.receiveShadow = true;
 
         this.scene.add(mesh);
 
@@ -217,6 +239,8 @@ export default class RoadNetwork {
                 geometry.setIndex(indexes);
 
                 mesh = new THREE.Mesh(geometry, material);
+                mesh.receiveShadow = true;
+                mesh.castShadow = true;
 
                 this.scene.add(mesh);
             }

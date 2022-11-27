@@ -32,6 +32,11 @@ export default class Warehouse {
 
         this.object.add(mesh);
 
+        // Create the label
+        mesh = this.makeLabelBillboard(warehouse.name, 30);
+        mesh.position.set(0, 2.5, 0);
+        this.object.add(mesh);
+
         // Sets the position of the warehouse
         this.object.position.set(this.position.x, this.position.y, this.position.z);
     }
@@ -43,5 +48,27 @@ export default class Warehouse {
             y: ((50 / 800) * warehouse.alt) / 8,
             z: ((100 / (42.1115 - 40.8387)) * (warehouse.lat - 40.8387) - 50)
         };
+    }
+
+    // Creates a billboard with the name of the warehouse
+    makeLabelBillboard(str, fontSize) {
+
+        const canvas = document.createElement('canvas');
+        const context = canvas.getContext('2d');
+
+        context.font = fontSize + 'px Arial';
+        context.textAlign = "center";
+        context.textBaseline = 'middle';
+        context.fillText(str, 150, 100);
+
+        const texture = new THREE.Texture(canvas);
+        texture.needsUpdate = true;
+
+        const material = new THREE.SpriteMaterial({ map: texture });
+
+        const sprite = new THREE.Sprite(material);
+        sprite.scale.set(0.25 * fontSize, 0.125 * fontSize, 0);
+
+        return sprite;
     }
 }

@@ -10,6 +10,7 @@ export default class RoadNetwork {
 
         // Create Scene
         this.scene = new THREE.Scene();
+        this.scene.fog = new THREE.FogExp2(0x34583d, 0.005);
 
         // Camera
         this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 10000);

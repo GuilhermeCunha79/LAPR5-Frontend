@@ -1,0 +1,58 @@
+﻿<div class="container">
+  <div class="menu-window">
+            <span>
+                <img src="../../assets/icon-warehouse.png" alt="account-icon">
+            </span>
+    <p>Create Delivery</p>
+    <div class="input-field">
+      <label>Delivery ID</label>
+      <input class="input" type="text" name="warehouseIdentifier" required [(ngModel)]="deliveryIdentifier">
+    </div>
+    <div class="input-field">
+      <label>Day</label>
+      <input class="input" type="text" name="designation" required [(ngModel)]="day">
+    </div>
+    <div class="input-field">
+      <label>Month</label>
+      <input class="input" type="text" name="street" required [(ngModel)]="month">
+    </div>
+    <div class="input-field">
+      <label>Year</label>
+      <input class="input" type="number" name="number" required [(ngModel)]="year">
+    </div>
+    <div class="input-field">
+      <label>Mass</label>
+      <input class="input" type="text" name="postalCode" required [(ngModel)]="mass">
+    </div>
+    <div class="input-field">
+      <label>Placing Time</label>
+      <input class="input" type="text" name="country" required [(ngModel)]="placingTime">
+    </div>
+    <div class="input-field">
+      <label>Store ID</label>
+      <input class="input" type="number" name="latitude" required [(ngModel)]="storeId">
+    </div>
+    <div class="input-field">
+      <label>Withdrawal Time</label>
+      <input class="input" type="number" name="longitude" required [(ngModel)]="withdrawalTime">
+    </div>
+    <div>
+      <button class="button" type="submit" (click)="createDelivery()" onclick="window.location.reload()">Submit</button>
+    </div>
+  </div>
+  <div class="menu-window">
+    <h1>Delivery List</h1>
+    <table id="tbody">
+      <tr>
+        <th>Delivery ID</th>
+        <th>Day</th>
+        <th>Month</th>
+        <th>Year</th>
+        <th>Mass</th>
+        <th>Placing Time</th>
+        <th>Withdrawal Time</th>
+        <th>Store ID</th>
+      </tr>
+    </table>
+  </div>
+</div>

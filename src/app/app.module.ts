@@ -15,6 +15,7 @@ import { LoginComponent } from './login/login.component';
 import { CreateWarehouseComponent } from './create-warehouse/create-warehouse.component';
 import { WarehouseManagerComponent } from './warehouse-manager/warehouse-manager.component';
 import { RouteComponent } from './create-route/route.component';
+import { FleetManagerComponent } from './fleet-manager/fleet-manager.component';
 
 @NgModule({
   imports: [
@@ -41,7 +42,8 @@ import { RouteComponent } from './create-route/route.component';
     CreateTruckComponent,
     CreateWarehouseComponent,
     WarehouseManagerComponent,
-    RouteComponent
+    RouteComponent,
+    FleetManagerComponent
   ],
   bootstrap: [ AppComponent ]
 })

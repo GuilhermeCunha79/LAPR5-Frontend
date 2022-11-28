@@ -24,7 +24,14 @@ export class CreateTruckComponent implements OnInit {
     this.listTable();
   }
 
+  public createValidTruck(): void {
+
+    this.truckService.createValidTruck(this.licensePlate, this.autonomy, this.capacityCargo, this.capacityTransportation, this.battery, this.tare);
+
+  }
+
   public createTruck(): void {
+
     this.truckService.createTruck(this.licensePlate, this.autonomy, this.capacityCargo, this.capacityTransportation, this.battery, this.tare).subscribe(data => {
       this.truck = data;
     });
@@ -34,4 +41,6 @@ export class CreateTruckComponent implements OnInit {
   public listTable(): void {
     this.truckService.listTable();
   }
+
+
 }

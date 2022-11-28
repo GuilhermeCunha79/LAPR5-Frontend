@@ -8,6 +8,7 @@ import {WarehouseManagerComponent} from "./warehouse-manager/warehouse-manager.c
 import {CreateWarehouseComponent} from "./create-warehouse/create-warehouse.component";
 import {RouteComponent} from "./create-route/route.component";
 import {CreateTruckComponent} from "./create-truck/create-truck.component";
+import {FleetManagerComponent} from "./fleet-manager/fleet-manager.component";
 
 const routes: Routes = [
   {path: '', redirectTo: '/login', pathMatch: 'full'},
@@ -22,7 +23,8 @@ const routes: Routes = [
 
   {path: 'create-route', component: RouteComponent},
   {path: 'create-truck', component: CreateTruckComponent},
-  {path: 'create-warehouse', component: CreateWarehouseComponent}
+  {path: 'create-warehouse', component: CreateWarehouseComponent},
+  {path: 'fleet-manager', component: FleetManagerComponent}
 ];
 
 @NgModule({

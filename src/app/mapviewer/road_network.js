@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { GLTFLoader } from 'https://unpkg.com/three@0.146.0/examples/jsm/loaders/GLTFLoader.js';
 import { OrbitControls } from 'https://unpkg.com/three@0.146.0/examples/jsm/controls/OrbitControls.js';
 
 import Warehouse from "./warehouse.js";
@@ -48,9 +49,44 @@ export default class RoadNetwork {
         this.sceneSetup(warehouseData);
     }
 
+    createTrees(array) {
+
+        const loader = new GLTFLoader();
+
+        array.forEach((pos) => {
+            loader.load('models/tree1.gltf', (model) => {
+                const mesh = model.scene;
+                mesh.position.set(pos.x, pos.y, pos.z);
+                mesh.scale.set(0.5, 0.5, 0.5);
+                this.scene.add(mesh);
+            });
+        });
+    }
+
     sceneSetup(warehouseData) {
 
         let mesh;
+
+        this.createTrees([
+            new THREE.Vector3(-1, 0, 12.6),
+            new THREE.Vector3(-16.3, 0, 12.4),
+            new THREE.Vector3(5.8, 0, 28.8),
+            new THREE.Vector3(-3.9, 0, 42),
+            new THREE.Vector3(-9.6, 0, 58.6),
+            new THREE.Vector3(15.8, 0, 54.7),
+            new THREE.Vector3(-30.6, 0, 21.4),
+            new THREE.Vector3(-23.1, 0, 36.2),
+            new THREE.Vector3(-31.6, 0, 53.7),
+            new THREE.Vector3(-53.2, 0, 7.9),
+            new THREE.Vector3(-55.4, 0, 31.9),
+            new THREE.Vector3(-41.7, 0, 36.9),
+            new THREE.Vector3(-45.9, 0, 48.9),
+            new THREE.Vector3(-12.1, 0, 25.8),
+            new THREE.Vector3(-36, 0, 4.4),
+            new THREE.Vector3(-53.1, 0, -10.2),
+            new THREE.Vector3(20.6, 0, 37.1),
+            new THREE.Vector3(32.4, 0, 50)
+        ])
 
         //////////////
         // Lighting //
@@ -185,12 +221,12 @@ export default class RoadNetwork {
         let points, geometry, mesh;
 
         const normals = new Float32Array([
-            0, 0, 1,
-            0, 0, 1,
-            0, 0, 1,
-            0, 0, 1,
-            0, 0, 1,
-            0, 0, 1
+            0, 1, 0,
+            0, 1, 0,
+            0, 1, 0,
+            0, 1, 0,
+            0, 1, 0,
+            0, 1, 0
         ]);
         const indexes = [
             0, 2, 1,

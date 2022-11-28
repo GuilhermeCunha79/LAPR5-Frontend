@@ -26,7 +26,12 @@ export class CreateTruckComponent implements OnInit {
 
   public createValidTruck(): void {
 
-    this.truckService.createValidTruck(this.licensePlate, this.autonomy, this.capacityCargo, this.capacityTransportation, this.battery, this.tare);
+
+    // @ts-ignore
+    this.truckService.createValidTruck(this.licensePlate, this.autonomy, this.capacityCargo, this.capacityTransportation, this.battery, this.tare).subscribe(data => {
+      this.truck = data;
+    });
+    setTimeout(window.location.reload.bind(window.location), 200);
 
   }
 

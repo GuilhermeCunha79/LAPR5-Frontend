@@ -186,6 +186,11 @@ export default class RoadNetwork {
             new THREE.Vector3(20.6, 0, 37.1),
             new THREE.Vector3(32.4, 0, 50)
         ]);
+
+        //////////////
+        // 3D Title //
+        //////////////
+        this.add3DTitle();
     }
 
     // Draws solid lines
@@ -304,6 +309,27 @@ export default class RoadNetwork {
 
                 this.scene.add(mesh);
             });
+        });
+    }
+
+    // Creates 3D text object displayed under the graph
+    add3DTitle() {
+        new FontLoader().load('https://unpkg.com/three@0.146.0/examples/fonts/droid/droid_sans_regular.typeface.json', (font) => {
+
+            const geometry = new TextGeometry('G70', {
+                height: 1,
+                size: 30,
+                font: font
+            });
+
+            const material = new THREE.MeshStandardMaterial({ color: 0x141414 });
+            const mesh = new THREE.Mesh(geometry, material);
+
+            mesh.position.set(-40, -0.2, -15);
+            //mesh.position.set(-55, -0.2, -9);
+            mesh.rotation.set(Math.PI / 2, 0, 0);
+
+            this.scene.add(mesh);
         });
     }
 

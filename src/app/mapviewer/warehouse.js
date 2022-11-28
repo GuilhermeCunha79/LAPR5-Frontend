@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { GLTFLoader } from 'https://unpkg.com/three@0.146.0/examples/jsm/loaders/GLTFLoader.js';
 
 export default class Warehouse {
     constructor(warehouse) {
@@ -37,6 +38,9 @@ export default class Warehouse {
         mesh.position.set(0, 2.5, 0);
         this.object.add(mesh);
 
+        // Add the warehouse model
+        this.createWarehouse();
+
         // Sets the position of the warehouse
         this.object.position.set(this.position.x, this.position.y, this.position.z);
     }
@@ -48,6 +52,23 @@ export default class Warehouse {
             y: ((50 / 800) * warehouse.alt) / 8,
             z: ((100 / (42.1115 - 40.8387)) * (warehouse.lat - 40.8387) - 50)
         };
+    }
+
+    // Creates the warehouse model
+    createWarehouse() {
+
+        const loader = new GLTFLoader();
+
+        loader.load('models/warehouse1.gltf', (model) => {
+
+            model.scene.traverse((node) => {
+                if (node.isMesh) node.castShadow = true;
+            });
+
+            const mesh = model.scene;
+            mesh.scale.set(0.06, 0.06, 0.06);
+            this.object.add(mesh);
+        });
     }
 
     // Creates a billboard with the name of the warehouse

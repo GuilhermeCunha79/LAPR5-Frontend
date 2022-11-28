@@ -1,6 +1,8 @@
 import * as THREE from 'three';
+import { FontLoader } from 'https://unpkg.com/three@0.146.0/examples/jsm/loaders/FontLoader.js';
 import { GLTFLoader } from 'https://unpkg.com/three@0.146.0/examples/jsm/loaders/GLTFLoader.js';
 import { OrbitControls } from 'https://unpkg.com/three@0.146.0/examples/jsm/controls/OrbitControls.js';
+import { TextGeometry } from 'https://unpkg.com/three@0.146.0/examples/jsm/geometries/TextGeometry.js';
 
 import Warehouse from "./warehouse.js";
 
@@ -49,62 +51,29 @@ export default class RoadNetwork {
         this.sceneSetup(warehouseData);
     }
 
-    createTrees(array) {
-
-        const loader = new GLTFLoader();
-
-        array.forEach((pos) => {
-            loader.load('models/tree1.gltf', (model) => {
-                const mesh = model.scene;
-                mesh.position.set(pos.x, pos.y, pos.z);
-                mesh.scale.set(0.5, 0.5, 0.5);
-                this.scene.add(mesh);
-            });
-        });
-    }
-
     sceneSetup(warehouseData) {
 
         let mesh;
 
-        this.createTrees([
-            new THREE.Vector3(-1, 0, 12.6),
-            new THREE.Vector3(-16.3, 0, 12.4),
-            new THREE.Vector3(5.8, 0, 28.8),
-            new THREE.Vector3(-3.9, 0, 42),
-            new THREE.Vector3(-9.6, 0, 58.6),
-            new THREE.Vector3(15.8, 0, 54.7),
-            new THREE.Vector3(-30.6, 0, 21.4),
-            new THREE.Vector3(-23.1, 0, 36.2),
-            new THREE.Vector3(-31.6, 0, 53.7),
-            new THREE.Vector3(-53.2, 0, 7.9),
-            new THREE.Vector3(-55.4, 0, 31.9),
-            new THREE.Vector3(-41.7, 0, 36.9),
-            new THREE.Vector3(-45.9, 0, 48.9),
-            new THREE.Vector3(-12.1, 0, 25.8),
-            new THREE.Vector3(-36, 0, 4.4),
-            new THREE.Vector3(-53.1, 0, -10.2),
-            new THREE.Vector3(20.6, 0, 37.1),
-            new THREE.Vector3(32.4, 0, 50)
-        ])
-
         //////////////
         // Lighting //
         //////////////
-        const light = new THREE.DirectionalLight(0xffffff, 1);
-        light.position.set(0, 10, 0);
+        this.scene.add(new THREE.AmbientLight(0x404040));
 
-        light.castShadow = true;
+        const sun = new THREE.DirectionalLight(0xffffff, 1);
+        sun.position.set(25, 50, 25);
 
-        light.shadow.mapSize.width = 2048;
-        light.shadow.mapSize.height = 2048;
+        sun.castShadow = true;
 
-        light.shadow.camera.top = 55;
-        light.shadow.camera.bottom = -55;
-        light.shadow.camera.left = -55;
-        light.shadow.camera.right = 55;
+        sun.shadow.mapSize.width = 2048;
+        sun.shadow.mapSize.height = 2048;
 
-        this.scene.add(light);
+        sun.shadow.camera.top = 60;
+        sun.shadow.camera.bottom = -60;
+        sun.shadow.camera.left = -60;
+        sun.shadow.camera.right = 60;
+
+        this.scene.add(sun);
 
         ////////////////////////////
         // Create the graph plane //
@@ -193,6 +162,30 @@ export default class RoadNetwork {
                 side: THREE.DoubleSide
             })
         );
+
+        //////////////////
+        // Create trees //
+        //////////////////
+        this.createTrees([
+            new THREE.Vector3(-1, 0, 12.6),
+            new THREE.Vector3(-16.3, 0, 12.4),
+            new THREE.Vector3(5.8, 0, 28.8),
+            new THREE.Vector3(-3.9, 0, 42),
+            new THREE.Vector3(-9.6, 0, 58.6),
+            new THREE.Vector3(15.8, 0, 54.7),
+            new THREE.Vector3(-30.6, 0, 21.4),
+            new THREE.Vector3(-23.1, 0, 36.2),
+            new THREE.Vector3(-31.6, 0, 53.7),
+            new THREE.Vector3(-53.2, 0, 7.9),
+            new THREE.Vector3(-55.4, 0, 31.9),
+            new THREE.Vector3(-41.7, 0, 36.9),
+            new THREE.Vector3(-45.9, 0, 48.9),
+            new THREE.Vector3(-12.1, 0, 25.8),
+            new THREE.Vector3(-36, 0, 4.4),
+            new THREE.Vector3(-53.1, 0, -10.2),
+            new THREE.Vector3(20.6, 0, 37.1),
+            new THREE.Vector3(32.4, 0, 50)
+        ]);
     }
 
     // Draws solid lines
@@ -290,6 +283,28 @@ export default class RoadNetwork {
                 this.scene.add(mesh);
             }
         }
+    }
+
+    // Imports and adds a trees to the scene
+    createTrees(array) {
+
+        const loader = new GLTFLoader();
+
+        array.forEach((pos) => {
+            loader.load('models/tree1.gltf', (model) => {
+
+                model.scene.traverse((node) => {
+                    if (node.isMesh) node.castShadow = true;
+                });
+
+                const mesh = model.scene;
+
+                mesh.position.set(pos.x, pos.y, pos.z);
+                mesh.scale.set(0.5, 0.5, 0.5);
+
+                this.scene.add(mesh);
+            });
+        });
     }
 
     // Updates the camera aspect ratio and the renderer size when the window is resized

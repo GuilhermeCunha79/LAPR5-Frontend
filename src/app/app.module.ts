@@ -7,7 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 //import { DashboardComponent } from './dashboard/dashboard.component';
 import { DeliveryDetailComponent } from './delivery-detail/delivery-detail.component';
-import { DeliveryComponent } from './Delivery/delivery.component';
+import { DeliveryComponent } from './create-delivery/create-delivery.component';
 import { DeliverySearchComponent } from './delivery-search/delivery-search.component';
 import { MessagesComponent } from './messages/messages.component';
 import { CreateTruckComponent } from './create-truck/create-truck.component';

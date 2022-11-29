@@ -1,6 +1,7 @@
 ﻿import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {map, Observable} from "rxjs";
+import {MessageService} from "../message.service";
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,11 @@ import {map, Observable} from "rxjs";
 export class WarehouseService {
   private Url = 'https://localhost:5001/api/Warehouses';
 
-  constructor(private httpClient: HttpClient) {
+  constructor(private httpClient: HttpClient, private messageService: MessageService) {
+  }
+
+  log(message: string) {
+    this.messageService.add(`Created Truck: ${message}`);
   }
 
   getWarehouses(): Observable<any> {
@@ -23,6 +28,13 @@ export class WarehouseService {
   getWarehouseByDesignation(designation: string): Observable<any> {
     return this.httpClient.get(this.Url + '/ByDesignation/' + designation).pipe(map(this.extractData));
   }
+
+  createValidWarehouse(warehouseIdentifier: string, designation: string, street: string, number: number, postalCode: string, country: string, latitude: number, longitude: number, altitude: number): Observable<any> | null {
+    if (this.validateData(warehouseIdentifier, designation, street, number, postalCode, country, latitude, longitude, altitude)) {
+      return this.createWarehouse(warehouseIdentifier, designation, street, number, postalCode, country, latitude, longitude, altitude);
+    } else return null;
+  }
+
 
   createWarehouse(warehouseIdentifier: string, designation: string, street: string, number: number, postalCode: string, country: string, latitude: number, longitude: number, altitude: number): Observable<any> {
     const body = {
@@ -40,7 +52,7 @@ export class WarehouseService {
     return this.httpClient.post(this.Url, body).pipe(map(this.extractData));
   }
 
-  updateWarehouse(warehouseIdentifier: string, designation: string, street: number, number: number, postalCode: string, country: string, latitude: number, longitude: number, altitude: number) {
+  updateWarehouse(warehouseIdentifier: string, designation: string, street: string, number: number, postalCode: string, country: string, latitude: number, longitude: number, altitude: number) {
     const body = {
       "warehouseIdentifier": warehouseIdentifier,
       "designation": designation,
@@ -78,5 +90,64 @@ export class WarehouseService {
         tr.insertCell().innerText = i[j].altitude;
       }
     });
+  }
+
+
+  validateData(warehouseIdentifier: string, designation: string, street: string, number: number, postalCode: string, country: string, latitude: number, longitude: number, altitude: number): boolean {
+
+
+    let flag: boolean = true;
+
+    if (warehouseIdentifier.length > 3) {
+      this.log("ERROR: Warehouse Id can't have more than 3 characters");
+      flag = false;
+    }
+
+    // console.log(this.getTruckByIdentifier(licensePlate))
+    // if (this.getTruckByIdentifier(licensePlate) as Object != null) {
+    //   this.log("ERROR: Truck already exists with that licensePlate");
+    //   flag = false;
+    // }
+
+
+    if (designation.length > 50) {
+      this.log("ERROR: Designation can't have more than 50 characters");
+      flag = false;
+    }
+
+    if (street == null) {
+      this.log("ERROR: Street must be inserted");
+      flag = false;
+    }
+
+    if (number == null) {
+      this.log("ERROR: Street number must be inserted");
+      flag = false;
+    }
+    if (postalCode == null || postalCode.length > 8) {
+      this.log("ERROR: Please insert a valid postal code (xxxx-xxx)");
+      flag = false;
+    }
+
+    if (country == null) {
+      this.log("ERROR: Country number must be inserted");
+      flag = false;
+    }
+    if (latitude == null) {
+      this.log("ERROR: Latitude number must be inserted");
+      flag = false;
+    }
+    if (longitude == null) {
+      this.log("ERROR: Longitude number must be inserted");
+      flag = false;
+    }
+
+    if (altitude <= 0) {
+      this.log("ERROR: Altitude must be positive");
+      flag = false;
+    }
+    return flag;
+
+
   }
 }

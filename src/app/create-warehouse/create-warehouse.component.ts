@@ -27,6 +27,16 @@ export class CreateWarehouseComponent implements OnInit {
     this.listTable();
   }
 
+  public createValidWarehouse(): void {
+
+
+    // @ts-ignore
+    this.warehouseService.createValidWarehouse(this.warehouseIdentifier, this.designation, this.street, this.number, this.postalCode, this.country, this.latitude, this.longitude, this.altitude).subscribe(data => {
+      this.warehouse = data
+    });
+    setTimeout(window.location.reload.bind(window.location), 200);
+
+  }
   public createWarehouse(): void {
     this.warehouseService.createWarehouse(this.warehouseIdentifier, this.designation, this.street, this.number, this.postalCode, this.country, this.latitude, this.longitude, this.altitude).subscribe(data => {
       this.warehouse = data

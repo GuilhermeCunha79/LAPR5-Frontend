@@ -8,7 +8,7 @@ import {map, Observable} from "rxjs";
 
 export class RouteService {
 
-  private Url = 'http://localhost:3000/api/route/';
+  private Url = 'http://localhost:3000/api/route';
 
   constructor(private httpClient: HttpClient) {
   }
@@ -17,11 +17,15 @@ export class RouteService {
     return res || {};
   }
 
-  getAllRoutes(): Observable<any> {
-    return this.httpClient.get(this.Url + 'all/').pipe(map(this.extractData));
+  getRoutes(params?: string): Observable<any> {
+    if (params) {
+      return this.httpClient.get(this.Url + "?" + params).pipe(map(this.extractData));
+    } else {
+      return this.httpClient.get(this.Url).pipe(map(this.extractData));
+    }
   }
 
-  createRoute(routeId: string, origin: string, destination: string, distance: number, timeDistance: number, energySpent: number, extraTimeBattery: number): Observable<any> {
+  createRoute(routeId: string, origin: string, destination: string, distance: number, timeDistance: number, energySpent: number, extraBatteryTime: number): Observable<any> {
     const body = {
       "routeId": routeId,
       "origin": origin,
@@ -29,15 +33,37 @@ export class RouteService {
       "distance": distance,
       "timeDistance": timeDistance,
       "energySpent": energySpent,
-      "extraTimeBattery": extraTimeBattery
+      "extraBatteryTime": extraBatteryTime
     };
 
     return this.httpClient.post(this.Url, body).pipe(map(this.extractData));
   }
 
-  fillRouteTable(): void {
+  fillRouteTable(params: any): void {
 
-    this.getAllRoutes().forEach(function (i) {
+    let routesArray;
+
+    if (Object.keys(params).length == 0) {
+      routesArray = this.getRoutes();
+    } else {
+      if (params.routeId) {
+        routesArray = this.getRoutes("routeId=" + params.routeId);
+      } else if (params.origin) {
+        routesArray = this.getRoutes("origin=" + params.origin);
+      } else if (params.destination) {
+        routesArray = this.getRoutes("destination=" + params.destination);
+      } else if (params.distance) {
+        routesArray = this.getRoutes("distance=" + params.distance);
+      } else if (params.timeDistance) {
+        routesArray = this.getRoutes("timeDistance=" + params.timeDistance);
+      } else if (params.energySpent) {
+        routesArray = this.getRoutes("energySpent=" + params.energySpent);
+      } else {
+        routesArray = this.getRoutes("extraBatteryTime=" + params.extraBatteryTime);
+      }
+    }
+
+    routesArray.forEach(function (i) {
       for (let j = 0; j < i.length; j++) {
 
         const tr = (document.getElementById('list-table') as HTMLTableElement).insertRow();
@@ -48,7 +74,7 @@ export class RouteService {
         tr.insertCell().innerText = i[j].distance;
         tr.insertCell().innerText = i[j].timeDistance;
         tr.insertCell().innerText = i[j].energySpent;
-        tr.insertCell().innerText = i[j].extraTimeBattery;
+        tr.insertCell().innerText = i[j].extraBatteryTime;
       }
     });
   }

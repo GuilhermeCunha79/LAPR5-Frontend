@@ -1,7 +1,12 @@
 body {
-  margin: 0;
   background-color: rgb(230, 230, 230);
   font-family: sans-serif;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+  color: white;
 }
 
 /*
@@ -21,6 +26,7 @@ nav {
 
 nav label {
   font-size: 30px;
+  font-weight: 600;
 }
 
 nav label span {
@@ -35,11 +41,6 @@ nav ul li {
   display: inline-block;
   margin: 0 12px;
   padding: 10px 0;
-}
-
-a {
-  text-decoration: none;
-  color: white;
 }
 
 .dropdown {
@@ -65,7 +66,7 @@ a {
 }
 
 /*
- * Content
+ * Create section
  */
 
 .container {
@@ -84,7 +85,7 @@ a {
   text-align: center;
 }
 
-.menu-window span {
+.domain-icon {
   background-color: #0073ff;
   border-radius: 50%;
   display: inline-block;
@@ -92,19 +93,20 @@ a {
   width: 75px;
 }
 
-.menu-window span img {
+.domain-icon img {
   margin: 25%;
   width: 50%;
 }
 
-.menu-window p {
-  font-weight: 400;
+.domain-title {
   font-size: 28px;
+  font-weight: 400;
   margin-top: 15px;
 }
 
 .input-field {
   text-align: left;
+  margin-bottom: 10px;
 }
 
 .input-field label {
@@ -113,16 +115,16 @@ a {
   margin-bottom: 5px;
 }
 
-.menu-window .input {
+.input-field .input {
   border: 1px solid #cecece;
   border-radius: 3px;
+  box-sizing: border-box;
   display: block;
-  margin-bottom: 10px;
   padding: 10px;
-  width: 250px;
+  width: 100%;
 }
 
-.menu-window .button {
+.button {
   background-color: #0073ff;
   border: none;
   border-radius: 3px;
@@ -133,9 +135,13 @@ a {
   width: 100%;
 }
 
-.menu-window .button:hover {
+.button:hover {
   opacity: 80%;
 }
+
+/*
+ * Table section
+ */
 
 .menu-window h1 {
   text-align: left;
@@ -152,8 +158,8 @@ th {
 
 th, td {
   border: 1px solid #dddddd;
-  text-align: left;
   padding: 8px;
+  text-align: left;
 }
 
 tr:nth-child(even) {
@@ -162,4 +168,21 @@ tr:nth-child(even) {
 
 tr:hover {
   background-color: rgb(180, 180, 180);
+}
+
+/*
+ * Footer
+ */
+
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+
+  background-color: #141d28;
+  color: white;
+  font-size: 10px;
+  margin-top: 15px;
+  padding: 10px 50px;
+  text-align: center;
 }

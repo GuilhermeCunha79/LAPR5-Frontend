@@ -5,5 +5,5 @@ class Route {
   distance: number;
   timeDistance: number;
   energySpent: number;
-  extraTimeBattery: number;
+  extraBatteryTime: number;
 }

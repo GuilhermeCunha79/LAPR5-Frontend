@@ -8,7 +8,7 @@ import {MessageService} from "../message.service";
 })
 
 export class WarehouseService {
-  private Url = 'https://localhost:5001/api/Warehouses';
+  private Url = 'https://lapr5-dddnetcore.herokuapp.com/api/Warehouses';
 
   constructor(private httpClient: HttpClient, private messageService: MessageService) {
   }

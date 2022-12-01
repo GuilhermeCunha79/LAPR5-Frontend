@@ -1,6 +1,7 @@
 ﻿import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {map, Observable} from "rxjs";
+import {MessageService} from "../message.service";
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,11 @@ import {map, Observable} from "rxjs";
 export class DeliveryService {
   private Url = 'https://localhost:5001/api/Delivery';
 
-  constructor(private httpClient: HttpClient) {
+  constructor(private httpClient: HttpClient, private messageService: MessageService) {
+  }
+
+  log(message: string) {
+    this.messageService.add(`Created Delivery: ${message}`);
   }
 
   getDeliveries(): Observable<any> {
@@ -19,6 +24,12 @@ export class DeliveryService {
   getDeliveryByIdentifier(deliveryIdentifier: string): Observable<any> {
     return this.httpClient.get(this.Url + '/ByIdentifier/' + deliveryIdentifier).pipe(
       map(this.extractData));
+  }
+
+  createValidDelivery(deliveryIdentifier: string, day: number, month: string, year: number, mass: number, placingTime: number, wId: string,withdrawalTime: number): Observable<any> | null {
+    if (this.validateData(deliveryIdentifier, day, month, year, mass, placingTime, wId, withdrawalTime)) {
+      return this.createDelivery(deliveryIdentifier, day, month, year, mass, placingTime, wId, withdrawalTime);
+    } else return null;
   }
 
   createDelivery(deliveryIdentifier: string, day: number, month: string, year: number, mass: number, placingTime: number, wId: string,withdrawalTime: number): Observable<any> {
@@ -92,5 +103,52 @@ export class DeliveryService {
 
       }
     });
+  }
+
+  validateData(deliveryIdentifier: string, day: number, month: string, year: number, mass: number, placingTime: number, wId: string,withdrawalTime: number): boolean {
+    let months: string[];
+    months = ["JANUARY","FEBRUARY","MARCH","APRIL","MAY","JUNE","JULY", "AUGUST","SEPTEMBER","OCTOBER","NOVEMBER","DECEMBER"];
+
+    let flag: boolean = true;
+
+    if (deliveryIdentifier == null) {
+      this.log("ERROR: Delivery Identifier must be inserted");
+      flag = false;
+    }
+
+    if (day <=0  || day>31) {
+      this.log("ERROR: Delivery day must be inserted correctly");
+      flag = false;
+    }
+
+    if (!months.includes(month.toUpperCase())) {
+      this.log("ERROR: Insert a valid month.");
+      flag = false;
+    }
+
+    if (year <0) {
+      this.log("ERROR: Delivery year must be correctly");
+      flag = false;
+    }
+    if (mass >0) {
+      this.log("ERROR: Mass cannot be less then 0.");
+      flag = false;
+    }
+
+    if (wId == null) {
+      this.log("ERROR: Warehouse ID to deliver must be inserted");
+      flag = false;
+    }
+    if (withdrawalTime == null) {
+      this.log("ERROR: Withdrawal time must be inserted");
+      flag = false;
+    }
+    if (placingTime == null) {
+      this.log("ERROR: Placing time must be inserted");
+      flag = false;
+    }
+    return flag;
+
+
   }
 }

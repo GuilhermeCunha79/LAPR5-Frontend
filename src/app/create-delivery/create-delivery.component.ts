@@ -32,6 +32,15 @@ export class DeliveryComponent implements OnInit {
     this.listTable();
   }
 
+  public createValidDelivery(): void {
+
+    // @ts-ignore
+    this.deliveryService.createValidDelivery(this.deliveryIdentifier, this.day, this.month, this.year, this.mass, this.placingTime, this.storeId, this.withdrawalTime).subscribe(data => {
+      this.delivery = data
+    });
+    setTimeout(window.location.reload.bind(window.location), 200);
+
+  }
 
   public createDelivery(): void {
     this.deliveryService.createDelivery(this.deliveryIdentifier, this.day, this.month, this.year, this.mass, this.placingTime, this.storeId, this.withdrawalTime).subscribe(data => {console.log(data);

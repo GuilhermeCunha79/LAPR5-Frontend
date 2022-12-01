@@ -10,6 +10,9 @@ import {TruckService} from "../services/TruckService";
 export class CreateTruckComponent implements OnInit {
 
   truck: Truck;
+  searchString: string;
+  searchNumber: number;
+  trucks: Truck [];
   licensePlate: string;
   autonomy: number;
   capacityCargo: number;
@@ -21,10 +24,11 @@ export class CreateTruckComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.listTable();
+   // this.listTable();
+    this.getTrucks();
   }
 
-  public createValidTruck(): void {
+ public createValidTruck(): void {
 
 
     // @ts-ignore
@@ -33,6 +37,14 @@ export class CreateTruckComponent implements OnInit {
     });
     setTimeout(window.location.reload.bind(window.location), 200);
 
+  }
+
+
+  public getTrucks(): void {
+
+    this.truckService.getTrucks().subscribe(data => {
+      this.trucks = data;
+    });
   }
 
   public createTruck(): void {
@@ -44,8 +56,14 @@ export class CreateTruckComponent implements OnInit {
   }
 
   public listTable(): void {
-    this.truckService.listTable();
+
+    this.truckService.listTable().subscribe(data => {
+      this.trucks = data  });
+   // this.trucks= this.truckService.listTable();
+
   }
+
+
 
 
 }

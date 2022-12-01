@@ -54,7 +54,7 @@ export class TruckService {
     return this.httpClient.get(this.Url + '?ls=' + licensePlate).pipe(map(this.extractData));
   }
 
-  listTable(): void {
+  listTable():Observable<any>  {
 
     let tbody = document.getElementById('tbody') as HTMLTableElement;
     let array = this.getTrucks();
@@ -80,6 +80,10 @@ export class TruckService {
 
 
     });
+
+    return array;
+
+
   }
 
 

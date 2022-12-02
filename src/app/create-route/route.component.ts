@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {RouteService} from "../services/RouteService";
-import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-route',
@@ -18,22 +17,25 @@ export class RouteComponent implements OnInit {
   energySpent: number;
   extraBatteryTime: number;
 
-  params: any;
+  searchRouteId: string;
+  searchOrigin: string;
+  searchDestination: string;
+  searchDistance: number;
+  searchTimeDistance: number;
+  searchEnergySpent: number;
+  searchExtraBatteryTime: number;
 
-  constructor(private routesService: RouteService, private activatedRoute: ActivatedRoute) {
-    this.activatedRoute.queryParams.subscribe(params => this.params = params);
+  routes: Route[];
+
+  constructor(private routesService: RouteService) {
   }
 
   ngOnInit(): void {
-    this.fillRouteTable();
+    this.routesService.getRoutes().subscribe((obj) => this.routes = obj);
   }
 
   public createRoute(): void {
     this.routesService.createRoute(this.routeId, this.origin, this.destination, this.distance, this.timeDistance, this.energySpent, this.extraBatteryTime).subscribe();
     setTimeout(window.location.reload.bind(window.location), 200);
-  }
-
-  public fillRouteTable(): void {
-    this.routesService.fillRouteTable(this.params);
   }
 }

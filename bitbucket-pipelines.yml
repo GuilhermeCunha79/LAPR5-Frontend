@@ -1,0 +1,30 @@
+image: node:16
+
+pipelines:
+  branches:
+    master:
+      - step:
+          name: Build App
+          caches:
+            - node
+          script:
+            - npm install
+      - step:
+         name: Create artifact
+         script:
+           - git archive --format=tar.gz master -o                   application.tar.gz
+         artifacts:
+           - application.tar.gz
+      - step:
+           name: Deploy to heroku
+#           trigger: manual
+           deployment: production
+           caches:
+             - node
+           script:
+             - pipe: atlassian/heroku-deploy:2.0.0
+               variables:
+                 HEROKU_API_KEY: $HEROKU_API_KEY
+                 HEROKU_APP_NAME: $HEROKU_APP_NAME
+                 ZIP_FILE: "application.tar.gz"
+                 WAIT: 'true'

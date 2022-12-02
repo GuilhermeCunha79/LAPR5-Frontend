@@ -39,11 +39,11 @@ export class RouteService {
     return this.httpClient.post(this.Url, body).pipe(map(this.extractData));
   }
 
-  fillRouteTable(params: any): void {
+  fillRouteTable(params?: any): void {
 
     let routesArray;
 
-    if (Object.keys(params).length == 0) {
+    if (!params || Object.keys(params).length == 0) {
       routesArray = this.getRoutes();
     } else {
       if (params.routeId) {

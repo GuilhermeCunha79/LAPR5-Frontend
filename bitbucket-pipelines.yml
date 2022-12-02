@@ -17,7 +17,7 @@ pipelines:
            - application.tar.gz
       - step:
            name: Deploy to heroku
-           trigger: manual
+#           trigger: manual
            deployment: production
            caches:
              - node

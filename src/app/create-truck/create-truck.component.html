@@ -43,7 +43,7 @@
         <th><input type="text" class="header-filter" placeholder="Battery" [(ngModel)]="searchBattery"></th>
         <th style="border-radius: 0 5px 0 0"><input type="text" class="header-filter" placeholder="Tare" [(ngModel)]="searchTare"></th>
       </tr>
-      <tr *ngFor="let truck of trucks | filter:searchLicensePlate:searchAutonomy:searchCapacityCargo:searchCapacityTransportation:searchBattery:searchTare">
+      <tr *ngFor="let truck of trucks | filter:'truck':{licensePlate: searchLicensePlate,autonomy: searchAutonomy,capacityCargo: searchCapacityCargo,capacityTransportation: searchCapacityTransportation,battery: searchBattery,tare: searchTare}">
         <td>{{truck.licensePlate}}</td>
         <td>{{truck.autonomy}}</td>
         <td>{{truck.capacityCargo}}</td>

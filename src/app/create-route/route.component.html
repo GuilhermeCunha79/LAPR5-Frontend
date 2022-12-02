@@ -6,31 +6,31 @@
     <p class="domain-title">Create Route</p>
     <div class="input-field">
       <label for="routeId">Route ID</label>
-      <input class="input" type="text" name="routeId" required [(ngModel)]="routeId" id="routeId">
+      <input class="input" type="text" name="routeId" [(ngModel)]="routeId" id="routeId">
     </div>
     <div class="input-field">
       <label for="origin">Origin</label>
-      <input class="input" type="text" name="origin" required [(ngModel)]="origin" id="origin">
+      <input class="input" type="text" name="origin" [(ngModel)]="origin" id="origin">
     </div>
     <div class="input-field">
       <label for="destination">Destination</label>
-      <input class="input" type="text" name="destination" required [(ngModel)]="destination" id="destination">
+      <input class="input" type="text" name="destination" [(ngModel)]="destination" id="destination">
     </div>
     <div class="input-field">
       <label for="distance">Distance</label>
-      <input class="input" type="number" name="distance" required [(ngModel)]="distance" id="distance">
+      <input class="input" type="number" name="distance" [(ngModel)]="distance" id="distance">
     </div>
     <div class="input-field">
       <label for="timeDistance">Time Distance</label>
-      <input class="input" type="number" name="timeDistance" required [(ngModel)]="timeDistance" id="timeDistance">
+      <input class="input" type="number" name="timeDistance" [(ngModel)]="timeDistance" id="timeDistance">
     </div>
     <div class="input-field">
       <label for="energySpent">Energy Spent</label>
-      <input class="input" type="number" name="energySpent" required [(ngModel)]="energySpent" id="energySpent">
+      <input class="input" type="number" name="energySpent" [(ngModel)]="energySpent" id="energySpent">
     </div>
     <div class="input-field">
       <label for="extraBatteryTime">Extra Battery Time</label>
-      <input class="input" type="number" name="extraBatteryTime" required [(ngModel)]="extraBatteryTime" id="extraBatteryTime">
+      <input class="input" type="number" name="extraBatteryTime" [(ngModel)]="extraBatteryTime" id="extraBatteryTime">
     </div>
     <div>
       <button class="button" type="submit" (click)="createRoute()">Submit</button>
@@ -40,13 +40,22 @@
     <h1>Route list</h1>
     <table id="list-table">
       <tr>
-        <th>Route ID</th>
-        <th>Origin</th>
-        <th>Destination</th>
-        <th>Distance</th>
-        <th>Time Distance</th>
-        <th>Energy Spent</th>
-        <th>Extra Battery Time</th>
+        <th style="border-radius: 5px 0 0 0"><input type="text" class="header-filter" placeholder="ID" [(ngModel)]="searchRouteId"></th>
+        <th><input type="text" class="header-filter" placeholder="Origin" [(ngModel)]="searchOrigin"></th>
+        <th><input type="text" class="header-filter" placeholder="Destination" [(ngModel)]="searchDestination"></th>
+        <th><input type="text" class="header-filter" placeholder="Distance" [(ngModel)]="searchDistance"></th>
+        <th><input type="text" class="header-filter" placeholder="Time Distance" [(ngModel)]="searchTimeDistance"></th>
+        <th><input type="text" class="header-filter" placeholder="Energy Spent" [(ngModel)]="searchEnergySpent"></th>
+        <th style="border-radius: 0 5px 0 0"><input type="text" class="header-filter" placeholder="Extra Battery" [(ngModel)]="searchExtraBatteryTime"></th>
+      </tr>
+      <tr *ngFor="let route of routes | filter:'route':{routeId: searchRouteId,origin: searchOrigin,destination: searchDestination,distance: searchDistance,timeDistance: searchTimeDistance,energySpent: searchEnergySpent, extraBatteryTime: searchExtraBatteryTime}">
+        <td>{{route.routeId}}</td>
+        <td>{{route.origin}}</td>
+        <td>{{route.destination}}</td>
+        <td>{{route.distance}}</td>
+        <td>{{route.timeDistance}}</td>
+        <td>{{route.energySpent}}</td>
+        <td>{{route.extraBatteryTime}}</td>
       </tr>
     </table>
   </div>

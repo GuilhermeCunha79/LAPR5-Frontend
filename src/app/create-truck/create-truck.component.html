@@ -41,9 +41,9 @@
         <th>Capacity Cargo</th>
         <th>Capacity Transportation</th>
         <th>Battery</th>
-        <th>Tare</th>
+        <th style="border-radius: 0 5px 0 0">Tare</th>
       </tr>
-      <tr *ngFor="let truck of trucks | filter : 'licensePlate': searchString ; let i = index">
+      <tr *ngFor="let truck of trucks | filter : 'licensePlate': searchString">
         <td>{{truck.licensePlate}}</td>
         <td>{{truck.autonomy}}</td>
         <td>{{truck.capacityCargo}}</td>

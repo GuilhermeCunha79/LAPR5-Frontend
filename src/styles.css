@@ -157,9 +157,18 @@ th {
 }
 
 th, td {
-  border: 1px solid #dddddd;
   padding: 8px;
   text-align: left;
+}
+
+.header-filter {
+  border: none;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+tr:nth-child(odd) {
+  background-color: #f0f0f0;
 }
 
 tr:nth-child(even) {

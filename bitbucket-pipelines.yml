@@ -11,9 +11,9 @@ pipelines:
             - npm install
       - step:
          name: Create artifact
-         script: 
-           - git archive --format=tar.gz master -o                   application.tar.gz 
-         artifacts: 
+         script:
+           - git archive --format=tar.gz master -o                   application.tar.gz
+         artifacts:
            - application.tar.gz
       - step:
            name: Deploy to heroku
@@ -22,7 +22,7 @@ pipelines:
            caches:
              - node
            script:
-             - pipe: atlassian/heroku-deploy:1.1.4
+             - pipe: atlassian/heroku-deploy:2.0.0
                variables:
                  HEROKU_API_KEY: $HEROKU_API_KEY
                  HEROKU_APP_NAME: $HEROKU_APP_NAME

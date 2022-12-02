@@ -10,8 +10,14 @@ import {TruckService} from "../services/TruckService";
 export class CreateTruckComponent implements OnInit {
 
   truck: Truck;
-  searchString: string;
-  searchNumber: number;
+
+  searchLicensePlate: string;
+  searchAutonomy: string;
+  searchCapacityCargo: string;
+  searchCapacityTransportation: string;
+  searchBattery: string;
+  searchTare: string;
+
   trucks: Truck [];
   licensePlate: string;
   autonomy: number;

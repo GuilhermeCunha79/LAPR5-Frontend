@@ -36,20 +36,20 @@
     <h1>Truck list</h1>
     <table id="tbody" >
       <tr>
-        <th style="border-radius: 5px 0 0 0"><input type="text" class="header-filter" placeholder="Licence Plate" pattern="([A-Z]{2}|[0-9]{2})-([A-Z]{2}|[0-9]{2})-([A-Z]{2}|[0-9]{2})" title="Must be of format XX-00-XX" required [(ngModel)]="searchString"></th>
-        <th>Autonomy</th>
-        <th>Capacity Cargo</th>
-        <th>Capacity Transportation</th>
-        <th>Battery</th>
-        <th style="border-radius: 0 5px 0 0">Tare</th>
+        <th style="border-radius: 5px 0 0 0"><input type="text" class="header-filter" placeholder="Licence Plate" [(ngModel)]="searchLicensePlate"></th>
+        <th><input type="text" class="header-filter" placeholder="Autonomy" [(ngModel)]="searchAutonomy"></th>
+        <th><input type="text" class="header-filter" placeholder="Capacity Cargo" [(ngModel)]="searchCapacityCargo"></th>
+        <th><input type="text" class="header-filter" placeholder="Capacity Transportation" [(ngModel)]="searchCapacityTransportation"></th>
+        <th><input type="text" class="header-filter" placeholder="Battery" [(ngModel)]="searchBattery"></th>
+        <th style="border-radius: 0 5px 0 0"><input type="text" class="header-filter" placeholder="Tare" [(ngModel)]="searchTare"></th>
       </tr>
-      <tr *ngFor="let truck of trucks | filter : 'licensePlate': searchString">
+      <tr *ngFor="let truck of trucks | filter:searchLicensePlate:searchAutonomy:searchCapacityCargo:searchCapacityTransportation:searchBattery:searchTare">
         <td>{{truck.licensePlate}}</td>
         <td>{{truck.autonomy}}</td>
         <td>{{truck.capacityCargo}}</td>
         <td>{{truck.capacityTransportation}}</td>
-        <td>{{truck.tare}}</td>
         <td>{{truck.battery}}</td>
+        <td>{{truck.tare}}</td>
       </tr>
     </table>
   </div>

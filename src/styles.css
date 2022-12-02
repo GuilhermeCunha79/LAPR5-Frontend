@@ -163,8 +163,9 @@ th, td {
 
 .header-filter {
   border: none;
-  border-radius: 5px;
-  padding: 5px;
+  border-radius: 15px;
+  max-width: 100px;
+  padding: 5px 15px;
 }
 
 tr:nth-child(odd) {

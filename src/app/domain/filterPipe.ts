@@ -1,20 +1,60 @@
-import { Pipe, PipeTransform, Injectable } from '@angular/core';
+import {Injectable, Pipe, PipeTransform} from '@angular/core';
 
 @Pipe({
   name: 'filter',
 })
+
 @Injectable()
 export class FilterPipe implements PipeTransform {
-  transform(items: any[], field: string, value: string): any[] {
+
+  transform(items: any[], licensePlate: string, autonomy: string, capacityCargo: string, capacityTransportation: string, battery: string, tare: string): any[] {
+
     if (!items) {
       return [];
     }
-    if (!field || !value) {
+
+    if (!licensePlate && !autonomy && !capacityCargo && !capacityTransportation && !battery && !tare) {
       return items;
     }
 
-    return items.filter((singleItem) =>
-      singleItem[field].toLowerCase().includes(value.toLowerCase())
-    );
+    let finalList = JSON.parse(JSON.stringify(items)) as any[];
+
+    if (licensePlate) {
+      finalList = finalList.filter((singleItem) =>
+        singleItem['licensePlate'].toLowerCase().includes(licensePlate.toLowerCase())
+      );
+    }
+
+    if (autonomy) {
+      finalList = finalList.filter((singleItem) =>
+        singleItem['autonomy'].toString().toLowerCase().includes(autonomy.toLowerCase())
+      );
+    }
+
+    if (capacityCargo) {
+      finalList = finalList.filter((singleItem) =>
+        singleItem['capacityCargo'].toString().toLowerCase().includes(capacityCargo.toLowerCase())
+      );
+    }
+
+    if (capacityTransportation) {
+      finalList = finalList.filter((singleItem) =>
+        singleItem['capacityTransportation'].toString().toLowerCase().includes(capacityTransportation.toLowerCase())
+      );
+    }
+
+    if (battery) {
+      finalList = finalList.filter((singleItem) =>
+        singleItem['battery'].toString().toLowerCase().includes(battery.toLowerCase())
+      );
+    }
+
+    if (tare) {
+      finalList = finalList.filter((singleItem) =>
+        singleItem['tare'].toString().toLowerCase().includes(tare.toLowerCase())
+      );
+    }
+
+    return finalList;
   }
 }

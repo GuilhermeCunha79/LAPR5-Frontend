@@ -41,40 +41,29 @@
     </div>
   </div>
 
-  <!--<!doctype html>
-  <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>jQuery UI Datepicker - Default functionality</title>
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="/resources/demos/style.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-    <script>
-    $( function() {
-      $( "#datepicker" ).datepicker();
-    } );
-    </script>
-  </head>
-  <body>
-  <p>Date: <input type="text" id="datepicker"></p>
-  </body>
-  </html>
-  -->
 
   <div class="menu-window">
-    <h1>Delivery List</h1>
+    <h1>Warehouse list</h1>
     <table id="tbody">
       <tr>
-        <th>Delivery ID</th>
-        <th>Day</th>
-        <th>Month</th>
-        <th>Year</th>
-        <th>Mass</th>
-        <th>Placing Time</th>
-        <th>Withdrawal Time</th>
-        <th>Store ID</th>
+        <th style="border-radius: 5px 0 0 0"><input type="text" class="header-filter" placeholder="Delivery ID" [(ngModel)]="searchDeliveryIdentifier"></th>
+        <th><input type="text" class="header-filter" placeholder="Day" [(ngModel)]="searchDay"></th>
+        <th><input type="text" class="header-filter" placeholder="Month" [(ngModel)]="searchMonth"></th>
+        <th><input type="text" class="header-filter" placeholder="Year" [(ngModel)]="searchYear"></th>
+        <th><input type="text" class="header-filter" placeholder="Mass" [(ngModel)]="searchMass"></th>
+        <th><input type="text" class="header-filter" placeholder="Placing Time" [(ngModel)]="searchPlacingTime"></th>
+        <th><input type="text" class="header-filter" placeholder="Store ID" [(ngModel)]="searchStoreId"></th>
+        <th><input type="text" class="header-filter" placeholder="Withdrawal Time" [(ngModel)]="searchWithdrawalTime"></th>
+      </tr>
+      <tr *ngFor="let delivery of deliveries | filter:'delivery':{deliveryIdentifier: searchDeliveryIdentifier,day: searchDay,month: searchMonth,year: searchYear,mass: searchMass,placingTime: searchPlacingTime, wId: searchStoreId, withdrawalTime: searchWithdrawalTime}">
+        <td>{{delivery.deliveryIdentifier}}</td>
+        <td>{{delivery.day}}</td>
+        <td>{{delivery.month}}</td>
+        <td>{{delivery.year}}</td>
+        <td>{{delivery.mass}}</td>
+        <td>{{delivery.placingTime}}</td>
+        <td>{{delivery.wId}}</td>
+        <td>{{delivery.withdrawalTime}}</td>
       </tr>
     </table>
   </div>

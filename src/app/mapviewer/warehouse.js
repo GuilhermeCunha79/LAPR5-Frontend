@@ -66,7 +66,7 @@ export default class Warehouse {
             });
 
             const mesh = model.scene;
-            mesh.scale.set(0.06, 0.06, 0.06);
+            mesh.scale.set(this.radius / 16, this.radius / 16, this.radius / 16);
             this.object.add(mesh);
         });
     }

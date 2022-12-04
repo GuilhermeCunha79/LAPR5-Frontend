@@ -22,9 +22,10 @@ pipelines:
            caches:
              - node
            script:
-             - pipe: atlassian/heroku-deploy:2.0.0
-               variables:
-                 HEROKU_API_KEY: $HEROKU_API_KEY
-                 HEROKU_APP_NAME: $HEROKU_APP_NAME
-                 ZIP_FILE: "application.tar.gz"
-                 WAIT: 'true'
+              -ls
+#             - pipe: atlassian/heroku-deploy:2.0.0
+#               variables:
+#                 HEROKU_API_KEY: $HEROKU_API_KEY
+#                 HEROKU_APP_NAME: $HEROKU_APP_NAME
+#                 ZIP_FILE: "application.tar.gz"
+#                 WAIT: 'true'

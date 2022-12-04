@@ -272,7 +272,7 @@ export default class RoadNetwork {
                     new THREE.Vector3(points[5].x - direction.x * lengthD, warehouseD.position.y, points[5].z - direction.z * lengthD)
                 );
 
-                const totalLength = lengthO + Math.sqrt(Math.pow(points[6].x - points[2].x, 2) + Math.pow(points[6].z - points[2].z, 2)) + lengthD;
+                /*const totalLength = lengthO + Math.sqrt(Math.pow(points[6].x - points[2].x, 2) + Math.pow(points[6].z - points[2].z, 2)) + lengthD;
 
                 const uvs = new Float32Array([
                     0.0, 1.0,
@@ -288,10 +288,10 @@ export default class RoadNetwork {
                     1.0, lengthD / totalLength
                 ]);
 
-                /*points =   [new THREE.Vector3(warehouseO.position.x + crossDirection.x * (width / 2), warehouseO.position.y, warehouseO.position.z + crossDirection.z * (width / 2))]; // 0
+                points =   [new THREE.Vector3(warehouseO.position.x + crossDirection.x * (width / 2), warehouseO.position.y, warehouseO.position.z + crossDirection.z * (width / 2))]; // 0
                 points.push(new THREE.Vector3(points[0].x + direction.x * lengthO, warehouseO.position.y, points[0].z + direction.z * lengthO)); // 1
                 points.push(new THREE.Vector3(warehouseO.position.x - crossDirection.x * (width / 2), warehouseO.position.y, warehouseO.position.z - crossDirection.z * (width / 2))); // 3
-                
+
                 points.push(new THREE.Vector3(points[0].x + direction.x * lengthO, warehouseO.position.y, points[0].z + direction.z * lengthO)); // 1
                 points.push(new THREE.Vector3(points[2].x + direction.x * lengthO, warehouseO.position.y, points[2].z + direction.z * lengthO)); // 2
                 points.push(new THREE.Vector3(warehouseO.position.x - crossDirection.x * (width / 2), warehouseO.position.y, warehouseO.position.z - crossDirection.z * (width / 2))); // 3
@@ -346,11 +346,11 @@ export default class RoadNetwork {
                 // Geometry
                 geometry = new THREE.BufferGeometry().setFromPoints(points);
                 geometry.setAttribute('normal', new THREE.BufferAttribute(normals, 3));
-                geometry.setAttribute('uv', new THREE.BufferAttribute(uvs, 2));
+                //geometry.setAttribute('uv', new THREE.BufferAttribute(uvs, 2));
                 geometry.setIndex(indexes);
 
                 // Material
-                const texture = new THREE.TextureLoader().load("textures/road.jpg");
+                /*const texture = new THREE.TextureLoader().load("textures/road.jpg");
 
                 texture.magFilter = THREE.LinearFilter;
                 texture.minFilter = THREE.LinearMipMapLinearFilter;
@@ -359,7 +359,11 @@ export default class RoadNetwork {
                 texture.wrapT = THREE.RepeatWrapping;
                 texture.repeat.set(1, totalLength * (1 / 0.45));
 
-                const material = new THREE.MeshPhongMaterial({ color: 0xffffff, map: texture });
+                const material = new THREE.MeshStandardMaterial({ color: 0xffffff, map: texture });*/
+                const material = new THREE.MeshStandardMaterial({
+                    color: 0x000000,
+                    side: THREE.DoubleSide
+                });
 
                 // Mesh
                 mesh = new THREE.Mesh(geometry, material);

@@ -16,13 +16,12 @@ pipelines:
          artifacts:
            - application.tar.gz
       - step:
-           name: Deploy to heroku
-#           trigger: manual
-           deployment: production
-           caches:
-             - node
-           script:
-              -ls
+          name: Deploy to azure
+          deployment: Production
+#          trigger: manual
+
+          script:
+            - ls
 #             - pipe: atlassian/heroku-deploy:2.0.0
 #               variables:
 #                 HEROKU_API_KEY: $HEROKU_API_KEY

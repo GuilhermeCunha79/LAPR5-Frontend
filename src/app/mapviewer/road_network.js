@@ -211,7 +211,7 @@ export default class RoadNetwork {
     // Creates all the links between each warehouse
     createLinks() {
 
-        let points, tempPoints, geometry, mesh;
+        let points, geometry, mesh;
 
         const normals = new Float32Array([
             0, 1, 0,
@@ -296,7 +296,7 @@ export default class RoadNetwork {
                 points.push(new THREE.Vector3(points[2].x + direction.x * lengthO, warehouseO.position.y, points[2].z + direction.z * lengthO)); // 2
                 points.push(new THREE.Vector3(warehouseO.position.x - crossDirection.x * (width / 2), warehouseO.position.y, warehouseO.position.z - crossDirection.z * (width / 2))); // 3
 
-                tempPoints =   [new THREE.Vector3(warehouseD.position.x + crossDirection.x * (width / 2), warehouseD.position.y, warehouseD.position.z + crossDirection.z * (width / 2))]; // 6
+                let tempPoints=[new THREE.Vector3(warehouseD.position.x + crossDirection.x * (width / 2), warehouseD.position.y, warehouseD.position.z + crossDirection.z * (width / 2))]; // 6
                 tempPoints.push(new THREE.Vector3(tempPoints[0].x - direction.x * lengthD, warehouseD.position.y, tempPoints[0].z - direction.z * lengthD)); // 4
                 tempPoints.push(new THREE.Vector3(warehouseD.position.x - crossDirection.x * (width / 2), warehouseD.position.y, warehouseD.position.z - crossDirection.z * (width / 2))); // 7
                 tempPoints.push(new THREE.Vector3(tempPoints[2].x - direction.x * lengthD, warehouseD.position.y, tempPoints[2].z - direction.z * lengthD)); // 5

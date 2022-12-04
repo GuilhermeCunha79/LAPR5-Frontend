@@ -8,7 +8,7 @@ import {map, Observable} from "rxjs";
 
 export class RouteService {
 
-  private Url = 'http://localhost:3000/api/route';
+  private Url = 'https://lapr5-logistics.herokuapp.com/api/route';
 
   constructor(private httpClient: HttpClient) {
   }

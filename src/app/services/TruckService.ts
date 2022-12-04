@@ -7,7 +7,7 @@ import {MessageService} from "../message.service";
   providedIn: 'root'
 })
 export class TruckService {
-  private Url = 'http://localhost:3000/api/truck/';
+  private Url = 'https://lapr5-logistics.herokuapp.com/api/truck/';
 
   constructor(private httpClient: HttpClient, private messageService: MessageService) {
   }

@@ -20,11 +20,24 @@ export class CreateWarehouseComponent implements OnInit {
   longitude: number;
   altitude: number;
 
+  searchWarehouseIdentifier: string;
+  searchDesignation: string;
+  searchStreet: string;
+  searchNumber: number;
+  searchPostalCode: number;
+  searchCountry: number;
+  searchLatitude: number;
+  searchLongitude: number;
+  searchAltitude: number;
+
+  warehouses: Warehouse[];
+
+
   constructor(private warehouseService: WarehouseService) {
   }
 
   ngOnInit(): void {
-    this.listTable();
+    this.getWarehouses();
   }
 
   public createValidWarehouse(): void {
@@ -37,6 +50,15 @@ export class CreateWarehouseComponent implements OnInit {
     setTimeout(window.location.reload.bind(window.location), 200);
 
   }
+
+  public getWarehouses(): void {
+
+    this.warehouseService.getWarehouses().subscribe(data => {
+      this.warehouses = data;
+    });
+  }
+
+
   public createWarehouse(): void {
     this.warehouseService.createWarehouse(this.warehouseIdentifier, this.designation, this.street, this.number, this.postalCode, this.country, this.latitude, this.longitude, this.altitude).subscribe(data => {
       this.warehouse = data

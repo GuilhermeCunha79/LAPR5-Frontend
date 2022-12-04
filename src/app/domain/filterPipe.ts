@@ -107,8 +107,62 @@ export class FilterPipe implements PipeTransform {
         );
       }
     } else if (domainType === "warehouse") {
+      if (!params.warehouseIdentifier && !params.designation && !params.street && !params.number && !params.postalCode && !params.country&& !params.latitude&& !params.longitude&& !params.altitude) {
+        return items;
+      }
 
-      //TODO
+      if (params.warehouseIdentifier) {
+        finalList = finalList.filter((singleItem) =>
+          singleItem['warehouseIdentifier'].toLowerCase().includes(params.warehouseIdentifier.toLowerCase())
+        );
+      }
+
+      if (params.designation) {
+        finalList = finalList.filter((singleItem) =>
+          singleItem['designation'].toString().toLowerCase().includes(params.designation.toLowerCase())
+        );
+      }
+
+      if (params.street) {
+        finalList = finalList.filter((singleItem) =>
+          singleItem['street'].toString().toLowerCase().includes(params.street.toLowerCase())
+        );
+      }
+
+      if (params.number) {
+        finalList = finalList.filter((singleItem) =>
+          singleItem['number'].toString().toLowerCase().includes(params.number.toLowerCase())
+        );
+      }
+
+      if (params.postalCode) {
+        finalList = finalList.filter((singleItem) =>
+          singleItem['postalCode'].toString().toLowerCase().includes(params.postalCode.toLowerCase())
+        );
+      }
+
+      if (params.country) {
+        finalList = finalList.filter((singleItem) =>
+          singleItem['country'].toString().toLowerCase().includes(params.country.toLowerCase())
+        );
+      }
+      if (params.latitude) {
+        finalList = finalList.filter((singleItem) =>
+          singleItem['latitude'].toString().toLowerCase().includes(params.latitude.toLowerCase())
+        );
+      }
+      if (params.longitude) {
+        finalList = finalList.filter((singleItem) =>
+          singleItem['longitude'].toString().toLowerCase().includes(params.longitude.toLowerCase())
+        );
+      }
+      if (params.altitude) {
+        finalList = finalList.filter((singleItem) =>
+          singleItem['altitude'].toString().toLowerCase().includes(params.altitude.toLowerCase())
+        );
+      }
+
+
     }
 
     return finalList;

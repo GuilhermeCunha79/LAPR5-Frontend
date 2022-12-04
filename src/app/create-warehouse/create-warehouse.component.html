@@ -48,15 +48,26 @@
     <h1>Warehouse list</h1>
     <table id="tbody">
       <tr>
-        <th>Warehouse ID</th>
-        <th>Designation</th>
-        <th>Street Name</th>
-        <th>Street Number</th>
-        <th>Street Postal Code</th>
-        <th>City</th>
-        <th>Latitude</th>
-        <th>Longitude</th>
-        <th>Altitude</th>
+        <th style="border-radius: 5px 0 0 0"><input type="text" class="header-filter" placeholder="Warehouse ID" [(ngModel)]="searchWarehouseIdentifier"></th>
+        <th><input type="text" class="header-filter" placeholder="Designation" [(ngModel)]="searchDesignation"></th>
+        <th><input type="text" class="header-filter" placeholder="Street Name" [(ngModel)]="searchStreet"></th>
+        <th><input type="text" class="header-filter" placeholder="Street Number" [(ngModel)]="searchNumber"></th>
+        <th><input type="text" class="header-filter" placeholder="Postal Code" [(ngModel)]="searchPostalCode"></th>
+        <th><input type="text" class="header-filter" placeholder="City" [(ngModel)]="searchCountry"></th>
+        <th><input type="text" class="header-filter" placeholder="Latitude" [(ngModel)]="searchLatitude"></th>
+        <th><input type="text" class="header-filter" placeholder="Longitude" [(ngModel)]="searchLongitude"></th>
+        <th style="border-radius: 0 5px 0 0"><input type="text" class="header-filter" placeholder="Altitude" [(ngModel)]="searchAltitude"></th>
+      </tr>
+      <tr *ngFor="let warehouse of warehouses | filter:'warehouse':{warehouseIdentifier: searchWarehouseIdentifier,designation: searchDesignation,street: searchStreet,number: searchNumber,postalCode: searchPostalCode,country: searchCountry, latitude: searchLatitude, longitude: searchLongitude, altitude: searchAltitude}">
+        <td>{{warehouse.warehouseIdentifier}}</td>
+        <td>{{warehouse.designation}}</td>
+        <td>{{warehouse.street}}</td>
+        <td>{{warehouse.number}}</td>
+        <td>{{warehouse.postalCode}}</td>
+        <td>{{warehouse.country}}</td>
+        <td>{{warehouse.latitude}}</td>
+        <td>{{warehouse.longitude}}</td>
+        <td>{{warehouse.altitude}}</td>
       </tr>
     </table>
   </div>

@@ -8,28 +8,36 @@ import {Delivery} from "../delivery";
   templateUrl: './create-delivery.component.html',
   styleUrls: ['./create-delivery.component.css']
 })
+
 export class DeliveryComponent implements OnInit {
   delivery: Delivery;
-  "deliveryIdentifier": string;
-  "day": number;
-  "month": string;
-  "year": number;
-  "mass": number;
-  "placingTime": number;
-  "storeId": string;
-  "withdrawalTime": number;
+  deliveryIdentifier: string;
+  day: number;
+  month: string;
+  year: number;
+  mass: number;
+  placingTime: number;
+  storeId: string;
+  withdrawalTime: number;
+
+  searchDeliveryIdentifier: string;
+  searchDay: number;
+  searchMonth: string;
+  searchYear: number;
+  searchMass: number;
+  searchPlacingTime: number;
+  searchStoreId: number;
+  searchWithdrawalTime: string;
+
+  deliveries: Delivery[];
 
 
-
-
-  constructor(private deliveryService: DeliveryService,
-              private route: ActivatedRoute,
-              private router: Router) {
+  constructor(private deliveryService: DeliveryService) {
 
   }
 
   ngOnInit(): void {
-    this.listTable();
+    this.getDeliveries();
   }
 
   public createValidDelivery(): void {
@@ -45,6 +53,13 @@ export class DeliveryComponent implements OnInit {
   public createDelivery(): void {
     this.deliveryService.createDelivery(this.deliveryIdentifier, this.day, this.month, this.year, this.mass, this.placingTime, this.storeId, this.withdrawalTime).subscribe(data => {console.log(data);
       this.delivery = data
+    });
+  }
+
+  public getDeliveries(): void {
+
+    this.deliveryService.getDeliveries().subscribe(data => {
+      this.deliveries = data;
     });
   }
 

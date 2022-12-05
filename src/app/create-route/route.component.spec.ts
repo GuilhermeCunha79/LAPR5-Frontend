@@ -1,23 +1,11 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { RouteComponent } from './route.component';
-
-describe('RoutesComponent', () => {
-  let component: RouteComponent;
-  let fixture: ComponentFixture<RouteComponent>;
-
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ RouteComponent ]
-    })
-    .compileComponents();
-
-    fixture = TestBed.createComponent(RouteComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+describe("Sample function", function() {
+  it("Sample test 1", function() {
+    const a = true;
+    expect(a).toBe(true);
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it("Sample test 2", function() {
+    const a = true;
+    expect(a).toBe(true);
   });
 });

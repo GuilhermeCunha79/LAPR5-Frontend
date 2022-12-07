@@ -1,4 +1,4 @@
-class Route {
+export class Route {
   routeId: string;
   origin: string;
   destination: string;

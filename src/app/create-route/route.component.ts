@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {RouteService} from "../services/RouteService";
+import {RouteService} from "../services/RouteService/route.service";
+import {Route} from "../domain/Route";
 
 @Component({
   selector: 'app-route',

@@ -26,9 +26,13 @@ export class RouteService {
     }
   }
 
-  createRoute(routeId: string, origin: string, destination: string, distance: number, timeDistance: number, energySpent: number, extraBatteryTime: number): Observable<any> | null {
-
+  createValidRoute(routeId: string, origin: string, destination: string, distance: number, timeDistance: number, energySpent: number, extraBatteryTime: number): Observable<any> | null {
     if (!this.validateData(routeId, origin, destination, distance, timeDistance, energySpent, extraBatteryTime)) return null;
+
+    return this.createRoute(routeId, origin, destination, distance, timeDistance, energySpent, extraBatteryTime);
+  }
+
+  createRoute(routeId: string, origin: string, destination: string, distance: number, timeDistance: number, energySpent: number, extraBatteryTime: number): Observable<any> {
 
     const body = {
       "routeId": routeId,

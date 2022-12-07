@@ -37,7 +37,7 @@ export class RouteComponent implements OnInit {
 
   public createRoute(): void {
     // @ts-ignore
-    this.routesService.createRoute(this.routeId, this.origin, this.destination, this.distance, this.timeDistance, this.energySpent, this.extraBatteryTime).subscribe();
+    this.routesService.createValidRoute(this.routeId, this.origin, this.destination, this.distance, this.timeDistance, this.energySpent, this.extraBatteryTime).subscribe();
     setTimeout(window.location.reload.bind(window.location), 200);
   }
 }

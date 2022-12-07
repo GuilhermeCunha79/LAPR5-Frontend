@@ -6,5 +6,5 @@
   mass: number;
   wId: string;
   withdrawalTime: number;
-  deliveryTime: number;
+  placingTime: number;
 }

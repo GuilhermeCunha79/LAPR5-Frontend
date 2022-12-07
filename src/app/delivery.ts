@@ -1,10 +1,10 @@
 ﻿export interface Delivery {
-  id: string;
+  deliveryIdentifier: string;
   day: number;
   month: string;
   year: number;
   mass: number;
   placingTime: number;
-  wId: string;
+  storeId: string;
   withdrawalTime: number;
 }

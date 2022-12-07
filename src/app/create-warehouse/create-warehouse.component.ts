@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {WarehouseService} from "../services/WarehouseService";
+import {Warehouse} from "../domain/Warehouse";
 
 @Component({
   selector: 'app-create-warehouse',

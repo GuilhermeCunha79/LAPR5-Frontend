@@ -1,4 +1,4 @@
-﻿class Warehouse {
+﻿export class Warehouse {
   warehouseIdentifier: string;
   designation: string;
   street: string;

@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {TruckService} from "../services/TruckService";
+import {TruckService} from "../services/TruckService/truck.service";
+import {Truck} from "../domain/Truck";
 
 @Component({
   selector: 'app-create-truck',

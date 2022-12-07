@@ -1,4 +1,4 @@
-class Truck {
+export class  Truck {
   licensePlate: string;
   autonomy: number;
   capacityCargo: number;
@@ -6,3 +6,4 @@ class Truck {
   battery: number;
   tare: number;
 }
+

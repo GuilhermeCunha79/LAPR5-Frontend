@@ -26,7 +26,7 @@ export class DeliveryComponent implements OnInit {
   searchYear: number;
   searchMass: number;
   searchPlacingTime: number;
-  searchStoreId: number;
+  searchStoreId: string;
   searchWithdrawalTime: string;
 
   deliveries: Delivery[];

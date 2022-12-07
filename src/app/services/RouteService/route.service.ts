@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {map, Observable} from "rxjs";
+import {MessageService} from "../../message.service";
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ export class RouteService {
 
   Url = 'https://lapr5-logistics.herokuapp.com/api/route';
 
-  constructor(private httpClient: HttpClient) {
+  constructor(private httpClient: HttpClient, private messageService: MessageService) {
   }
 
   public extractData(res: any) {
@@ -25,7 +26,10 @@ export class RouteService {
     }
   }
 
-  createRoute(routeId: string, origin: string, destination: string, distance: number, timeDistance: number, energySpent: number, extraBatteryTime: number): Observable<any> {
+  createRoute(routeId: string, origin: string, destination: string, distance: number, timeDistance: number, energySpent: number, extraBatteryTime: number): Observable<any> | null {
+
+    if (!this.validateData(routeId, origin, destination, distance, timeDistance, energySpent, extraBatteryTime)) return null;
+
     const body = {
       "routeId": routeId,
       "origin": origin,
@@ -77,5 +81,49 @@ export class RouteService {
         tr.insertCell().innerText = i[j].extraBatteryTime;
       }
     });
+  }
+
+  validateData(routeId: string, origin: string, destination: string, distance: number, timeDistance: number, energySpent: number, extraBatteryTime: number): boolean {
+
+    if (routeId == null) {
+      this.log("ERROR: Route Id can't be null.");
+      return false;
+    }
+
+    if (origin == null) {
+      this.log("ERROR: Route origin can't be null.");
+      return false;
+    }
+
+    if (destination == null) {
+      this.log("ERROR: Route destination can't be null.");
+      return false;
+    }
+
+    if (distance == null) {
+      this.log("ERROR: Route distance can't be null.");
+      return false;
+    }
+
+    if (timeDistance == null) {
+      this.log("ERROR: Route timeDistance can't be null.");
+      return false;
+    }
+
+    if (energySpent == null) {
+      this.log("ERROR: Route energySpent can't be null.");
+      return false;
+    }
+
+    if (extraBatteryTime == null) {
+      this.log("ERROR: Route extraBatteryTime can't be null.");
+      return false;
+    }
+
+    return false;
+  }
+
+  log(message: string) {
+    this.messageService.add(`Created Truck: ${message}`);
   }
 }

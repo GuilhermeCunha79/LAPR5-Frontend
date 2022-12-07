@@ -72,7 +72,7 @@ export class DeliveryService {
   /** POST: add a new delivery to the server */
   addDeliveries(delivery: Delivery): Observable<Delivery> {
     return this.http.post<Delivery>(this.deliveriesUrl, delivery, this.httpOptions).pipe(
-      tap((newDelivery: Delivery) => this.log(`added delivery w/ id=${newDelivery.id}`)),
+      tap((newDelivery: Delivery) => this.log(`added delivery w/ id=${newDelivery.deliveryIdentifier}`)),
       catchError(this.handleError<Delivery>('addDelivery'))
     );
   }
@@ -90,7 +90,7 @@ export class DeliveryService {
   /** PUT: update the delivery on the server */
   updateDelivery(delivery: Delivery): Observable<any> {
     return this.http.put(this.deliveriesUrl, delivery, this.httpOptions).pipe(
-      tap(_ => this.log(`updated hero id=${delivery.id}`)),
+      tap(_ => this.log(`updated hero id=${delivery.deliveryIdentifier}`)),
       catchError(this.handleError<any>('updateDelivery'))
     );
   }

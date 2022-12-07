@@ -7,7 +7,7 @@ import {MessageService} from "../message.service";
   providedIn: 'root'
 })
 export class DeliveryService {
-  private Url = 'https://lapr5-dddnetcore.herokuapp.com/api/Delivery';
+  public Url = 'https://lapr5-dddnetcore.herokuapp.com/api/Delivery';
 
   constructor(private httpClient: HttpClient, private messageService: MessageService) {
   }

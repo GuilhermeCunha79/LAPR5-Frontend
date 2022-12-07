@@ -6,15 +6,15 @@
     <p class="domain-title">Create Delivery</p>
     <div class="input-field">
       <label>Delivery ID</label>
-      <input class="input" type="text" name="warehouseIdentifier" required [(ngModel)]="deliveryIdentifier">
+      <input class="input" type="text" name="deliveryIdentifier" required [(ngModel)]="deliveryIdentifier">
     </div>
     <div class="input-field">
       <label>Day</label>
-      <input class="input" type="text" name="designation" required [(ngModel)]="day">
+      <input class="input" type="number" name="day" required [(ngModel)]="day">
     </div>
     <div class="input-field">
       <label>Month</label>
-      <input class="input" type="text" name="street" required [(ngModel)]="month">
+      <input class="input" type="text" name="month" required [(ngModel)]="month">
     </div>
     <div class="input-field">
       <label>Year</label>
@@ -22,19 +22,19 @@
     </div>
     <div class="input-field">
       <label>Mass</label>
-      <input class="input" type="text" name="postalCode" required [(ngModel)]="mass">
+      <input class="input" type="number" name="postalCode" required [(ngModel)]="mass">
     </div>
     <div class="input-field">
       <label>Placing Time</label>
-      <input class="input" type="text" name="country" required [(ngModel)]="placingTime">
+      <input class="input" type="number" name="placingTime" required [(ngModel)]="placingTime">
     </div>
     <div class="input-field">
       <label>Store ID</label>
-      <input class="input" type="number" name="latitude" required [(ngModel)]="storeId">
+      <input class="input" type="text" name="storeId" required [(ngModel)]="storeId">
     </div>
     <div class="input-field">
       <label>Withdrawal Time</label>
-      <input class="input" type="number" name="longitude" required [(ngModel)]="withdrawalTime">
+      <input class="input" type="number" name="withdrawalTime" required [(ngModel)]="withdrawalTime">
     </div>
     <div>
       <button class="button" type="submit" (click)="createValidDelivery()" onclick="window.location.reload()">Submit</button>

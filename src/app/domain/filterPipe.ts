@@ -17,7 +17,147 @@ export class FilterPipe implements PipeTransform {
 
     if (domainType === "delivery") {
 
-      //TODO
+      if (!params.deliveryIdentifier && !params.day && !params.month && !params.year && !params.mass && !params.wId && !params.withdrawalTime && !params.placingTime) {
+        return items;
+      }
+
+      if (params.deliveryIdentifier) {
+        finalList = finalList.filter((singleItem) =>
+          singleItem['deliveryIdentifier'].toLowerCase().includes(params.deliveryIdentifier.toLowerCase())
+        );
+      }
+
+      if (params.day) {
+        finalList = finalList.filter((singleItem) =>
+          singleItem['day'].toLowerCase().includes(params.day.toLowerCase())
+        );
+      }
+
+      if (params.wId) {
+        finalList = finalList.filter((singleItem) =>
+          singleItem['wId'].toLowerCase().includes(params.wId.toLowerCase())
+        );
+      }
+
+      if (params.year) {
+        finalList = finalList.filter((singleItem) =>
+          singleItem['year'].toString().toLowerCase().includes(params.year.toLowerCase())
+        );
+      }
+
+      if (params.mass) {
+        finalList = finalList.filter((singleItem) =>
+          singleItem['mass'].toString().toLowerCase().includes(params.mass.toLowerCase())
+        );
+      }
+
+      if (params.withdrawalTime) {
+        finalList = finalList.filter((singleItem) =>
+          singleItem['withdrawalTime'].toString().toLowerCase().includes(params.withdrawalTime.toLowerCase())
+        );
+      }
+
+      if (params.placingTime) {
+        finalList = finalList.filter((singleItem) =>
+          singleItem['placingTime'].toString().toLowerCase().includes(params.placingTime.toLowerCase())
+        );
+      }
+    } else if (domainType === "truck") {
+
+      if (!params.licensePlate && !params.autonomy && !params.capacityCargo && !params.capacityTransportation && !params.battery && !params.tare) {
+        return items;
+      }
+
+      if (params.licensePlate) {
+        finalList = finalList.filter((singleItem) =>
+          singleItem['licensePlate'].toLowerCase().includes(params.licensePlate.toLowerCase())
+        );
+      }
+
+      if (params.autonomy) {
+        finalList = finalList.filter((singleItem) =>
+          singleItem['autonomy'].toString().toLowerCase().includes(params.autonomy.toLowerCase())
+        );
+      }
+
+      if (params.capacityCargo) {
+        finalList = finalList.filter((singleItem) =>
+          singleItem['capacityCargo'].toString().toLowerCase().includes(params.capacityCargo.toLowerCase())
+        );
+      }
+
+      if (params.capacityTransportation) {
+        finalList = finalList.filter((singleItem) =>
+          singleItem['capacityTransportation'].toString().toLowerCase().includes(params.capacityTransportation.toLowerCase())
+        );
+      }
+
+      if (params.battery) {
+        finalList = finalList.filter((singleItem) =>
+          singleItem['battery'].toString().toLowerCase().includes(params.battery.toLowerCase())
+        );
+      }
+
+      if (params.tare) {
+        finalList = finalList.filter((singleItem) =>
+          singleItem['tare'].toString().toLowerCase().includes(params.tare.toLowerCase())
+        );
+      }
+    } else if (domainType === "warehouse") {
+      if (!params.warehouseIdentifier && !params.designation && !params.street && !params.number && !params.postalCode && !params.country&& !params.latitude&& !params.longitude&& !params.altitude) {
+        return items;
+      }
+
+      if (params.warehouseIdentifier) {
+        finalList = finalList.filter((singleItem) =>
+          singleItem['warehouseIdentifier'].toLowerCase().includes(params.warehouseIdentifier.toLowerCase())
+        );
+      }
+
+      if (params.designation) {
+        finalList = finalList.filter((singleItem) =>
+          singleItem['designation'].toString().toLowerCase().includes(params.designation.toLowerCase())
+        );
+      }
+
+      if (params.street) {
+        finalList = finalList.filter((singleItem) =>
+          singleItem['street'].toString().toLowerCase().includes(params.street.toLowerCase())
+        );
+      }
+
+      if (params.number) {
+        finalList = finalList.filter((singleItem) =>
+          singleItem['number'].toString().toLowerCase().includes(params.number.toLowerCase())
+        );
+      }
+
+      if (params.postalCode) {
+        finalList = finalList.filter((singleItem) =>
+          singleItem['postalCode'].toString().toLowerCase().includes(params.postalCode.toLowerCase())
+        );
+      }
+
+      if (params.country) {
+        finalList = finalList.filter((singleItem) =>
+          singleItem['country'].toString().toLowerCase().includes(params.country.toLowerCase())
+        );
+      }
+      if (params.latitude) {
+        finalList = finalList.filter((singleItem) =>
+          singleItem['latitude'].toString().toLowerCase().includes(params.latitude.toLowerCase())
+        );
+      }
+      if (params.longitude) {
+        finalList = finalList.filter((singleItem) =>
+          singleItem['longitude'].toString().toLowerCase().includes(params.longitude.toLowerCase())
+        );
+      }
+      if (params.altitude) {
+        finalList = finalList.filter((singleItem) =>
+          singleItem['altitude'].toString().toLowerCase().includes(params.altitude.toLowerCase())
+        );
+      }
     } else if (domainType === "route") {
 
       if (!params.routeId && !params.origin && !params.destination && !params.distance && !params.timeDistance && !params.energySpent && !params.extraBatteryTime) {

@@ -1,7 +1,7 @@
 ﻿import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
-import {DeliveryService} from "../services/DeliveryService";
+
 import {Delivery} from "../delivery";
+import {DeliveryService} from "../services/DeliveryService";
 
 @Component({
   selector: 'app-create-warehouse',

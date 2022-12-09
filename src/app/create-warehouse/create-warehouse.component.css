@@ -1,0 +1,187 @@
+.input-warehouseIdentifier {
+  text-align: left;
+  margin-bottom: 10px;
+}
+
+.input-warehouseIdentifier label {
+  display: block;
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.input-warehouseIdentifier .input {
+  border: 1px solid #cecece;
+  border-radius: 3px;
+  box-sizing: border-box;
+  display: block;
+  padding: 10px;
+  width: 100%;
+}
+
+
+.input-designation {
+  text-align: left;
+  margin-bottom: 10px;
+}
+
+.input-designation label {
+  display: block;
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.input-designation .input {
+  border: 1px solid #cecece;
+  border-radius: 3px;
+  box-sizing: border-box;
+  display: block;
+  padding: 10px;
+  width: 100%;
+}
+
+
+.input-street {
+  text-align: left;
+  margin-bottom: 10px;
+}
+
+.input-street label {
+  display: block;
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.input-street .input {
+  border: 1px solid #cecece;
+  border-radius: 3px;
+  box-sizing: border-box;
+  display: block;
+  padding: 10px;
+  width: 100%;
+}
+
+
+.input-number {
+  text-align: left;
+  margin-bottom: 10px;
+}
+
+.input-number label {
+  display: block;
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.input-number .input {
+  border: 1px solid #cecece;
+  border-radius: 3px;
+  box-sizing: border-box;
+  display: block;
+  padding: 10px;
+  width: 100%;
+}
+
+.input-postalCode {
+  text-align: left;
+  margin-bottom: 10px;
+}
+
+.input-postalCode label {
+  display: block;
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.input-postalCode .input {
+  border: 1px solid #cecece;
+  border-radius: 3px;
+  box-sizing: border-box;
+  display: block;
+  padding: 10px;
+  width: 100%;
+}
+
+
+.input-country {
+  text-align: left;
+  margin-bottom: 10px;
+}
+
+.input-country label {
+  display: block;
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.input-country .input {
+  border: 1px solid #cecece;
+  border-radius: 3px;
+  box-sizing: border-box;
+  display: block;
+  padding: 10px;
+  width: 100%;
+}
+
+
+.input-latitude {
+  text-align: left;
+  margin-bottom: 10px;
+}
+
+.input-latitude label {
+  display: block;
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.input-latitude .input {
+  border: 1px solid #cecece;
+  border-radius: 3px;
+  box-sizing: border-box;
+  display: block;
+  padding: 10px;
+  width: 100%;
+}
+
+
+.input-longitude {
+  text-align: left;
+  margin-bottom: 10px;
+}
+
+.input-longitude label {
+  display: block;
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.input-longitude .input {
+  border: 1px solid #cecece;
+  border-radius: 3px;
+  box-sizing: border-box;
+  display: block;
+  padding: 10px;
+  width: 100%;
+}
+
+.input-altitude {
+  text-align: left;
+  margin-bottom: 10px;
+}
+
+.input-altitude label {
+  display: block;
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.input-altitude .input {
+  border: 1px solid #cecece;
+  border-radius: 3px;
+  box-sizing: border-box;
+  display: block;
+  padding: 10px;
+  width: 100%;
+}
+
+

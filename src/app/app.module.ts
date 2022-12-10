@@ -5,10 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
-//import { DashboardComponent } from './dashboard/dashboard.component';
-import { DeliveryDetailComponent } from './delivery-detail/delivery-detail.component';
 import { DeliveryComponent } from './create-delivery/create-delivery.component';
-import { DeliverySearchComponent } from './delivery-search/delivery-search.component';
 import { MessagesComponent } from './messages/messages.component';
 import { CreateTruckComponent } from './create-truck/create-truck.component';
 import { LoginComponent } from './login/login.component';
@@ -36,18 +33,16 @@ import {SharedModule} from "./shared.module";
   declarations: [
     AppComponent,
     LoginComponent,
-   // DashboardComponent,
     DeliveryComponent,
-    DeliveryDetailComponent,
     MessagesComponent,
-    DeliverySearchComponent,
     CreateTruckComponent,
     CreateWarehouseComponent,
     WarehouseManagerComponent,
     RouteComponent,
     FleetManagerComponent,
-
   ],
   bootstrap: [ AppComponent ]
 })
-export class AppModule { }
+
+export class AppModule {
+}

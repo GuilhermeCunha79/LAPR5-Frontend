@@ -104,23 +104,23 @@ export class RouteService {
       return false;
     }
 
-    if (distance == null) {
-      this.log("ERROR: Route distance can't be null.");
+    if (distance == null || distance < 0) {
+      this.log("ERROR: Route distance can't be null or zero.");
       return false;
     }
 
-    if (timeDistance == null) {
-      this.log("ERROR: Route timeDistance can't be null.");
+    if (timeDistance == null || timeDistance < 0) {
+      this.log("ERROR: Route timeDistance can't be null or zero.");
       return false;
     }
 
-    if (energySpent == null) {
-      this.log("ERROR: Route energySpent can't be null.");
+    if (energySpent == null || energySpent < 0) {
+      this.log("ERROR: Route energySpent can't be null or zero.");
       return false;
     }
 
-    if (extraBatteryTime == null) {
-      this.log("ERROR: Route extraBatteryTime can't be null.");
+    if (extraBatteryTime == null || extraBatteryTime < 0) {
+      this.log("ERROR: Route extraBatteryTime can't be null or zero.");
       return false;
     }
 

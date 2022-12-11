@@ -70,8 +70,8 @@ export default class RoadNetwork {
 
         sun.shadow.camera.top = 60;
         sun.shadow.camera.bottom = -60;
-        sun.shadow.camera.left = -60;
-        sun.shadow.camera.right = 60;
+        sun.shadow.camera.left = -75;
+        sun.shadow.camera.right = 75;
 
         this.scene.add(sun);
 
@@ -185,7 +185,9 @@ export default class RoadNetwork {
         //////////////
         // 3D Title //
         //////////////
-        this.add3DTitle();
+        this.add3DTitle(
+            new THREE.MeshStandardMaterial({ color: 0x141414 })
+        );
     }
 
     // Draws solid lines
@@ -210,35 +212,15 @@ export default class RoadNetwork {
 
     // Creates all the links between each warehouse
     createLinks() {
-
-        let points, geometry, mesh;
-
-        const normals = new Float32Array([
-            0, 1, 0,
-            0, 1, 0,
-            0, 1, 0,
-            0, 1, 0,
-            0, 1, 0,
-            0, 1, 0
-        ]);
-        const indexes = [
-            0, 2, 1,
-            1, 2, 3,
-            2, 6, 3,
-            3, 6, 7,
-            6, 4, 7,
-            7, 4, 5
-        ];
-
         for (let i = 0; i < this.warehouseArray.length - 1; i++) {
             for (let j = 0; j < this.warehouseArray[i].links.length; j++) {
 
                 const warehouseO = this.warehouseArray[i];
                 const warehouseD = this.warehouseArray[this.warehouseArray[i].links[j]];
 
+                const width = 0.45;
                 const lengthO = warehouseO.radius * 1.5;
                 const lengthD = warehouseD.radius * 1.5;
-                const width = 0.45;
 
                 const direction = new THREE.Vector3(
                     warehouseD.position.x - warehouseO.position.x,
@@ -252,121 +234,113 @@ export default class RoadNetwork {
                     direction.z
                 ).cross(new THREE.Vector3(0, 1, 0));
 
-                points = [
+                const pointsTemp = [
                     new THREE.Vector3(warehouseO.position.x + crossDirection.x * (width / 2), warehouseO.position.y, warehouseO.position.z + crossDirection.z * (width / 2)),
                     new THREE.Vector3(warehouseO.position.x - crossDirection.x * (width / 2), warehouseO.position.y, warehouseO.position.z - crossDirection.z * (width / 2))
                 ];
 
-                points.push(
-                    new THREE.Vector3(points[0].x + direction.x * lengthO, warehouseO.position.y, points[0].z + direction.z * lengthO),
-                    new THREE.Vector3(points[1].x + direction.x * lengthO, warehouseO.position.y, points[1].z + direction.z * lengthO)
+                pointsTemp.push(
+                    new THREE.Vector3(pointsTemp[0].x + direction.x * lengthO, warehouseO.position.y, pointsTemp[0].z + direction.z * lengthO),
+                    new THREE.Vector3(pointsTemp[1].x + direction.x * lengthO, warehouseO.position.y, pointsTemp[1].z + direction.z * lengthO)
                 );
 
-                points.push(
+                pointsTemp.push(
                     new THREE.Vector3(warehouseD.position.x + crossDirection.x * (width / 2), warehouseD.position.y, warehouseD.position.z + crossDirection.z * (width / 2)),
                     new THREE.Vector3(warehouseD.position.x - crossDirection.x * (width / 2), warehouseD.position.y, warehouseD.position.z - crossDirection.z * (width / 2))
                 );
 
-                points.push(
-                    new THREE.Vector3(points[4].x - direction.x * lengthD, warehouseD.position.y, points[4].z - direction.z * lengthD),
-                    new THREE.Vector3(points[5].x - direction.x * lengthD, warehouseD.position.y, points[5].z - direction.z * lengthD)
+                pointsTemp.push(
+                    new THREE.Vector3(pointsTemp[4].x - direction.x * lengthD, warehouseD.position.y, pointsTemp[4].z - direction.z * lengthD),
+                    new THREE.Vector3(pointsTemp[5].x - direction.x * lengthD, warehouseD.position.y, pointsTemp[5].z - direction.z * lengthD)
                 );
 
-                /*const totalLength = lengthO + Math.sqrt(Math.pow(points[6].x - points[2].x, 2) + Math.pow(points[6].z - points[2].z, 2)) + lengthD;
+                const totalLength = lengthO + Math.sqrt(Math.pow(pointsTemp[6].x - pointsTemp[2].x, 2) + Math.pow(pointsTemp[6].z - pointsTemp[2].z, 2)) + lengthD;
 
-                const uvs = new Float32Array([
-                    0.0, 1.0,
-                    1.0, 1.0,
+                const pointsFinal = [
+                    pointsTemp[0],
+                    pointsTemp[1],
+                    pointsTemp[2],
+                    pointsTemp[3],
 
-                    0.0, 1 - (lengthO / totalLength),
-                    1.0, 1 - (lengthO / totalLength),
+                    pointsTemp[2],
+                    pointsTemp[3],
+                    pointsTemp[6],
+                    pointsTemp[7],
 
-                    0.0, 0.0,
-                    1.0, 0.0,
+                    pointsTemp[6],
+                    pointsTemp[7],
+                    pointsTemp[4],
+                    pointsTemp[5]
+                ];
 
-                    0.0, lengthD / totalLength,
-                    1.0, lengthD / totalLength
+                const normals = new Float32Array([
+                    0.0, 1.0, 0.0,
+                    0.0, 1.0, 0.0,
+                    0.0, 1.0, 0.0,
+                    0.0, 1.0, 0.0,
+
+                    0.0, 1.0, 0.0,
+                    0.0, 1.0, 0.0,
+                    0.0, 1.0, 0.0,
+                    0.0, 1.0, 0.0,
+
+                    0.0, 1.0, 0.0,
+                    0.0, 1.0, 0.0,
+                    0.0, 1.0, 0.0,
+                    0.0, 1.0, 0.0
                 ]);
 
-                points =   [new THREE.Vector3(warehouseO.position.x + crossDirection.x * (width / 2), warehouseO.position.y, warehouseO.position.z + crossDirection.z * (width / 2))]; // 0
-                points.push(new THREE.Vector3(points[0].x + direction.x * lengthO, warehouseO.position.y, points[0].z + direction.z * lengthO)); // 1
-                points.push(new THREE.Vector3(warehouseO.position.x - crossDirection.x * (width / 2), warehouseO.position.y, warehouseO.position.z - crossDirection.z * (width / 2))); // 3
-
-                points.push(new THREE.Vector3(points[0].x + direction.x * lengthO, warehouseO.position.y, points[0].z + direction.z * lengthO)); // 1
-                points.push(new THREE.Vector3(points[2].x + direction.x * lengthO, warehouseO.position.y, points[2].z + direction.z * lengthO)); // 2
-                points.push(new THREE.Vector3(warehouseO.position.x - crossDirection.x * (width / 2), warehouseO.position.y, warehouseO.position.z - crossDirection.z * (width / 2))); // 3
-
-                let tempPoints=[new THREE.Vector3(warehouseD.position.x + crossDirection.x * (width / 2), warehouseD.position.y, warehouseD.position.z + crossDirection.z * (width / 2))]; // 6
-                tempPoints.push(new THREE.Vector3(tempPoints[0].x - direction.x * lengthD, warehouseD.position.y, tempPoints[0].z - direction.z * lengthD)); // 4
-                tempPoints.push(new THREE.Vector3(warehouseD.position.x - crossDirection.x * (width / 2), warehouseD.position.y, warehouseD.position.z - crossDirection.z * (width / 2))); // 7
-                tempPoints.push(new THREE.Vector3(tempPoints[2].x - direction.x * lengthD, warehouseD.position.y, tempPoints[2].z - direction.z * lengthD)); // 5
-
-                points.push(new THREE.Vector3(points[0].x + direction.x * lengthO, warehouseO.position.y, points[0].z + direction.z * lengthO)); // 1
-                points.push(tempPoints[1]); // 4
-                points.push(new THREE.Vector3(points[2].x + direction.x * lengthO, warehouseO.position.y, points[2].z + direction.z * lengthO)); // 2
-
-                points.push(tempPoints[1]); // 4
-                points.push(tempPoints[3]); // 5
-                points.push(new THREE.Vector3(points[2].x + direction.x * lengthO, warehouseO.position.y, points[2].z + direction.z * lengthO)); // 2
-
-                points.push(tempPoints[1]); // 4
-                points.push(tempPoints[0]); // 6
-                points.push(tempPoints[3]); // 5
-
-                points.push(tempPoints[0]); // 6
-                points.push(tempPoints[2]); // 7
-                points.push(tempPoints[3]); // 5
-
                 const uvs = new Float32Array([
                     0.0, 1.0,
-                    0.0, 1 - (lengthO / totalLength),
                     1.0, 1.0,
+                    0.0, 1 - (lengthO / totalLength),
+                    1.0, 1 - (lengthO / totalLength),
 
                     0.0, 1 - (lengthO / totalLength),
                     1.0, 1 - (lengthO / totalLength),
-                    1.0, 1.0,
+                    0.0, lengthD / totalLength,
+                    1.0, lengthD / totalLength,
 
-                    0.0, 1 - (lengthO / totalLength),
-                    0.0, lengthO / totalLength,
-                    1.0, 1 - (lengthO / totalLength),
-
-                    0.0, lengthO / totalLength,
-                    1.0, lengthO / totalLength,
-                    1.0, 1 - (lengthO / totalLength),
-
-                    0.0, 1 - (lengthO / totalLength),
+                    0.0, lengthD / totalLength,
+                    1.0, lengthD / totalLength,
                     0.0, 0.0,
-                    1.0, lengthO / totalLength,
+                    1.0, 0.0
+                ]);
 
-                    0.0, 0.0,
-                    1.0, 0.0,
-                    1.0, lengthO / totalLength,
-                ]);*/
+                const indexes = [
+                    0, 2, 1,
+                    2, 3, 1,
+                    4, 6, 5,
+                    6, 7, 5,
+                    8, 10, 9,
+                    10, 11, 9
+                ];
 
                 // Geometry
-                geometry = new THREE.BufferGeometry().setFromPoints(points);
+                const geometry = new THREE.BufferGeometry().setFromPoints(pointsFinal);
                 geometry.setAttribute('normal', new THREE.BufferAttribute(normals, 3));
-                //geometry.setAttribute('uv', new THREE.BufferAttribute(uvs, 2));
+                geometry.setAttribute('uv', new THREE.BufferAttribute(uvs, 2));
                 geometry.setIndex(indexes);
 
                 // Material
-                /*const texture = new THREE.TextureLoader().load("textures/road.jpg");
+                const texture = new THREE.TextureLoader().load("textures/road.jpg");
 
                 texture.magFilter = THREE.LinearFilter;
                 texture.minFilter = THREE.LinearMipMapLinearFilter;
 
                 texture.wrapS = THREE.RepeatWrapping;
                 texture.wrapT = THREE.RepeatWrapping;
+
                 texture.repeat.set(1, totalLength * (1 / 0.45));
 
-                const material = new THREE.MeshStandardMaterial({ color: 0xffffff, map: texture });*/
                 const material = new THREE.MeshStandardMaterial({
-                    color: 0x000000,
-                    side: THREE.DoubleSide
+                    color: 0xffffff,
+                    side: THREE.DoubleSide,
+                    map: texture
                 });
 
                 // Mesh
-                mesh = new THREE.Mesh(geometry, material);
+                const mesh = new THREE.Mesh(geometry, material);
                 mesh.receiveShadow = true;
                 mesh.castShadow = true;
 
@@ -398,7 +372,7 @@ export default class RoadNetwork {
     }
 
     // Creates 3D text object displayed under the graph
-    add3DTitle() {
+    add3DTitle(material) {
         new FontLoader().load('https://unpkg.com/three@0.146.0/examples/fonts/droid/droid_sans_regular.typeface.json', (font) => {
 
             const geometry = new TextGeometry('EletricGo', {
@@ -407,10 +381,8 @@ export default class RoadNetwork {
                 font: font
             });
 
-            const material = new THREE.MeshStandardMaterial({ color: 0x141414 });
             const mesh = new THREE.Mesh(geometry, material);
 
-            //mesh.position.set(-40, -0.2, -15);
             mesh.position.set(-55, -0.2, -9);
             mesh.rotation.set(Math.PI / 2, 0, 0);
 

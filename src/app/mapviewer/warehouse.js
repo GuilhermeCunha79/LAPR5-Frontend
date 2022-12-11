@@ -4,14 +4,15 @@ import { GLTFLoader } from 'https://unpkg.com/three@0.146.0/examples/jsm/loaders
 export default class Warehouse {
     constructor(warehouse) {
 
+        this.name = warehouse.name;
         this.links = warehouse.links;
-        this.object = new THREE.Group();
         this.position = this.coordinatesToCartesian(warehouse);
         this.radius = 0.75 + this.links.length * 0.15;
+        this.object = new THREE.Group();
 
         let geometry, material, mesh;
 
-        // Create the main circle that represents the warehouse
+        // Create the main cylinder (blue) that represents the warehouse
         geometry = new THREE.CylinderGeometry(this.radius, this.radius, 0.1, 10);
         material = new THREE.MeshStandardMaterial({ color: 0x004961 });
         mesh = new THREE.Mesh(geometry, material);
@@ -23,7 +24,7 @@ export default class Warehouse {
 
         this.object.add(mesh);
 
-        // Create a slightly larger circle to serve as a border
+        // Create a slightly larger cylinder (black) to serve as a border
         geometry = new THREE.CylinderGeometry(this.radius * 1.2, this.radius * 1.2, 0.1, 10);
         material = new THREE.MeshStandardMaterial({ color: 0x000000 });
         mesh = new THREE.Mesh(geometry, material);

@@ -8,6 +8,7 @@ import {CreateWarehouseComponent} from "./create-warehouse/create-warehouse.comp
 import {RouteComponent} from "./create-route/route.component";
 import {CreateTruckComponent} from "./create-truck/create-truck.component";
 import {FleetManagerComponent} from "./fleet-manager/fleet-manager.component";
+import {CreatePlanningComponent} from "./create-planning/create-planning.component";
 
 const routes: Routes = [
   {path: '', redirectTo: '/login', pathMatch: 'full'},
@@ -16,6 +17,7 @@ const routes: Routes = [
   {path: 'warehouse-manager', component: WarehouseManagerComponent},
   {path: 'create-delivery', component: DeliveryComponent},
   {path: 'create-warehouse', component: CreateWarehouseComponent},
+  {path: 'create-planning', component: CreatePlanningComponent},
 
   {path: 'fleet-manager', component: FleetManagerComponent},
   {path: 'create-truck', component: CreateTruckComponent},

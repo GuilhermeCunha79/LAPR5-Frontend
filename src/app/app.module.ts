@@ -14,6 +14,7 @@ import { WarehouseManagerComponent } from './warehouse-manager/warehouse-manager
 import { RouteComponent } from './create-route/route.component';
 import { FleetManagerComponent } from './fleet-manager/fleet-manager.component';
 import {SharedModule} from "./shared.module";
+import { CreatePlanningComponent } from './create-planning/create-planning.component';
 
 @NgModule({
   imports: [
@@ -40,6 +41,7 @@ import {SharedModule} from "./shared.module";
     WarehouseManagerComponent,
     RouteComponent,
     FleetManagerComponent,
+    CreatePlanningComponent,
   ],
   bootstrap: [ AppComponent ]
 })

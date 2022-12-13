@@ -301,9 +301,35 @@ export class FilterPipe implements PipeTransform {
           singleItem['altitude'].toString().toLowerCase().includes(params.altitude.toLowerCase())
         );
       }
+    }else if (domainType === "planning") {
 
+      if (!params.planningId && !params.licensePlate && !params.date && !params.warehouse) {
+        return items;
+      }
+
+      if (params.planningId) {
+        finalList = finalList.filter((singleItem) =>
+          singleItem['planningId'].toLowerCase().includes(params.planningId.toLowerCase())
+        );
+      }
+      if (params.licensePlate) {
+        finalList = finalList.filter((singleItem) =>
+          singleItem['licensePlate'].toLowerCase().includes(params.licensePlate.toLowerCase())
+        );
+      }
+      if (params.date) {
+        finalList = finalList.filter((singleItem) =>
+          singleItem['date'].toLowerCase().includes(params.date.toLowerCase())
+        );
+      }
+      if (params.warehouse) {
+        finalList = finalList.filter((singleItem) =>
+          singleItem['warehouse'].toLowerCase().includes(params.warehouse.toLowerCase())
+        );
+      }
 
     }
+
 
     return finalList;
   }

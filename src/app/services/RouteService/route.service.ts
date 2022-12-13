@@ -128,6 +128,6 @@ export class RouteService {
   }
 
   log(message: string) {
-    this.messageService.add(`Created Truck: ${message}`);
+    this.messageService.add(`Created Route: ${message}`);
   }
 }

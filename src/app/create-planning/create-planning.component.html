@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="menu-window" style="width: 275px">
+    <span class="domain-icon">
+        <img src="../../assets/icon-planning.png" alt="account-icon">
+    </span>
+    <p class="domain-title">Create Planning</p>
+    <div class="input-field">
+      <label for="planningId">Planning ID</label>
+      <input class="input" type="text" name="planningId" [(ngModel)]="planningId" id="planningId">
+    </div>
+    <div class="input-field">
+      <label for="licensePlate">License Plate</label>
+      <input class="input" type="text" name="licensePlate" [(ngModel)]="licensePlate" id="licensePlate">
+    </div>
+    <div class="input-field">
+      <label for="date">Date</label>
+      <input class="input" type="date" name="destination" [(ngModel)]="date" id="date">
+    </div>
+    <div>
+      <button class="button" type="submit" (click)="createPlanning()">Submit</button>
+    </div>
+  </div>
+  <div class="menu-window">
+    <h1>Planning list</h1>
+    <table id="list-table">
+      <tr>
+        <th style="border-radius: 5px 0 0 0"><input type="text" class="header-filter" placeholder="ID" [(ngModel)]="searchPlanningId"></th>
+        <th><input type="text" class="header-filter" placeholder="License Plate" [(ngModel)]="searchLicensePlate"></th>
+        <th><input type="text" class="header-filter" placeholder="Date" [(ngModel)]="searchDate"></th>
+        <th><input type="text" class="header-filter" placeholder="Warehouses" [(ngModel)]="searchWarehouse"></th>
+      </tr>
+      <tr
+        *ngFor="let planning of plannings | filter:'planning':{planningId: searchPlanningId,licensePlate: searchLicensePlate,date: searchDate,warehouse:searchWarehouse}">
+        <td>{{planning.planningId}}</td>
+        <td>{{planning.licensePlate}}</td>
+        <td>{{planning.date}}</td>
+        <td>{{planning.warehouse}}</td>
+      </tr>
+    </table>
+  </div>
+</div>

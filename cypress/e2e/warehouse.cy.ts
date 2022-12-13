@@ -1,7 +1,7 @@
 describe('empty spec', () => {
 
   beforeEach(() => {
-    cy.visit('http://localhost:4200/login')
+    cy.visit('https://spa-g70-2022.vercel.app/login')
 
 
     cy.contains('Warehouse Manager').click({force: true})

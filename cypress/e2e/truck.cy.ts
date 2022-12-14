@@ -1,84 +1,56 @@
 describe('empty spec', () => {
 
   beforeEach(() => {
-    cy.visit('https://spa-g70-2022.vercel.app/login')
+    cy.visit('http://localhost:4200/login')
 
+    cy.contains('Fleet Manager').click({force: true})
 
-    cy.contains('Warehouse Manager').click({force: true})
+    cy.contains('Create Truck').click({force: true})
 
-    cy.contains('Create Warehouse').click()
-
-    cy.url().should('include', '/create-warehouse')
+    cy.url().should('include', '/create-truck')
   })
 
   it('.createTruck() - inputs for trucks', () => {
-    // Get an input, type into it
-    // warehouse id
-    cy.get('.input-warehouseIdentifier [type="text"]').type('7F2', {force: true})
 
-    cy.get('.input-warehouseIdentifier [type="text"]').should('have.value', '7F2')
+    // License Plate
 
-    // designation
+    cy.get('#input-licensePlate [type="text"]').type('AA-88-XX', {force: true})
 
-    cy.get('.input-designation [type="text"]').type('Warehouse', {force: true})
+    //cy.get('#input-licencePlate [type="text"]').should('have.value', 'AA-88-XX')
 
-    cy.get('.input-designation [type="text"]').should('have.value', 'Warehouse')
+    // Autonomy
 
-    // street
+    cy.get('#input-autonomy [type="number"]').type('10', {force: true})
 
-    cy.get('.input-street [type="text"]').type('Rua Infante', {force: true})
+    cy.get('#input-autonomy [type="number"]').should('have.value', '10')
 
-    cy.get('.input-street [type="text"]').should('have.value', 'Rua Infante')
+    // CapacityCargo
 
-    // number
+    cy.get('#input-capacityCargo [type="number"]').type('20', {force: true})
 
-    cy.get('.input-number [type="number"]').type('3', {force: true})
+    cy.get('#input-capacityCargo [type="number"]').should('have.value', '20')
 
-    cy.get('.input-number [type="number"]').should('have.value', '3')
+    // CapacityTransportation
 
-    // postal code
+    cy.get('#input-capacityTransportation [type="number"]').type('30', {force: true})
 
-    cy.get('.input-postalCode [type="text"]').type('4034-902', {force: true})
+    cy.get('#input-capacityTransportation [type="number"]').should('have.value', '30')
 
-    cy.get('.input-postalCode [type="text"]').should('have.value', '4034-902')
+    // Battery
 
-    // country
+    cy.get('#input-battery [type="number"]').type('40', {force: true})
 
-    cy.get('.input-country [type="text"]').type('Portugal', {force: true})
+    cy.get('#input-battery [type="number"]').should('have.value', '40')
 
-    cy.get('.input-country [type="text"]').should('have.value', 'Portugal')
+    // Tare
 
+    cy.get('#input-tare [type="number"]').type('50', {force: true})
 
-    // latitude
+    cy.get('#input-tare [type="number"]').should('have.value', '50')
 
-    cy.get('.input-latitude [type="number"]').type('34', {force: true})
-
-    cy.get('.input-latitude [type="number"]').should('have.value', '34')
-
-    // longitude
-
-    cy.get('.input-longitude [type="number"]').type('67', {force: true})
-
-    cy.get('.input-longitude [type="number"]').should('have.value', '67')
-
-    // altitude
-
-    cy.get('.input-altitude [type="number"]').type('4', {force: true})
-
-    cy.get('.input-altitude [type="number"]').should('have.value', '4')
-
-    // cy.get('.submit-warehouse [type="submit"]')
-    //   .type('Submit',{force: true} ).click({force: true})
-
-    cy.get('button').as('btn').click({force: true})
-
+    //cy.get('#button-truck').as('btn').click({force: true})
   })
 
   it('filter check', () => {
-
-    // cy.get('.header-filter').should('have.value', '7F2')
-
-
   })
-
 })

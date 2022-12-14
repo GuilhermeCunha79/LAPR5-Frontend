@@ -124,7 +124,7 @@ export class RouteService {
       return false;
     }
 
-    return false;
+    return true;
   }
 
   log(message: string) {

@@ -4,35 +4,35 @@
         <img src="../../assets/icon-route.png" alt="account-icon">
     </span>
     <p class="domain-title">Create Route</p>
-    <div class="input-field">
+    <div class="input-field" id="input-routeId">
       <label for="routeId">Route ID</label>
       <input class="input" type="text" name="routeId" [(ngModel)]="routeId" id="routeId">
     </div>
-    <div class="input-field">
+    <div class="input-field" id="input-routeOrigin">
       <label for="origin">Origin</label>
       <input class="input" type="text" name="origin" [(ngModel)]="origin" id="origin">
     </div>
-    <div class="input-field">
+    <div class="input-field" id="input-routeDestination">
       <label for="destination">Destination</label>
       <input class="input" type="text" name="destination" [(ngModel)]="destination" id="destination">
     </div>
-    <div class="input-field">
+    <div class="input-field" id="input-routeDistance">
       <label for="distance">Distance</label>
       <input class="input" type="number" name="distance" [(ngModel)]="distance" id="distance">
     </div>
-    <div class="input-field">
+    <div class="input-field" id="input-routeTimeDistance">
       <label for="timeDistance">Time Distance</label>
       <input class="input" type="number" name="timeDistance" [(ngModel)]="timeDistance" id="timeDistance">
     </div>
-    <div class="input-field">
+    <div class="input-field" id="input-routeEnergySpent">
       <label for="energySpent">Energy Spent</label>
       <input class="input" type="number" name="energySpent" [(ngModel)]="energySpent" id="energySpent">
     </div>
-    <div class="input-field">
+    <div class="input-field" id="input-routeExtraBatteryTime">
       <label for="extraBatteryTime">Extra Battery Time</label>
       <input class="input" type="number" name="extraBatteryTime" [(ngModel)]="extraBatteryTime" id="extraBatteryTime">
     </div>
-    <div>
+    <div id="button-route">
       <button class="button" type="submit" (click)="createRoute()">Submit</button>
     </div>
   </div>

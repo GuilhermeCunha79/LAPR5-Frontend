@@ -4,31 +4,31 @@
       <img src="../../assets/icon-truck.png" alt="account-icon">
     </span>
     <p class="domain-title">Create Truck</p>
-    <div class="input-field">
+    <div class="input-field" id="input-licensePlate">
       <label>License Plate</label>
       <input class="input" type="text" name="licensePlate" required [(ngModel)]="licensePlate">
     </div>
-    <div class="input-field">
+    <div class="input-field" id="input-autonomy">
       <label>Autonomy</label>
       <input class="input" type="number" name="autonomy" required [(ngModel)]="autonomy">
     </div>
-    <div class="input-field">
+    <div class="input-field" id="input-capacityCargo">
       <label>Capacity Cargo</label>
       <input class="input" type="number" name="capacityCargo" required [(ngModel)]="capacityCargo">
     </div>
-    <div class="input-field">
+    <div class="input-field" id="input-capacityTransportation">
       <label>Capacity Transportation</label>
       <input class="input" type="number" name="capacityTransportation" required [(ngModel)]="capacityTransportation">
     </div>
-    <div class="input-field">
+    <div class="input-field" id="input-battery">
       <label>Battery</label>
       <input class="input" type="number" name="battery" required [(ngModel)]="battery">
     </div>
-    <div class="input-field">
+    <div class="input-field" id="input-tare">
       <label>Tare</label>
       <input class="input" type="number" name="tare" required [(ngModel)]="tare">
     </div>
-    <div>
+    <div id="button-truck">
       <button class="button" type="submit" (click)="createValidTruck()">Submit</button>
     </div>
   </div>

@@ -48,7 +48,7 @@ describe('empty spec', () => {
 
     cy.get('#input-tare [type="number"]').should('have.value', '50')
 
-    //cy.get('#button-truck').as('btn').click({force: true})
+    cy.get('#button-truck').as('btn').click({force: true})
   })
 
   it('filter check', () => {

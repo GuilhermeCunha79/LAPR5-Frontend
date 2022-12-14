@@ -25,25 +25,26 @@ export class PlanningService {
     }
   }
 
-  createPlanning(planningId: string, licensePlate: string, date: string): Observable<any> {
+  createPlanning(planningId: string, licensePlate: string, date: string, heuristic: string): Observable<any> {
 
     const body = {
       "planningId": planningId,
       "licensePlate": licensePlate,
-      "date": date
+      "date": date,
+      "heuristic": heuristic
     };
 
     return this.httpClient.post(this.Url, body).pipe(map(this.extractData));
   }
 
-  createValidPlanning(planningId: string, licensePlate: string, date: string): Observable<any> | null {
-    if (!this.validateData(planningId, licensePlate, date)) return null;
+  createValidPlanning(planningId: string, licensePlate: string, date: string, heuristic: string): Observable<any> | null {
+    if (!this.validateData(planningId, licensePlate, date, heuristic)) return null;
 
-    return this.createPlanning(planningId, licensePlate, date);
+    return this.createPlanning(planningId, licensePlate, date, heuristic);
   }
 
 
-  validateData(planningId: string, licensePlate: string, date: string): boolean {
+  validateData(planningId: string, licensePlate: string, date: string, heuristic: string): boolean {
 
     if (planningId == null) {
       this.log("ERROR: Planning Id can't be null.");
@@ -57,6 +58,11 @@ export class PlanningService {
 
     if (date == null) {
       this.log("ERROR: Planning date can't be null.");
+      return false;
+    }
+
+    if (heuristic == null) {
+      this.log("ERROR: Planning heuristic can't be null.");
       return false;
     }
 

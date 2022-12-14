@@ -30,7 +30,7 @@ export class CreatePlanningComponent implements OnInit {
 
   public createPlanning(): void {
     // @ts-ignore
-    this.planningService.createValidPlanning(this.planningId, this.licensePlate, this.date).subscribe();
+    this.planningService.createValidPlanning(this.planningId, this.licensePlate, this.date, this.heuristic).subscribe();
     setTimeout(window.location.reload.bind(window.location), 200);
   }
 }

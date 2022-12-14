@@ -9,13 +9,11 @@ import {PlanningService} from "../services/PlanningService/planning.service";
 })
 export class CreatePlanningComponent implements OnInit {
 
-  planningId: string;
   licensePlate: string;
   date: string;
   warehouse: string;
   heuristic: string;
 
-  searchPlanningId: string;
   searchLicensePlate: string;
   searchDate: string;
   searchWarehouse: string;
@@ -30,7 +28,7 @@ export class CreatePlanningComponent implements OnInit {
 
   public createPlanning(): void {
     // @ts-ignore
-    this.planningService.createValidPlanning(this.planningId, this.licensePlate, this.date, this.heuristic).subscribe();
+    this.planningService.createValidPlanning( this.licensePlate, this.date, this.heuristic).subscribe();
     setTimeout(window.location.reload.bind(window.location), 200);
   }
 }

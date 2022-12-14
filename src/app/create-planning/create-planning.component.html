@@ -5,10 +5,6 @@
     </span>
     <p class="domain-title">Create Planning</p>
     <div class="input-field">
-      <label for="planningId">Planning ID</label>
-      <input class="input" type="text" name="planningId" [(ngModel)]="planningId" id="planningId">
-    </div>
-    <div class="input-field">
       <label for="licensePlate">License Plate</label>
       <input class="input" type="text" name="licensePlate" [(ngModel)]="licensePlate" id="licensePlate">
     </div>
@@ -17,8 +13,12 @@
       <input class="input" type="date" name="date" [(ngModel)]="date" id="date">
     </div>
     <div class="input-field">
-      <label for="heuristic">Heuristic</label>
-      <input class="input" type="text" name="heuristic" [(ngModel)]="heuristic" id="heuristic">
+      <select name="heuristic" [(ngModel)]="heuristic" id="heuristic">
+        <option value="">Select an heuristic</option>
+        <option value="1">Distance</option>
+        <option value="2">Weight</option>
+        <option value="3">Distance and Weight</option>
+      </select>
     </div>
     <div>
       <button class="button" type="submit" (click)="createPlanning()">Submit</button>
@@ -28,13 +28,13 @@
     <h1>Planning list</h1>
     <table id="list-table">
       <tr>
-        <th style="border-radius: 5px 0 0 0"><input type="text" class="header-filter" placeholder="ID" [(ngModel)]="searchPlanningId"></th>
-        <th><input type="text" class="header-filter" placeholder="License Plate" [(ngModel)]="searchLicensePlate"></th>
+        <th style="border-radius: 5px 0 0 0"><input type="text" class="header-filter" placeholder="License Plate"
+                                                    [(ngModel)]="searchLicensePlate"></th>
         <th><input type="text" class="header-filter" placeholder="Date" [(ngModel)]="searchDate"></th>
         <th>Warehouses</th>
       </tr>
-      <tr *ngFor="let planning of plannings | filter:'planning':{planningId: searchPlanningId,licensePlate: searchLicensePlate,date: searchDate,warehouse:searchWarehouse}">
-        <td>{{planning.planningId}}</td>
+      <tr
+        *ngFor="let planning of plannings | filter:'planning':{licensePlate: searchLicensePlate,date: searchDate,warehouse:searchWarehouse}">
         <td>{{planning.licensePlate}}</td>
         <td>{{planning.date}}</td>
         <td>{{planning.warehouse}}</td>

@@ -303,15 +303,10 @@ export class FilterPipe implements PipeTransform {
       }
     }else if (domainType === "planning") {
 
-      if (!params.planningId && !params.licensePlate && !params.date && !params.warehouse) {
+      if (!params.licensePlate && !params.date && !params.warehouse) {
         return items;
       }
 
-      if (params.planningId) {
-        finalList = finalList.filter((singleItem) =>
-          singleItem['planningId'].toLowerCase().includes(params.planningId.toLowerCase())
-        );
-      }
       if (params.licensePlate) {
         finalList = finalList.filter((singleItem) =>
           singleItem['licensePlate'].toLowerCase().includes(params.licensePlate.toLowerCase())

@@ -14,7 +14,11 @@
     </div>
     <div class="input-field">
       <label for="date">Date</label>
-      <input class="input" type="date" name="destination" [(ngModel)]="date" id="date">
+      <input class="input" type="date" name="date" [(ngModel)]="date" id="date">
+    </div>
+    <div class="input-field">
+      <label for="heuristic">Heuristic</label>
+      <input class="input" type="text" name="heuristic" [(ngModel)]="heuristic" id="heuristic">
     </div>
     <div>
       <button class="button" type="submit" (click)="createPlanning()">Submit</button>
@@ -27,10 +31,9 @@
         <th style="border-radius: 5px 0 0 0"><input type="text" class="header-filter" placeholder="ID" [(ngModel)]="searchPlanningId"></th>
         <th><input type="text" class="header-filter" placeholder="License Plate" [(ngModel)]="searchLicensePlate"></th>
         <th><input type="text" class="header-filter" placeholder="Date" [(ngModel)]="searchDate"></th>
-        <th><input type="text" class="header-filter" placeholder="Warehouses" [(ngModel)]="searchWarehouse"></th>
+        <th>Warehouses</th>
       </tr>
-      <tr
-        *ngFor="let planning of plannings | filter:'planning':{planningId: searchPlanningId,licensePlate: searchLicensePlate,date: searchDate,warehouse:searchWarehouse}">
+      <tr *ngFor="let planning of plannings | filter:'planning':{planningId: searchPlanningId,licensePlate: searchLicensePlate,date: searchDate,warehouse:searchWarehouse}">
         <td>{{planning.planningId}}</td>
         <td>{{planning.licensePlate}}</td>
         <td>{{planning.date}}</td>

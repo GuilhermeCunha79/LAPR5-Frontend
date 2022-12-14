@@ -13,6 +13,7 @@ export class CreatePlanningComponent implements OnInit {
   licensePlate: string;
   date: string;
   warehouse: string;
+  heuristic: string;
 
   searchPlanningId: string;
   searchLicensePlate: string;

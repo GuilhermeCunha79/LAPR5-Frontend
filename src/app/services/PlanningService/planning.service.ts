@@ -8,8 +8,7 @@ import {map, Observable} from "rxjs";
 })
 export class PlanningService {
 
-  public Url = 'https://localhost:3000/api/planning';
-
+  public Url = 'http://localhost:3000/api/planning/';
 
   constructor(private httpClient: HttpClient, private messageService: MessageService) {
   }
@@ -26,34 +25,42 @@ export class PlanningService {
     }
   }
 
-  createPlanning(planningId: string, licensePlate: string, date: string, warehouse: string): Observable<any> {
+  createPlanning(planningId: string, licensePlate: string, date: string): Observable<any> {
 
     const body = {
       "planningId": planningId,
       "licensePlate": licensePlate,
-      "date": date,
-      "warehouse": warehouse
+      "date": date
     };
 
     return this.httpClient.post(this.Url, body).pipe(map(this.extractData));
   }
 
-  createValidPlanning(planningId: string, licensePlate: string, date: string, warehouse: string): Observable<any> | null {
-    if (!this.validateData(planningId)) return null;
+  createValidPlanning(planningId: string, licensePlate: string, date: string): Observable<any> | null {
+    if (!this.validateData(planningId, licensePlate, date)) return null;
 
-    return this.createPlanning(planningId, licensePlate, date, warehouse);
+    return this.createPlanning(planningId, licensePlate, date);
   }
 
 
-  validateData(licensePlate: string): boolean {
+  validateData(planningId: string, licensePlate: string, date: string): boolean {
 
-    let flag: boolean = true;
-
-    if (licensePlate.length != 8) {
-      this.log("ERROR: Please insert a valid License Plate");
-      flag = false;
+    if (planningId == null) {
+      this.log("ERROR: Planning Id can't be null.");
+      return false;
     }
-    return flag;
+
+    if (licensePlate == null) {
+      this.log("ERROR: Planning licensePlate can't be null.");
+      return false;
+    }
+
+    if (date == null) {
+      this.log("ERROR: Planning date can't be null.");
+      return false;
+    }
+
+    return true;
   }
 
   log(message: string) {

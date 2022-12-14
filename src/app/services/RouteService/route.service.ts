@@ -9,7 +9,7 @@ import {MessageService} from "../../message.service";
 
 export class RouteService {
 
-  Url = 'https://lapr5-logistics.herokuapp.com/api/route';
+  Url = 'http://localhost:3000/api/route';
 
   constructor(private httpClient: HttpClient, private messageService: MessageService) {
   }

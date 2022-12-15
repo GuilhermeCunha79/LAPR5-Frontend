@@ -6,69 +6,61 @@ describe('empty spec', () => {
 
     cy.contains('Warehouse Manager').click({force: true})
 
-    cy.contains('Create Warehouse').click()
+    cy.contains('Create Delivery').click()
 
-    cy.url().should('include', '/create-warehouse')
+    cy.url().should('include', '/create-delivery')
   })
 
   it('.createDelivery() - inputs for delivery', () => {
     // Get an input, type into it
-    // warehouse id
-    cy.get('.input-warehouseIdentifier [type="text"]').type('7F2', {force: true})
+    //delivery id
+    cy.get('.input-deliveryIdentifier [type="text"]').type('7F2', {force: true})
 
-    cy.get('.input-warehouseIdentifier [type="text"]').should('have.value', '7F2')
+    cy.get('.input-deliveryIdentifier [type="text"]').should('have.value', '7F2')
 
-    // designation
+    //day
 
-    cy.get('.input-designation [type="text"]').type('Warehouse', {force: true})
+    cy.get('.input-day [type="number"]').type('23', {force: true})
 
-    cy.get('.input-designation [type="text"]').should('have.value', 'Warehouse')
+    cy.get('.input-day [type="number"]').should('have.value', '23')
 
-    // street
+    //month
 
-    cy.get('.input-street [type="text"]').type('Rua Infante', {force: true})
+    cy.get('.input-month [type="text"]').type('december', {force: true})
 
-    cy.get('.input-street [type="text"]').should('have.value', 'Rua Infante')
+    cy.get('.input-month [type="text"]').should('have.value', 'december')
 
-    // number
+    //year
 
-    cy.get('.input-number [type="number"]').type('3', {force: true})
+    cy.get('.input-year [type="number"]').type('2012', {force: true})
 
-    cy.get('.input-number [type="number"]').should('have.value', '3')
+    cy.get('.input-year [type="number"]').should('have.value', '2012')
 
-    // postal code
+    //mass
 
-    cy.get('.input-postalCode [type="text"]').type('4034-902', {force: true})
+    cy.get('.input-mass [type="number"]').type('22', {force: true})
 
-    cy.get('.input-postalCode [type="text"]').should('have.value', '4034-902')
+    cy.get('.input-mass [type="number"]').should('have.value', '22')
 
-    // country
+    //placingTime
 
-    cy.get('.input-country [type="text"]').type('Portugal', {force: true})
+    cy.get('.input-placingTime [type="number"]').type('2', {force: true})
 
-    cy.get('.input-country [type="text"]').should('have.value', 'Portugal')
+    cy.get('.input-placingTime [type="number"]').should('have.value', '2')
 
 
-    // latitude
+    //storeId
 
-    cy.get('.input-latitude [type="number"]').type('34', {force: true})
+    cy.get('.input-storeId [type="text"]').type('34A', {force: true})
 
-    cy.get('.input-latitude [type="number"]').should('have.value', '34')
+    cy.get('.input-storeId [type="text"]').should('have.value', '34A')
 
-    // longitude
+    //withdrawalTime
 
-    cy.get('.input-longitude [type="number"]').type('67', {force: true})
+    cy.get('.input-withdrawalTime [type="number"]').type('67', {force: true})
 
-    cy.get('.input-longitude [type="number"]').should('have.value', '67')
+    cy.get('.input-withdrawalTime [type="number"]').should('have.value', '67')
 
-    // altitude
-
-    cy.get('.input-altitude [type="number"]').type('4', {force: true})
-
-    cy.get('.input-altitude [type="number"]').should('have.value', '4')
-
-    // cy.get('.submit-warehouse [type="submit"]')
-    //   .type('Submit',{force: true} ).click({force: true})
 
     cy.get('button').as('btn').click({force: true})
 

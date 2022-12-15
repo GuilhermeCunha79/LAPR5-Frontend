@@ -12,7 +12,7 @@ export class CreatePlanningComponent implements OnInit {
   licensePlate: string;
   date: string;
   warehouse: string;
-  heuristic: string;
+  heuristic: string = "1";
 
   searchLicensePlate: string;
   searchDate: string;

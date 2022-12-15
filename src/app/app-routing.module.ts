@@ -9,6 +9,7 @@ import {RouteComponent} from "./create-route/route.component";
 import {CreateTruckComponent} from "./create-truck/create-truck.component";
 import {FleetManagerComponent} from "./fleet-manager/fleet-manager.component";
 import {CreatePlanningComponent} from "./create-planning/create-planning.component";
+import {RoadNetworkComponent} from "./road-network/road-network.component";
 
 const routes: Routes = [
   {path: '', redirectTo: '/login', pathMatch: 'full'},
@@ -22,7 +23,8 @@ const routes: Routes = [
   {path: 'fleet-manager', component: FleetManagerComponent},
   {path: 'create-truck', component: CreateTruckComponent},
 
-  {path: 'create-route', component: RouteComponent}
+  {path: 'create-route', component: RouteComponent},
+  {path: 'road-network', component: RoadNetworkComponent}
 ];
 
 @NgModule({

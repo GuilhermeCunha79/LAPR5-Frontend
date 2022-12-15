@@ -15,6 +15,7 @@ import { RouteComponent } from './create-route/route.component';
 import { FleetManagerComponent } from './fleet-manager/fleet-manager.component';
 import {SharedModule} from "./shared.module";
 import { CreatePlanningComponent } from './create-planning/create-planning.component';
+import {RoadNetworkComponent} from "./road-network/road-network.component";
 
 @NgModule({
   imports: [
@@ -42,6 +43,7 @@ import { CreatePlanningComponent } from './create-planning/create-planning.compo
     RouteComponent,
     FleetManagerComponent,
     CreatePlanningComponent,
+    RoadNetworkComponent,
   ],
   bootstrap: [ AppComponent ]
 })

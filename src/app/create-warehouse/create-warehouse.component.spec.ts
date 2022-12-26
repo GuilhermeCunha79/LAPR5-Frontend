@@ -25,6 +25,7 @@ describe('CreateWarehouseComponent', () => {
   });
 
   it('should create', () => {
+    // @ts-ignore
     expect(component).toBeTruthy();
   });
 });

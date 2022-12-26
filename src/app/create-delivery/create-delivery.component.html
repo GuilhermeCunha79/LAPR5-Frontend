@@ -4,6 +4,7 @@
       <img src="../../assets/icon-warehouse.png" alt="account-icon">
     </span>
     <p class="domain-title">Create Delivery</p>
+    <div class="filter-condition"></div>
     <div class="input-field">
       <label>Delivery ID</label>
       <input class="input" type="text" name="deliveryIdentifier" required [(ngModel)]="deliveryIdentifier">
@@ -36,14 +37,33 @@
       <label>Withdrawal Time</label>
       <input class="input" type="number" name="withdrawalTime" required [(ngModel)]="withdrawalTime">
     </div>
-    <div>
-      <button class="button" type="submit" (click)="createValidDelivery()" onclick="window.location.reload()">Submit</button>
+    <div class="submit-delivery">
+      <button class="button" type="submit" (click)="createValidDelivery()">Submit</button>
     </div>
   </div>
 
 
   <div class="menu-window">
     <h1>Delivery list</h1>
+    <div class="input-field">
+      <label for="order1">Order By</label>
+      <select name="order" id="order1" onchange="myFunction()">
+        <option value="1">Reverse chronological order
+        </option>
+        <option value="2">Ascending Warehouse ID
+        </option>
+      </select>
+
+      <p id="demo"></p>
+
+      <script>
+        function myFunction() {
+          var x = document.getElementById("order1").value;
+          document.getElementById("demo").innerHTML = "You selected: " + x;
+        }
+      </script>
+
+    </div>
     <table id="tbody">
       <tr>
         <th style="border-radius: 5px 0 0 0"><input type="text" class="header-filter" placeholder="Delivery ID" [(ngModel)]="searchDeliveryIdentifier"></th>
@@ -55,7 +75,9 @@
         <th><input type="text" class="header-filter" placeholder="Store ID" [(ngModel)]="searchStoreId"></th>
         <th><input type="text" class="header-filter" placeholder="Withdrawal Time" [(ngModel)]="searchWithdrawalTime"></th>
       </tr>
-      <tr *ngFor="let delivery of deliveries | filter:'delivery':{deliveryIdentifier: searchDeliveryIdentifier,day: searchDay,month: searchMonth,year: searchYear,mass: searchMass,placingTime: searchPlacingTime, wId: searchStoreId, withdrawalTime: searchWithdrawalTime}">
+      <!--<tr *ngFor="let delivery of deliveries | sortId:'storeId'">-->
+      <tr *ngFor="let delivery of deliveries | orderBy:'day':'month':'year'">
+      <tr *ngFor="let delivery of deliveries | filter:'delivery':{deliveryIdentifier: searchDeliveryIdentifier,day: searchDay,month: searchMonth,year: searchYear,mass: searchMass,placingTime: searchPlacingTime, storeId: searchStoreId, withdrawalTime: searchWithdrawalTime}">
         <td>{{delivery.deliveryIdentifier}}</td>
         <td>{{delivery.day}}</td>
         <td>{{delivery.month}}</td>

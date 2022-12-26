@@ -46,7 +46,7 @@ export class DeliveryService {
     return this.httpClient.post(this.Url, body).pipe(map(this.extractData));
   }
 
-  updateDelivery(deliveryIdentifier: string, day: number, month: string, year: number, mass: number, wId: string, withdrawalTime: number, placingTime: number): Observable<any> {
+  updateDelivery(deliveryIdentifier: string, day: number, month: string, year: number, mass: number, storeId: string, withdrawalTime: number, placingTime: number): Observable<any> {
     const body = {
       "deliveryIdentifier": deliveryIdentifier,
       "day": day,
@@ -54,7 +54,7 @@ export class DeliveryService {
       "year": year,
       "mass": mass,
       "placingTime": placingTime,
-      "storeId": wId,
+      "storeId": storeId,
       "withdrawalTime": withdrawalTime
     };
     console.log(body);
@@ -105,14 +105,14 @@ export class DeliveryService {
     });
   }
 
-  validateData(deliveryIdentifier: string, day: number, month: string, year: number, mass: number, placingTime: number, wId: string,withdrawalTime: number): boolean {
+  validateData(deliveryIdentifier: string, day: number, month: string, year: number, mass: number, placingTime: number, storeId: string,withdrawalTime: number): boolean {
     let months: string[];
     months = ["JANUARY","FEBRUARY","MARCH","APRIL","MAY","JUNE","JULY", "AUGUST","SEPTEMBER","OCTOBER","NOVEMBER","DECEMBER"];
 
     let flag: boolean = true;
 
-    if (deliveryIdentifier == null) {
-      this.log("ERROR: Delivery Identifier must be inserted");
+    if (deliveryIdentifier.length > 3) {
+      this.log("ERROR: Delivery Identifier cannot have more than 3 characters.");
       flag = false;
     }
 
@@ -130,12 +130,12 @@ export class DeliveryService {
       this.log("ERROR: Delivery year must be correctly");
       flag = false;
     }
-    if (mass >0) {
+    if (mass <0) {
       this.log("ERROR: Mass cannot be less then 0.");
       flag = false;
     }
 
-    if (wId == null) {
+    if (storeId == null) {
       this.log("ERROR: Warehouse ID to deliver must be inserted");
       flag = false;
     }

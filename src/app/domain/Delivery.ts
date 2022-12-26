@@ -4,7 +4,7 @@
   month: string;
   year: number;
   mass: number;
-  wId: string;
+  storeId: string;
   withdrawalTime: number;
   placingTime: number;
 }

@@ -1,1 +1,12 @@
 ﻿
+
+select {
+  border: 1px solid #cecece;
+  border-radius: 3px;
+  box-sizing: border-box;
+  display: block;
+  padding: 10px;
+  width: 100%;
+  font-size: 16px;
+  margin-bottom: 5px;
+}

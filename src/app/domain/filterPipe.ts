@@ -17,7 +17,7 @@ export class FilterPipe implements PipeTransform {
 
     if (domainType === "delivery") {
 
-      if (!params.deliveryIdentifier && !params.day && !params.month && !params.year && !params.mass && !params.wId && !params.withdrawalTime && !params.placingTime) {
+      if (!params.deliveryIdentifier && !params.day && !params.month && !params.year && !params.mass && !params.storeId && !params.withdrawalTime && !params.placingTime) {
         return items;
       }
 
@@ -29,13 +29,13 @@ export class FilterPipe implements PipeTransform {
 
       if (params.day) {
         finalList = finalList.filter((singleItem) =>
-          singleItem['day'].toLowerCase().includes(params.day.toLowerCase())
+          singleItem['day'].toString().toLowerCase().includes(params.day.toLowerCase())
         );
       }
 
-      if (params.wId) {
+      if (params.month) {
         finalList = finalList.filter((singleItem) =>
-          singleItem['wId'].toLowerCase().includes(params.wId.toLowerCase())
+          singleItem['month'].toLowerCase().includes(params.month.toLowerCase())
         );
       }
 
@@ -54,6 +54,12 @@ export class FilterPipe implements PipeTransform {
       if (params.withdrawalTime) {
         finalList = finalList.filter((singleItem) =>
           singleItem['withdrawalTime'].toString().toLowerCase().includes(params.withdrawalTime.toLowerCase())
+        );
+      }
+
+      if (params.storeId) {
+        finalList = finalList.filter((singleItem) =>
+          singleItem['storeId'].toString().toLowerCase().includes(params.storeId.toLowerCase())
         );
       }
 

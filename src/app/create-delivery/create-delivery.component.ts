@@ -27,9 +27,9 @@ export class DeliveryComponent implements OnInit {
   searchMass: number;
   searchPlacingTime: number;
   searchStoreId: string;
-  searchWithdrawalTime: string;
+  searchWithdrawalTime: number;
 
-  deliveries: Delivery[];
+  deliveries: Delivery[] = [];
 
 
   constructor(private deliveryService: DeliveryService) {
@@ -41,6 +41,7 @@ export class DeliveryComponent implements OnInit {
   }
 
   public createValidDelivery(): void {
+
 
     // @ts-ignore
     this.deliveryService.createValidDelivery(this.deliveryIdentifier, this.day, this.month, this.year, this.mass, this.placingTime, this.storeId, this.withdrawalTime).subscribe(data => {
@@ -67,7 +68,5 @@ export class DeliveryComponent implements OnInit {
     this.deliveryService.listTable();
 
   }
-
-
 
 }

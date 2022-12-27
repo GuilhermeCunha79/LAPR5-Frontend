@@ -4,7 +4,6 @@ import { RouterTestingModule } from "@angular/router/testing";
 import {DeliveryComponent} from "./create-delivery.component";
 import {FilterPipe} from "../domain/filterPipe";
 
-
 describe('CriarEntregaComponent', () => {
   let component: DeliveryComponent;
   let fixture: ComponentFixture<DeliveryComponent>;
@@ -25,6 +24,7 @@ describe('CriarEntregaComponent', () => {
   });
 
   it('should create', () => {
+    // @ts-ignore
     expect(component).toBeTruthy();
   });
 });

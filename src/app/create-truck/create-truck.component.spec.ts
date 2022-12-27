@@ -4,7 +4,6 @@ import { RouterTestingModule } from "@angular/router/testing";
 import {CreateTruckComponent} from "./create-truck.component";
 import {FilterPipe} from "../domain/filterPipe";
 
-
 describe('CriarCamiaoComponent', () => {
   let component: CreateTruckComponent;
   let fixture: ComponentFixture<CreateTruckComponent>;
@@ -25,6 +24,7 @@ describe('CriarCamiaoComponent', () => {
   });
 
   it('should create', () => {
+    // @ts-ignore
     expect(component).toBeTruthy();
   });
 });

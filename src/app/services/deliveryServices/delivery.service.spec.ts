@@ -1,28 +1,22 @@
-
 import { TestBed } from '@angular/core/testing';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import {DeliveryService} from "./delivery.service";
 
-
-import {Delivery} from "../../delivery";
+import {Delivery} from "../../domain/delivery";
 
 describe('DeliveryService', () => {
   let service: DeliveryService;
   let httpClient: HttpClient;
   let httpTestingController: HttpTestingController;
 
-
-
   beforeEach(() => {
+
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers:[
-        DeliveryService
-        //HttpErrorHandler
-
-      ]
+      providers:[DeliveryService]
     });
+
     service = TestBed.inject(DeliveryService);
     httpClient = TestBed.inject(HttpClient);
     httpTestingController = TestBed.inject(HttpTestingController);
@@ -35,7 +29,6 @@ describe('DeliveryService', () => {
   afterEach(() => {
     httpTestingController.verify();
   });
-
 
   describe('#criarEntrega', () => {
 
@@ -52,8 +45,7 @@ describe('DeliveryService', () => {
         withdrawalTime: 3
       };
 
-      service.createDelivery(c.deliveryIdentifier, c.day, c.month,
-        c.year, c.mass, c.placingTime,c.storeId,c.withdrawalTime).subscribe(
+      service.createDelivery(c.deliveryIdentifier, c.day, c.month, c.year, c.mass, c.placingTime,c.storeId,c.withdrawalTime).subscribe(
         data => expect(data).toEqual(c, 'should return the Driver'),
         fail
       );
@@ -64,11 +56,8 @@ describe('DeliveryService', () => {
       expect(req.request.body).toEqual(c);
 
       // Expect server to return the path after POST
-      const expectedResponse = new HttpResponse(
-        { status: 200, statusText: 'OK', body: c });
+      const expectedResponse = new HttpResponse({ status: 200, statusText: 'OK', body: c });
       req.event(expectedResponse);
     });
   });
-
-
 });

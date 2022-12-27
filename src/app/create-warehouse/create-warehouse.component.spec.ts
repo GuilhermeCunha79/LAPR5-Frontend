@@ -4,7 +4,6 @@ import { RouterTestingModule } from "@angular/router/testing";
 import {CreateWarehouseComponent} from "./create-warehouse.component";
 import {FilterPipe} from "../domain/filterPipe";
 
-
 describe('CreateWarehouseComponent', () => {
   let component: CreateWarehouseComponent;
   let fixture: ComponentFixture<CreateWarehouseComponent>;

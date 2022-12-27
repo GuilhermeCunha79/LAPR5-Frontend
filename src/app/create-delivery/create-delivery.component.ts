@@ -1,6 +1,6 @@
 ﻿import {Component, OnInit} from '@angular/core';
 
-import {Delivery} from "../delivery";
+import {Delivery} from "../domain/delivery";
 import {DeliveryService} from "../services/deliveryServices/delivery.service";
 
 @Component({

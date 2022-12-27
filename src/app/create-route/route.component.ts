@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {RouteService} from "../services/RouteService/route.service";
+import {RouteService} from "../services/route/route.service";
 import {Route} from "../domain/Route";
 
 @Component({

@@ -1,33 +1,28 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 import {FilterPipe} from "./domain/filterPipe";
 import {OrderPipe} from "./domain/orderPipe";
 import {IdPipe} from "./domain/orderPipe1";
-// ...
-
 
 @NgModule({
   imports: [
-    // Modules
-    CommonModule,
+    CommonModule
   ],
 
   declarations: [
-    // Components &amp; directives
     FilterPipe,
     OrderPipe,
-    IdPipe,
+    IdPipe
   ],
 
-  providers: [
-    // Services
-  ],
+  providers: [],
 
   exports: [
-    // ...
     FilterPipe,
     OrderPipe,
-    IdPipe,
-  ],
+    IdPipe
+  ]
 })
-export class SharedModule {}
+
+export class SharedModule {
+}

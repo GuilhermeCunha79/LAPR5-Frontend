@@ -24,6 +24,7 @@ describe('CreatePlanningComponent', () => {
   });
 
   it('should create', () => {
+    // @ts-ignore
     expect(component).toBeTruthy();
   });
 });

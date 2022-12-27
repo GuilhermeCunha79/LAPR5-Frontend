@@ -31,7 +31,7 @@
         <th style="border-radius: 5px 0 0 0"><input type="text" class="header-filter" placeholder="License Plate"
                                                     [(ngModel)]="searchLicensePlate"></th>
         <th><input type="text" class="header-filter" placeholder="Date" [(ngModel)]="searchDate"></th>
-        <th>Warehouses</th>
+        <th style="border-radius: 0 5px 0 0">Warehouses</th>
       </tr>
       <tr
         *ngFor="let planning of plannings | filter:'planning':{licensePlate: searchLicensePlate,date: searchDate,warehouse:searchWarehouse}">

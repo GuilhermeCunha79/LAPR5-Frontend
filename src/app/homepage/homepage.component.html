@@ -1,51 +1,11 @@
 <div class="homepage-hero">
   <ul>
-    <a href="#" [routerLink]="['/delivery']" class="button-pad">
+    <a *ngFor="let link of links" href="#" [routerLink]="[link.route]" class="button-pad">
       <li>
         <span class="domain-icon">
-          <img src="../../assets/icon-delivery.png" alt="account-icon">
+          <img src="../../assets/{{link.icon}}" alt="account-icon">
         </span>
-        <span class="description">Deliveries</span>
-      </li>
-    </a>
-    <a href="#" [routerLink]="['/planning']" class="button-pad">
-      <li>
-        <span class="domain-icon">
-          <img src="../../assets/icon-planning.png" alt="account-icon">
-        </span>
-        <span class="description">Planning</span>
-      </li>
-    </a>
-    <a href="#" [routerLink]="['/route']" class="button-pad">
-      <li>
-        <span class="domain-icon">
-          <img src="../../assets/icon-route.png" alt="account-icon">
-        </span>
-        <span class="description">Routes</span>
-      </li>
-    </a>
-    <a href="#" [routerLink]="['/truck']" class="button-pad">
-      <li>
-        <span class="domain-icon">
-          <img src="../../assets/icon-truck.png" alt="account-icon">
-        </span>
-        <span class="description">Trucks</span>
-      </li>
-    </a>
-    <a href="#" [routerLink]="['/warehouse']" class="button-pad">
-      <li>
-        <span class="domain-icon">
-          <img src="../../assets/icon-warehouse.png" alt="account-icon">
-        </span>
-        <span class="description">Warehouses</span>
-      </li>
-    </a>
-    <a href="#" [routerLink]="['/road-network']" class="button-pad">
-      <li>
-        <span class="domain-icon">
-          <img src="../../assets/icon-network.png" alt="account-icon">
-        </span>
-        <span class="description">Network</span>
+        <span class="description">{{link.description}}</span>
       </li>
     </a>
   </ul>

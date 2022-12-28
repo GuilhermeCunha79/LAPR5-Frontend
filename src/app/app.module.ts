@@ -8,7 +8,7 @@ import {AppComponent} from './app.component';
 import {DeliveryComponent} from './create-delivery/create-delivery.component';
 import {MessagesComponent} from './messages/messages.component';
 import {CreateTruckComponent} from './create-truck/create-truck.component';
-import {LoginComponent} from './login/login.component';
+import {HomepageComponent} from './homepage/homepage.component';
 import {CreateWarehouseComponent} from './create-warehouse/create-warehouse.component';
 import {CreateRouteComponent} from './create-route/create-route.component';
 import {SharedModule} from "./shared.module";
@@ -28,7 +28,7 @@ import { DefaultLayoutComponent } from './default-layout/default-layout.componen
 
   declarations: [
     AppComponent,
-    LoginComponent,
+    HomepageComponent,
     DeliveryComponent,
     MessagesComponent,
     CreateTruckComponent,

@@ -3,28 +3,34 @@ import {RouterModule, Routes} from '@angular/router';
 
 import {DeliveryComponent} from "./create-delivery/create-delivery.component";
 import {LoginComponent} from "./login/login.component";
-import {WarehouseManagerComponent} from "./warehouse-manager/warehouse-manager.component";
 import {CreateWarehouseComponent} from "./create-warehouse/create-warehouse.component";
-import {RouteComponent} from "./create-route/route.component";
+import {CreateRouteComponent} from "./create-route/create-route.component";
 import {CreateTruckComponent} from "./create-truck/create-truck.component";
-import {FleetManagerComponent} from "./fleet-manager/fleet-manager.component";
 import {CreatePlanningComponent} from "./create-planning/create-planning.component";
 import {RoadNetworkComponent} from "./road-network/road-network.component";
+import {LoginScreenComponent} from "./login-screen/login-screen.component";
+import {DefaultLayoutComponent} from "./default-layout/default-layout.component";
 
 const routes: Routes = [
-  {path: '', redirectTo: '/login', pathMatch: 'full'},
-  {path: 'login', component: LoginComponent},
+  {path: '', redirectTo: '/home', pathMatch: 'full'},
 
-  {path: 'warehouse-manager', component: WarehouseManagerComponent},
-  {path: 'create-delivery', component: DeliveryComponent},
-  {path: 'create-warehouse', component: CreateWarehouseComponent},
-  {path: 'create-planning', component: CreatePlanningComponent},
+  {path: 'login', component: LoginScreenComponent},
 
-  {path: 'fleet-manager', component: FleetManagerComponent},
-  {path: 'create-truck', component: CreateTruckComponent},
+  {
+    path: '',
+    component: DefaultLayoutComponent,
+    children: [
+      {path: 'home', component: LoginComponent},
 
-  {path: 'create-route', component: RouteComponent},
-  {path: 'road-network', component: RoadNetworkComponent}
+      {path: 'delivery', component: DeliveryComponent},
+      {path: 'planning', component: CreatePlanningComponent},
+      {path: 'route', component: CreateRouteComponent},
+      {path: 'truck', component: CreateTruckComponent},
+      {path: 'warehouse', component: CreateWarehouseComponent},
+
+      {path: 'road-network', component: RoadNetworkComponent},
+    ]
+  }
 ];
 
 @NgModule({

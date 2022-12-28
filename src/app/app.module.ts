@@ -10,13 +10,12 @@ import {MessagesComponent} from './messages/messages.component';
 import {CreateTruckComponent} from './create-truck/create-truck.component';
 import {LoginComponent} from './login/login.component';
 import {CreateWarehouseComponent} from './create-warehouse/create-warehouse.component';
-import {WarehouseManagerComponent} from './warehouse-manager/warehouse-manager.component';
-import {RouteComponent} from './create-route/route.component';
-import {FleetManagerComponent} from './fleet-manager/fleet-manager.component';
+import {CreateRouteComponent} from './create-route/create-route.component';
 import {SharedModule} from "./shared.module";
 import {CreatePlanningComponent} from './create-planning/create-planning.component';
 import {RoadNetworkComponent} from "./road-network/road-network.component";
 import {LoginScreenComponent} from './login-screen/login-screen.component';
+import { DefaultLayoutComponent } from './default-layout/default-layout.component';
 
 @NgModule({
   imports: [
@@ -34,12 +33,11 @@ import {LoginScreenComponent} from './login-screen/login-screen.component';
     MessagesComponent,
     CreateTruckComponent,
     CreateWarehouseComponent,
-    WarehouseManagerComponent,
-    RouteComponent,
-    FleetManagerComponent,
+    CreateRouteComponent,
     CreatePlanningComponent,
     RoadNetworkComponent,
-    LoginScreenComponent
+    LoginScreenComponent,
+    DefaultLayoutComponent
   ],
 
   bootstrap: [AppComponent]

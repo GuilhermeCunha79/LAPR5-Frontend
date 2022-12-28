@@ -69,9 +69,9 @@ nav ul li {
  */
 
 .container {
-  margin: 25px 0 55px 0;
   display: flex;
   justify-content: center;
+  padding: 25px 0 57px 0;
 }
 
 .menu-window {
@@ -168,15 +168,15 @@ th, td {
   padding: 5px 15px;
 }
 
-tr:nth-child(odd) {
+tbody tr:nth-child(odd) {
   background-color: #f0f0f0;
 }
 
-tr:nth-child(even) {
+tbody tr:nth-child(even) {
   background-color: #dddddd;
 }
 
-tr:hover {
+tbody tr:hover {
   background-color: rgb(180, 180, 180);
 }
 

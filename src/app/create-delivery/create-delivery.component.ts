@@ -1,6 +1,5 @@
 ﻿import {Component, OnInit} from '@angular/core';
-
-import {Delivery} from "../domain/delivery";
+import {Delivery} from "../domain/Delivery";
 import {DeliveryService} from "../services/delivery/delivery.service";
 
 @Component({
@@ -9,7 +8,7 @@ import {DeliveryService} from "../services/delivery/delivery.service";
   styleUrls: ['./create-delivery.component.css']
 })
 
-export class DeliveryComponent implements OnInit {
+export class CreateDeliveryComponent implements OnInit {
   delivery: Delivery;
   deliveryIdentifier: string;
   day: number;

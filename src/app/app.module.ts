@@ -5,7 +5,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {AppRoutingModule} from './app-routing.module';
 
 import {AppComponent} from './app.component';
-import {DeliveryComponent} from './create-delivery/create-delivery.component';
+import {CreateDeliveryComponent} from './create-delivery/create-delivery.component';
 import {MessagesComponent} from './messages/messages.component';
 import {CreateTruckComponent} from './create-truck/create-truck.component';
 import {HomepageComponent} from './homepage/homepage.component';
@@ -15,7 +15,7 @@ import {SharedModule} from "./shared.module";
 import {CreatePlanningComponent} from './create-planning/create-planning.component';
 import {RoadNetworkComponent} from "./road-network/road-network.component";
 import {LoginScreenComponent} from './login-screen/login-screen.component';
-import { DefaultLayoutComponent } from './default-layout/default-layout.component';
+import {DefaultLayoutComponent} from './default-layout/default-layout.component';
 
 @NgModule({
   imports: [
@@ -28,16 +28,18 @@ import { DefaultLayoutComponent } from './default-layout/default-layout.componen
 
   declarations: [
     AppComponent,
-    HomepageComponent,
-    DeliveryComponent,
     MessagesComponent,
+    DefaultLayoutComponent,
+
+    HomepageComponent,
+    LoginScreenComponent,
+
+    CreateDeliveryComponent,
     CreateTruckComponent,
     CreateWarehouseComponent,
     CreateRouteComponent,
     CreatePlanningComponent,
-    RoadNetworkComponent,
-    LoginScreenComponent,
-    DefaultLayoutComponent
+    RoadNetworkComponent
   ],
 
   bootstrap: [AppComponent]

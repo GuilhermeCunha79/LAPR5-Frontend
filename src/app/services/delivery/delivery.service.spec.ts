@@ -3,7 +3,7 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import {DeliveryService} from "./delivery.service";
 
-import {Delivery} from "../../domain/delivery";
+import {Delivery} from "../../domain/Delivery";
 
 describe('DeliveryService', () => {
   let service: DeliveryService;

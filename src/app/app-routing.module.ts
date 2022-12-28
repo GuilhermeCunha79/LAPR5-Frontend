@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 
-import {DeliveryComponent} from "./create-delivery/create-delivery.component";
+import {CreateDeliveryComponent} from "./create-delivery/create-delivery.component";
 import {HomepageComponent} from "./homepage/homepage.component";
 import {CreateWarehouseComponent} from "./create-warehouse/create-warehouse.component";
 import {CreateRouteComponent} from "./create-route/create-route.component";
@@ -22,7 +22,7 @@ const routes: Routes = [
     children: [
       {path: 'home', component: HomepageComponent},
 
-      {path: 'delivery', component: DeliveryComponent},
+      {path: 'delivery', component: CreateDeliveryComponent},
       {path: 'planning', component: CreatePlanningComponent},
       {path: 'route', component: CreateRouteComponent},
       {path: 'truck', component: CreateTruckComponent},

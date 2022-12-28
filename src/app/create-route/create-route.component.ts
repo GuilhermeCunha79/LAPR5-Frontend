@@ -4,11 +4,11 @@ import {Route} from "../domain/Route";
 
 @Component({
   selector: 'app-route',
-  templateUrl: './route.component.html',
-  styleUrls: ['./route.component.css']
+  templateUrl: './create-route.component.html',
+  styleUrls: ['./create-route.component.css']
 })
 
-export class RouteComponent implements OnInit {
+export class CreateRouteComponent implements OnInit {
 
   routeId: string;
   origin: string;

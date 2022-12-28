@@ -2,15 +2,15 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule,} from '@angular/common/http/testing';
 import { RouterTestingModule } from "@angular/router/testing";
 import {FilterPipe} from "../domain/filterPipe";
-import { RouteComponent } from './route.component';
+import { CreateRouteComponent } from './create-route.component';
 
 describe('CreateRouteComponent', () => {
-  let component: RouteComponent;
-  let fixture: ComponentFixture<RouteComponent>;
+  let component: CreateRouteComponent;
+  let fixture: ComponentFixture<CreateRouteComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ RouteComponent, FilterPipe],
+      declarations: [ CreateRouteComponent, FilterPipe],
       imports:[
         HttpClientTestingModule,
         RouterTestingModule
@@ -18,7 +18,7 @@ describe('CreateRouteComponent', () => {
     })
       .compileComponents();
 
-    fixture = TestBed.createComponent(RouteComponent);
+    fixture = TestBed.createComponent(CreateRouteComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -20,6 +20,7 @@ export class CreateWarehouseComponent implements OnInit {
   latitude: number;
   longitude: number;
   altitude: number;
+  status: string;
 
   searchWarehouseIdentifier: string;
   searchDesignation: string;
@@ -30,6 +31,8 @@ export class CreateWarehouseComponent implements OnInit {
   searchLatitude: number;
   searchLongitude: number;
   searchAltitude: number;
+  searchStatus: string;
+
 
   warehouses: Warehouse[];
 
@@ -57,6 +60,22 @@ export class CreateWarehouseComponent implements OnInit {
     this.warehouseService.getWarehouses().subscribe(data => {
       this.warehouses = data;
     });
+  }
+
+  public inactivateWarehouse(warehouseIdentifier: string): void {
+
+    this.warehouseService.inactivateByIdentifier(warehouseIdentifier).subscribe(data => {
+      this.warehouses = data;
+    });
+    setTimeout(window.location.reload.bind(window.location), 500);
+  }
+
+  public activateWarehouse(warehouseIdentifier: string): void {
+
+    this.warehouseService.activateByIdentifier(warehouseIdentifier).subscribe(data => {
+      this.warehouses = data;
+    });
+    setTimeout(window.location.reload.bind(window.location), 500);
   }
 
 

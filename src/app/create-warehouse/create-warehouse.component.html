@@ -49,7 +49,8 @@
     <h1>Warehouse list</h1>
     <table id="tbody">
       <tr>
-        <th style="border-radius: 5px 0 0 0"><input type="text" class="header-filter" placeholder="Warehouse ID" [(ngModel)]="searchWarehouseIdentifier"></th>
+        <th style="border-radius: 5px 0 0 0"><input type="text" class="header-filter" placeholder="Warehouse ID"
+                                                    [(ngModel)]="searchWarehouseIdentifier"></th>
         <th><input type="text" class="header-filter" placeholder="Designation" [(ngModel)]="searchDesignation"></th>
         <th><input type="text" class="header-filter" placeholder="Street Name" [(ngModel)]="searchStreet"></th>
         <th><input type="text" class="header-filter" placeholder="Street Number" [(ngModel)]="searchNumber"></th>
@@ -57,9 +58,12 @@
         <th><input type="text" class="header-filter" placeholder="City" [(ngModel)]="searchCountry"></th>
         <th><input type="text" class="header-filter" placeholder="Latitude" [(ngModel)]="searchLatitude"></th>
         <th><input type="text" class="header-filter" placeholder="Longitude" [(ngModel)]="searchLongitude"></th>
-        <th style="border-radius: 0 5px 0 0"><input type="text" class="header-filter" placeholder="Altitude" [(ngModel)]="searchAltitude"></th>
+        <th><input type="text" class="header-filter" placeholder="Altitude" [(ngModel)]="searchAltitude"></th>
+        <th><input type="text" class="header-filter" placeholder="Status" [(ngModel)]="searchStatus"></th>
+        <th style="border-radius: 0 5px 0 0">Change Status</th>
       </tr>
-      <tr *ngFor="let warehouse of warehouses | filter:'warehouse':{warehouseIdentifier: searchWarehouseIdentifier,designation: searchDesignation,street: searchStreet,number: searchNumber,postalCode: searchPostalCode,country: searchCountry, latitude: searchLatitude, longitude: searchLongitude, altitude: searchAltitude}">
+      <tr
+        *ngFor="let warehouse of warehouses | filter:'warehouse':{warehouseIdentifier: searchWarehouseIdentifier,designation: searchDesignation,street: searchStreet,number: searchNumber,postalCode: searchPostalCode,country: searchCountry, latitude: searchLatitude, longitude: searchLongitude, altitude: searchAltitude, status:searchStatus}">
         <td>{{warehouse.warehouseIdentifier}}</td>
         <td>{{warehouse.designation}}</td>
         <td>{{warehouse.street}}</td>
@@ -69,6 +73,11 @@
         <td>{{warehouse.latitude}}</td>
         <td>{{warehouse.longitude}}</td>
         <td>{{warehouse.altitude}}</td>
+        <td>{{warehouse.status}}</td>
+        <td>
+          <div *ngIf="warehouse.status === 'Active' "> <button class="button" type="Deactivate" (click)="inactivateWarehouse(warehouse.warehouseIdentifier)">Deactivate</button></div>
+          <div *ngIf="warehouse.status === 'Inactive' "> <button class="button" type="Activate" (click)="activateWarehouse(warehouse.warehouseIdentifier)">Activate</button></div>
+        </td>
       </tr>
     </table>
   </div>

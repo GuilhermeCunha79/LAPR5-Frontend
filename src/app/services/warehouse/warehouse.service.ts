@@ -72,6 +72,16 @@ export class WarehouseService {
     return res || {};
   }
 
+  inactivateByIdentifier(warehouseIdentifier: string): Observable<any> {
+    return this.httpClient.delete(this.Url + '/ByIdentifier/' + warehouseIdentifier).pipe(map(this.extractData));
+  }
+
+  activateByIdentifier(warehouseIdentifier: string): Observable<any> {
+
+    const body = {
+    };
+    return this.httpClient.patch(this.Url + '/Activate/ByIdentifier/' + warehouseIdentifier,body).pipe(map(this.extractData));
+  }
   listTable(): void {
 
     this.getWarehouses().forEach(function (i) {

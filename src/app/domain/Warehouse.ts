@@ -4,8 +4,9 @@
   street: string;
   number: number;
   postalCode: string;
-  country : string;
+  country: string;
   latitude: number;
   longitude: number;
   altitude: number;
+  status: string;
 }

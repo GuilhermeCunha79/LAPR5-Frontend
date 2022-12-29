@@ -110,7 +110,7 @@ export class FilterPipe implements PipeTransform {
         );
       }
     } else if (domainType === "warehouse") {
-      if (!params.warehouseIdentifier && !params.designation && !params.street && !params.number && !params.postalCode && !params.country&& !params.latitude&& !params.longitude&& !params.altitude) {
+      if (!params.warehouseIdentifier && !params.designation && !params.street && !params.number && !params.postalCode && !params.country && !params.latitude && !params.longitude && !params.altitude) {
         return items;
       }
 
@@ -253,7 +253,7 @@ export class FilterPipe implements PipeTransform {
         );
       }
     } else if (domainType === "warehouse") {
-      if (!params.warehouseIdentifier && !params.designation && !params.street && !params.number && !params.postalCode && !params.country&& !params.latitude&& !params.longitude&& !params.altitude) {
+      if (!params.warehouseIdentifier && !params.designation && !params.street && !params.number && !params.postalCode && !params.country && !params.latitude && !params.longitude && !params.altitude && !params.status) {
         return items;
       }
 
@@ -307,7 +307,12 @@ export class FilterPipe implements PipeTransform {
           singleItem['altitude'].toString().toLowerCase().includes(params.altitude.toLowerCase())
         );
       }
-    }else if (domainType === "planning") {
+      if (params.status) {
+        finalList = finalList.filter((singleItem) =>
+          singleItem['status'].toString().toLowerCase().includes(params.status.toLowerCase())
+        );
+      }
+    } else if (domainType === "planning") {
 
       if (!params.licensePlate && !params.date && !params.warehouse) {
         return items;

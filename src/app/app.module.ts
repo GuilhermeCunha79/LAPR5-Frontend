@@ -4,13 +4,13 @@ import {FormsModule} from '@angular/forms';
 import {AppRoutingModule} from './app-routing.module';
 import {HttpClientModule} from '@angular/common/http';
 import {SharedModule} from "./shared.module";
-import {GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule} from '@abacritt/angularx-social-login';
 
 import {AppComponent} from './app.component';
 import {MessagesComponent} from './messages/messages.component';
 import {DefaultLayoutComponent} from './default-layout/default-layout.component';
 import {HomepageComponent} from './homepage/homepage.component';
 import {LoginScreenComponent} from './login-screen/login-screen.component';
+import {SignupScreenComponent} from './signup-screen/signup-screen.component';
 import {CreateDeliveryComponent} from './create-delivery/create-delivery.component';
 import {CreatePlanningComponent} from './create-planning/create-planning.component';
 import {CreateRouteComponent} from './create-route/create-route.component';
@@ -24,8 +24,7 @@ import {RoadNetworkComponent} from "./road-network/road-network.component";
     FormsModule,
     AppRoutingModule,
     HttpClientModule,
-    SharedModule,
-    SocialLoginModule
+    SharedModule
   ],
   declarations: [
     AppComponent,
@@ -33,26 +32,13 @@ import {RoadNetworkComponent} from "./road-network/road-network.component";
     DefaultLayoutComponent,
     HomepageComponent,
     LoginScreenComponent,
+    SignupScreenComponent,
     CreateDeliveryComponent,
     CreatePlanningComponent,
     CreateRouteComponent,
     CreateTruckComponent,
     CreateWarehouseComponent,
     RoadNetworkComponent
-  ],
-  providers: [
-    {
-      provide: 'SocialAuthServiceConfig',
-      useValue: {
-        autoLogin: false,
-        providers: [
-          {
-            id: GoogleLoginProvider.PROVIDER_ID,
-            provider: new GoogleLoginProvider('130051265539-iqqg4sl2l1bum9t6ketuop7llr0tbltt.apps.googleusercontent.com')
-          }
-        ], onError: (err) => console.error(err)
-      } as SocialAuthServiceConfig,
-    }
   ],
   bootstrap: [AppComponent]
 })

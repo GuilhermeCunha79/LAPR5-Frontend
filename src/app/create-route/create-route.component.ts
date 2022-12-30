@@ -26,7 +26,7 @@ export class CreateRouteComponent implements OnInit {
   searchEnergySpent: number;
   searchExtraBatteryTime: number;
 
-  routes: Route[];
+  routes: Route[] = [];
 
   constructor(private routesService: RouteService) {
   }

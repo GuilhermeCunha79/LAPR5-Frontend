@@ -40,26 +40,26 @@
     <h1>Route list</h1>
     <table id="list-table">
       <thead>
-      <tr>
-        <th style="border-radius: 5px 0 0 0"><input type="text" class="header-filter" placeholder="ID" [(ngModel)]="searchRouteId"></th>
-        <th><input type="text" class="header-filter" placeholder="Origin" [(ngModel)]="searchOrigin"></th>
-        <th><input type="text" class="header-filter" placeholder="Destination" [(ngModel)]="searchDestination"></th>
-        <th><input type="text" class="header-filter" placeholder="Distance" [(ngModel)]="searchDistance"></th>
-        <th><input type="text" class="header-filter" placeholder="Time Distance" [(ngModel)]="searchTimeDistance"></th>
-        <th><input type="text" class="header-filter" placeholder="Energy Spent" [(ngModel)]="searchEnergySpent"></th>
-        <th style="border-radius: 0 5px 0 0"><input type="text" class="header-filter" placeholder="Extra Battery" [(ngModel)]="searchExtraBatteryTime"></th>
-      </tr>
+        <tr>
+          <th style="border-radius: 5px 0 0 0"><input type="text" class="header-filter" placeholder="ID" [(ngModel)]="searchRouteId"></th>
+          <th><input type="text" class="header-filter" placeholder="Origin" [(ngModel)]="searchOrigin"></th>
+          <th><input type="text" class="header-filter" placeholder="Destination" [(ngModel)]="searchDestination"></th>
+          <th><input type="text" class="header-filter" placeholder="Distance" [(ngModel)]="searchDistance"></th>
+          <th><input type="text" class="header-filter" placeholder="Time Distance" [(ngModel)]="searchTimeDistance"></th>
+          <th><input type="text" class="header-filter" placeholder="Energy Spent" [(ngModel)]="searchEnergySpent"></th>
+          <th style="border-radius: 0 5px 0 0"><input type="text" class="header-filter" placeholder="Extra Battery" [(ngModel)]="searchExtraBatteryTime"></th>
+        </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let route of routes | filter:'route':{routeId: searchRouteId,origin: searchOrigin,destination: searchDestination,distance: searchDistance,timeDistance: searchTimeDistance,energySpent: searchEnergySpent, extraBatteryTime: searchExtraBatteryTime}">
-        <td>{{route.routeId}}</td>
-        <td>{{route.origin}}</td>
-        <td>{{route.destination}}</td>
-        <td>{{route.distance}}</td>
-        <td>{{route.timeDistance}}</td>
-        <td>{{route.energySpent}}</td>
-        <td>{{route.extraBatteryTime}}</td>
-      </tr>
+        <tr *ngFor="let route of routes | filter:'route':{routeId: searchRouteId,origin: searchOrigin,destination: searchDestination,distance: searchDistance,timeDistance: searchTimeDistance,energySpent: searchEnergySpent, extraBatteryTime: searchExtraBatteryTime}">
+          <td>{{route.routeId}}</td>
+          <td>{{route.origin}}</td>
+          <td>{{route.destination}}</td>
+          <td>{{route.distance}}</td>
+          <td>{{route.timeDistance}}</td>
+          <td>{{route.energySpent}}</td>
+          <td>{{route.extraBatteryTime}}</td>
+        </tr>
       </tbody>
     </table>
   </div>

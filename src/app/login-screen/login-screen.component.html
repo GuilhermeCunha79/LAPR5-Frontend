@@ -1,1 +1,20 @@
-<p>login-screen works!</p>
+<div class="container-full">
+  <div class="menu-window" style="width: 250px">
+    <span class="domain-icon">
+        <img src="../../assets/icon-account.png" alt="account-icon">
+    </span>
+    <p class="domain-title">Sign In</p>
+    <div class="input-field">
+      <input class="input" type="text" placeholder="Email" [(ngModel)]="email" id="input-email">
+    </div>
+    <div class="input-field">
+      <input class="input" type="password" placeholder="Password" [(ngModel)]="password" id="input-password">
+    </div>
+    <div style="margin-bottom: 10px">
+      <button class="button" type="submit" (click)="login()" id="button-login">Login</button>
+    </div>
+    <div>
+      <button class="button" type="submit" (click)="signup()" id="button-signup">Sign Up</button>
+    </div>
+  </div>
+</div>

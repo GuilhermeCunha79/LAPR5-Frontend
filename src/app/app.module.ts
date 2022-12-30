@@ -7,10 +7,10 @@ import {SharedModule} from "./shared.module";
 
 import {AppComponent} from './app.component';
 import {MessagesComponent} from './messages/messages.component';
+import {LoginScreenComponent} from './page-login/login-screen.component';
+import {SignupScreenComponent} from './page-signup/signup-screen.component';
 import {DefaultLayoutComponent} from './default-layout/default-layout.component';
 import {HomepageComponent} from './homepage/homepage.component';
-import {LoginScreenComponent} from './login-screen/login-screen.component';
-import {SignupScreenComponent} from './signup-screen/signup-screen.component';
 import {CreateDeliveryComponent} from './create-delivery/create-delivery.component';
 import {CreatePlanningComponent} from './create-planning/create-planning.component';
 import {CreateRouteComponent} from './create-route/create-route.component';

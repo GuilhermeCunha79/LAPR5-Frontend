@@ -13,7 +13,7 @@ import {CreateWarehouseComponent} from "./create-warehouse/create-warehouse.comp
 import {RoadNetworkComponent} from "./road-network/road-network.component";
 
 const routes: Routes = [
-  {path: '', redirectTo: '/home', pathMatch: 'full'},
+  {path: '', redirectTo: '/login', pathMatch: 'full'},
 
   {path: 'login', component: PageLoginComponent},
   {path: 'signup', component: PageSignupComponent},

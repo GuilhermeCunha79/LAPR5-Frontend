@@ -20,12 +20,9 @@ export class PageLoginComponent implements OnInit {
   }
 
   login(): void {
-    if (this.signupService.login(this.email, this.password)) {
-      this.signupService.getUser(this.email, this.password)?.subscribe(obj => {
-        console.log(obj)
-        sessionStorage.setItem("user-data", JSON.stringify(obj));
-        this.signupService.redirectToHome();
-      });
-    }
+    this.signupService.getUser(this.email, this.password)?.subscribe(obj => {
+      sessionStorage.setItem("user-data", JSON.stringify(obj));
+      this.signupService.redirectToHome();
+    });
   }
 }

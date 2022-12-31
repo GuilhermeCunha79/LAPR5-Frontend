@@ -25,7 +25,7 @@ export class PageSignupComponent implements OnInit {
 
   signup(): void {
     this.signupService.createValidUser(this.email, this.password, this.firstName, this.lastName, this.phoneNumber, this.role)?.subscribe(obj => {
-      sessionStorage.setItem("user-data", JSON.stringify(obj));
+      sessionStorage.setItem("user-data", JSON.stringify(obj.userDTO));
       this.signupService.redirectToHome();
     });
   }

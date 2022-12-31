@@ -13,11 +13,11 @@ export class DefaultLayoutComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    //this.signupService.redirectToLogin();
+    this.signupService.redirectToLogin();
   }
 
   logout() {
     sessionStorage.removeItem("user-data");
-    //this.signupService.redirectToLogin();
+    this.signupService.redirectToLogin();
   }
 }

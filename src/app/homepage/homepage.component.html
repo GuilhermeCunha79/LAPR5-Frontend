@@ -1,12 +1,15 @@
+<h1 style="margin-top: 200px">Welcome, {{name}} - {{roles[userData.role-1]}}</h1>
 <div class="homepage-hero">
   <ul>
-    <a *ngFor="let link of links" href="#" [routerLink]="[link.route]" class="button-pad">
-      <li>
+    <ng-container *ngFor="let link of links">
+      <a *ngIf="link.roles.includes(userData.role) || userData.role == 5" href="#" [routerLink]="[link.route]" class="button-pad">
+        <li>
         <span class="domain-icon">
           <img src="../../assets/{{link.icon}}" alt="account-icon">
         </span>
-        <span class="description">{{link.description}}</span>
-      </li>
-    </a>
+          <span class="description">{{link.description}}</span>
+        </li>
+      </a>
+    </ng-container>
   </ul>
 </div>

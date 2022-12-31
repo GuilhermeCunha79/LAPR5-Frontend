@@ -1,1 +1,39 @@
-<p>signup-screen works!</p>
+<div class="container-full">
+  <div class="menu-window" style="width: 250px">
+    <span class="domain-icon">
+        <img src="../../assets/icon-account.png" alt="account-icon">
+    </span>
+    <p class="domain-title">Sign Up</p>
+    <div class="input-field">
+      <input class="input" type="text" placeholder="Email" [(ngModel)]="email" id="input-email">
+    </div>
+    <div class="input-field">
+      <input class="input" type="password" placeholder="Password" [(ngModel)]="password" id="input-password">
+    </div>
+    <div class="input-field">
+      <input class="input" type="text" placeholder="Fist Name" [(ngModel)]="firstName" id="input-firstName">
+    </div>
+    <div class="input-field">
+      <input class="input" type="text" placeholder="Last Name" [(ngModel)]="lastName" id="input-lastName">
+    </div>
+    <div class="input-field">
+      <input class="input" type="text" placeholder="Phone Number" [(ngModel)]="phoneNumber" id="input-phoneNumber">
+    </div>
+    <div class="input-field">
+      <!--<label>Role</label>-->
+      <select [(ngModel)]="role" id="input-role">
+        <option value="1">Warehouse Manager</option>
+        <option value="2">Logistics Manager</option>
+        <option value="3">Fleet Manager</option>
+        <option value="4">Client</option>
+        <option value="5">Administrator</option>
+      </select>
+    </div>
+    <div style="margin-bottom: 40px">
+      <button class="button" type="submit" (click)="signup()" id="button-login">Sign Up</button>
+    </div>
+    <div>
+      <button class="button" type="submit" [routerLink]="['/login']" id="button-signup">Go back</button>
+    </div>
+  </div>
+</div>

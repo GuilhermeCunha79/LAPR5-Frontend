@@ -1,8 +1,8 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 
-import {LoginScreenComponent} from "./page-login/login-screen.component";
-import {SignupScreenComponent} from "./page-signup/signup-screen.component";
+import {PageLoginComponent} from "./page-login/page-login.component";
+import {PageSignupComponent} from "./page-signup/page-signup.component";
 import {DefaultLayoutComponent} from "./default-layout/default-layout.component";
 import {HomepageComponent} from "./homepage/homepage.component";
 import {CreateDeliveryComponent} from "./create-delivery/create-delivery.component";
@@ -15,8 +15,8 @@ import {RoadNetworkComponent} from "./road-network/road-network.component";
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
 
-  {path: 'login', component: LoginScreenComponent},
-  {path: 'signup', component: SignupScreenComponent},
+  {path: 'login', component: PageLoginComponent},
+  {path: 'signup', component: PageSignupComponent},
 
   {
     path: '',

@@ -3,11 +3,11 @@ import {AuthService} from "../services/auth/auth.service";
 
 @Component({
   selector: 'app-signup-screen',
-  templateUrl: './signup-screen.component.html',
-  styleUrls: ['./signup-screen.component.css']
+  templateUrl: './page-signup.component.html',
+  styleUrls: ['./page-signup.component.css']
 })
 
-export class SignupScreenComponent implements OnInit {
+export class PageSignupComponent implements OnInit {
 
   email: string;
   password: string;

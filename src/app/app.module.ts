@@ -7,8 +7,8 @@ import {SharedModule} from "./shared.module";
 
 import {AppComponent} from './app.component';
 import {MessagesComponent} from './messages/messages.component';
-import {LoginScreenComponent} from './page-login/login-screen.component';
-import {SignupScreenComponent} from './page-signup/signup-screen.component';
+import {PageLoginComponent} from './page-login/page-login.component';
+import {PageSignupComponent} from './page-signup/page-signup.component';
 import {DefaultLayoutComponent} from './default-layout/default-layout.component';
 import {HomepageComponent} from './homepage/homepage.component';
 import {CreateDeliveryComponent} from './create-delivery/create-delivery.component';
@@ -31,8 +31,8 @@ import {RoadNetworkComponent} from "./road-network/road-network.component";
     MessagesComponent,
     DefaultLayoutComponent,
     HomepageComponent,
-    LoginScreenComponent,
-    SignupScreenComponent,
+    PageLoginComponent,
+    PageSignupComponent,
     CreateDeliveryComponent,
     CreatePlanningComponent,
     CreateRouteComponent,

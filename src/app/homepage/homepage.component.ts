@@ -21,8 +21,8 @@ export class HomepageComponent implements OnInit {
     "Warehouse Manager",
     "Logistics Manager",
     "Fleet Manager",
-    "Client",
-    "Administrator"
+    "Administrator",
+    "Client"
   ];
 
   userData: any;

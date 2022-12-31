@@ -2,20 +2,8 @@
   <label><a href="#">Eletric<span>Go</span></a></label>
   <ul>
     <li><a href="#">Home</a></li>
-    <!--<li class="dropdown-hover">
-      <a href="#">Login</a>
-      <div class="dropdown">
-        <ul>
-          <li><a href="#" [routerLink]="['/delivery']">Delivery</a></li>
-          <li><a href="#" [routerLink]="['/planning']">Planning</a></li>
-          <li><a href="#" [routerLink]="['/route']">Route</a></li>
-          <li><a href="#" [routerLink]="['/truck']">Truck</a></li>
-          <li><a href="#" [routerLink]="['/warehouse']">Warehouse</a></li>
-          <li><a href="#" [routerLink]="['/road-network']">Road Network</a></li>
-        </ul>
-      </div>
-    </li>-->
     <li><a href="#">About</a></li>
+    <li><a href="#" (click)="logout()">Logout</a></li>
   </ul>
 </nav>
 <router-outlet></router-outlet>

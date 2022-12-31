@@ -27,18 +27,22 @@
   <div class="menu-window">
     <h1>Planning list</h1>
     <table id="list-table">
-      <tr>
-        <th style="border-radius: 5px 0 0 0"><input type="text" class="header-filter" placeholder="License Plate"
-                                                    [(ngModel)]="searchLicensePlate"></th>
-        <th><input type="text" class="header-filter" placeholder="Date" [(ngModel)]="searchDate"></th>
-        <th style="border-radius: 0 5px 0 0">Warehouses</th>
-      </tr>
-      <tr
-        *ngFor="let planning of plannings | filter:'planning':{licensePlate: searchLicensePlate,date: searchDate,warehouse:searchWarehouse}">
-        <td>{{planning.licensePlate}}</td>
-        <td>{{planning.date}}</td>
-        <td>{{planning.warehouse}}</td>
-      </tr>
+      <thead>
+        <tr>
+          <th style="border-radius: 5px 0 0 0"><input type="text" class="header-filter" placeholder="License Plate"
+                                                      [(ngModel)]="searchLicensePlate"></th>
+          <th><input type="text" class="header-filter" placeholder="Date" [(ngModel)]="searchDate"></th>
+          <th style="border-radius: 0 5px 0 0">Warehouses</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let planning of plannings | filter:'planning':{licensePlate: searchLicensePlate,date: searchDate,warehouse:searchWarehouse}">
+          <td>{{planning.licensePlate}}</td>
+          <td>{{planning.date}}</td>
+          <td>{{planning.warehouse}}</td>
+        </tr>
+      </tbody>
     </table>
   </div>
 </div>

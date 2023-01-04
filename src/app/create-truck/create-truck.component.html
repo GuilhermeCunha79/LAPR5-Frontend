@@ -35,6 +35,7 @@
   <div class="menu-window">
     <h1>Truck list</h1>
     <table id="tbody" >
+      <thead>
       <tr>
         <th style="border-radius: 5px 0 0 0"><input type="text" class="header-filter" placeholder="Licence Plate" [(ngModel)]="searchLicensePlate"></th>
         <th><input type="text" class="header-filter" placeholder="Autonomy" [(ngModel)]="searchAutonomy"></th>
@@ -43,6 +44,8 @@
         <th><input type="text" class="header-filter" placeholder="Battery" [(ngModel)]="searchBattery"></th>
         <th style="border-radius: 0 5px 0 0"><input type="text" class="header-filter" placeholder="Tare" [(ngModel)]="searchTare"></th>
       </tr>
+      </thead>
+      <tbody>
       <tr *ngFor="let truck of trucks | filter:'truck':{licensePlate: searchLicensePlate,autonomy: searchAutonomy,capacityCargo: searchCapacityCargo,capacityTransportation: searchCapacityTransportation,battery: searchBattery,tare: searchTare}">
         <td>{{truck.licensePlate}}</td>
         <td>{{truck.autonomy}}</td>
@@ -51,6 +54,7 @@
         <td>{{truck.battery}}</td>
         <td>{{truck.tare}}</td>
       </tr>
+      </tbody>
     </table>
   </div>
 </div>

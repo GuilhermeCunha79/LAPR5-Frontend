@@ -26,6 +26,9 @@ export class CreateRouteComponent implements OnInit {
   searchEnergySpent: number;
   searchExtraBatteryTime: number;
 
+  listSize: number = 10;
+  pageNumber: number = 1;
+
   routes: Route[] = [];
 
   constructor(private routesService: RouteService) {
@@ -39,5 +42,19 @@ export class CreateRouteComponent implements OnInit {
     // @ts-ignore
     this.routesService.createValidRoute(this.routeId, this.origin, this.destination, this.distance, this.timeDistance, this.energySpent, this.extraBatteryTime).subscribe();
     setTimeout(window.location.reload.bind(window.location), 200);
+  }
+
+  changePage(right: boolean): void {
+    if (right) {
+      this.pageNumber++;
+
+      const maxPageNumber = Math.ceil(this.routes.length/this.listSize);
+      if (this.pageNumber > maxPageNumber) this.pageNumber = maxPageNumber;
+    }
+    else {
+      this.pageNumber--;
+
+      if (this.pageNumber < 1) this.pageNumber = 1;
+    }
   }
 }

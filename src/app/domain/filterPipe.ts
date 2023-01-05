@@ -7,7 +7,7 @@ import {Injectable, Pipe, PipeTransform} from '@angular/core';
 @Injectable()
 export class FilterPipe implements PipeTransform {
 
-  transform(items: any[], domainType: string, params: any): any[] {
+  transform(items: any[], domainType: string, params: any, listSize?: number, pageNumber?: number): any[] {
 
     if (!items) {
       return [];
@@ -166,7 +166,7 @@ export class FilterPipe implements PipeTransform {
       }
     } else if (domainType === "route") {
 
-      if (!params.routeId && !params.origin && !params.destination && !params.distance && !params.timeDistance && !params.energySpent && !params.extraBatteryTime) {
+      if (!params.routeId && !params.origin && !params.destination && !params.distance && !params.timeDistance && !params.energySpent && !params.extraBatteryTime && !listSize && !pageNumber) {
         return items;
       }
 
@@ -210,6 +210,10 @@ export class FilterPipe implements PipeTransform {
         finalList = finalList.filter((singleItem) =>
           singleItem['extraBatteryTime'].toString().toLowerCase().includes(params.extraBatteryTime.toLowerCase())
         );
+      }
+
+      if (listSize && pageNumber) {
+        finalList = this.sliceArray(finalList, listSize, pageNumber)
       }
     } else if (domainType === "truck") {
 
@@ -333,9 +337,17 @@ export class FilterPipe implements PipeTransform {
           singleItem['warehouse'].toLowerCase().includes(params.warehouse.toLowerCase())
         );
       }
-
     }
 
     return finalList;
+  }
+
+  sliceArray(items: any[], listSize: number, pageNumber: number) {
+    if (listSize*(pageNumber-1) > items.length) {
+      return items;
+    }
+
+    const offset = listSize*pageNumber > items.length ? listSize*pageNumber-items.length : 0;
+    return items.slice(listSize*(pageNumber-1), (listSize*pageNumber)-offset);
   }
 }

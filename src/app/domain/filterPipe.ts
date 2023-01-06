@@ -110,6 +110,11 @@ export class FilterPipe implements PipeTransform {
         );
       }
 
+      if (params.status) {
+        finalList = finalList.filter((singleItem) =>
+          singleItem['status'].toString().toLowerCase().includes(params.status.toLowerCase())
+        );
+      }
       if (listSize && pageNumber) {
         finalList = this.sliceArray(finalList, listSize, pageNumber)
       }

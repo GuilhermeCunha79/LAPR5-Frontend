@@ -26,10 +26,11 @@ export class CreateTruckComponent implements OnInit {
   capacityTransportation: number;
   battery: number;
   tare: number;
-
+  searchStatus: string;
 
   listSize: number = 10;
   pageNumber: number = 1;
+
 
   constructor(private truckService: TruckService) {
   }
@@ -71,6 +72,14 @@ export class CreateTruckComponent implements OnInit {
     this.truckService.listTable().subscribe(data => {
       this.trucks = data  });
    // this.trucks= this.truckService.listTable();
+  }
+
+  public activateTruck(licensePlate: string): void {
+
+    this.truckService.activateByIdentifier(licensePlate).subscribe(data => {
+      this.truck = data;
+    });
+    setTimeout(window.location.reload.bind(window.location), 500);
   }
 
   changePage(right: boolean): void {

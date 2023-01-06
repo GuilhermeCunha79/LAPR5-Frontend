@@ -27,6 +27,10 @@ export class CreateTruckComponent implements OnInit {
   battery: number;
   tare: number;
 
+
+  listSize: number = 10;
+  pageNumber: number = 1;
+
   constructor(private truckService: TruckService) {
   }
 
@@ -67,10 +71,19 @@ export class CreateTruckComponent implements OnInit {
     this.truckService.listTable().subscribe(data => {
       this.trucks = data  });
    // this.trucks= this.truckService.listTable();
-
   }
 
+  changePage(right: boolean): void {
+    if (right) {
+      this.pageNumber++;
 
+      const maxPageNumber = Math.ceil(this.trucks.length/this.listSize);
+      if (this.pageNumber > maxPageNumber) this.pageNumber = maxPageNumber;
+    }
+    else {
+      this.pageNumber--;
 
-
+      if (this.pageNumber < 1) this.pageNumber = 1;
+    }
+  }
 }

@@ -70,7 +70,7 @@ export class FilterPipe implements PipeTransform {
       }
     } else if (domainType === "truck") {
 
-      if (!params.licensePlate && !params.autonomy && !params.capacityCargo && !params.capacityTransportation && !params.battery && !params.tare) {
+      if (!params.licensePlate && !params.autonomy && !params.capacityCargo && !params.capacityTransportation && !params.battery && !params.tare && !listSize && !pageNumber) {
         return items;
       }
 
@@ -108,6 +108,10 @@ export class FilterPipe implements PipeTransform {
         finalList = finalList.filter((singleItem) =>
           singleItem['tare'].toString().toLowerCase().includes(params.tare.toLowerCase())
         );
+      }
+
+      if (listSize && pageNumber) {
+        finalList = this.sliceArray(finalList, listSize, pageNumber)
       }
     } else if (domainType === "warehouse") {
       if (!params.warehouseIdentifier && !params.designation && !params.street && !params.number && !params.postalCode && !params.country && !params.latitude && !params.longitude && !params.altitude) {
@@ -215,47 +219,6 @@ export class FilterPipe implements PipeTransform {
       if (listSize && pageNumber) {
         finalList = this.sliceArray(finalList, listSize, pageNumber)
       }
-    } else if (domainType === "truck") {
-
-      if (!params.licensePlate && !params.autonomy && !params.capacityCargo && !params.capacityTransportation && !params.battery && !params.tare) {
-        return items;
-      }
-
-      if (params.licensePlate) {
-        finalList = finalList.filter((singleItem) =>
-          singleItem['licensePlate'].toLowerCase().includes(params.licensePlate.toLowerCase())
-        );
-      }
-
-      if (params.autonomy) {
-        finalList = finalList.filter((singleItem) =>
-          singleItem['autonomy'].toString().toLowerCase().includes(params.autonomy.toLowerCase())
-        );
-      }
-
-      if (params.capacityCargo) {
-        finalList = finalList.filter((singleItem) =>
-          singleItem['capacityCargo'].toString().toLowerCase().includes(params.capacityCargo.toLowerCase())
-        );
-      }
-
-      if (params.capacityTransportation) {
-        finalList = finalList.filter((singleItem) =>
-          singleItem['capacityTransportation'].toString().toLowerCase().includes(params.capacityTransportation.toLowerCase())
-        );
-      }
-
-      if (params.battery) {
-        finalList = finalList.filter((singleItem) =>
-          singleItem['battery'].toString().toLowerCase().includes(params.battery.toLowerCase())
-        );
-      }
-
-      if (params.tare) {
-        finalList = finalList.filter((singleItem) =>
-          singleItem['tare'].toString().toLowerCase().includes(params.tare.toLowerCase())
-        );
-      }
     } else if (domainType === "warehouse") {
       if (!params.warehouseIdentifier && !params.designation && !params.street && !params.number && !params.postalCode && !params.country && !params.latitude && !params.longitude && !params.altitude && !params.status) {
         return items;
@@ -350,4 +313,6 @@ export class FilterPipe implements PipeTransform {
     const offset = listSize*pageNumber > items.length ? listSize*pageNumber-items.length : 0;
     return items.slice(listSize*(pageNumber-1), (listSize*pageNumber)-offset);
   }
+
+
 }

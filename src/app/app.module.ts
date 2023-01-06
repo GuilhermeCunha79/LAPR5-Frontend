@@ -17,6 +17,8 @@ import {CreateRouteComponent} from './create-route/create-route.component';
 import {CreateTruckComponent} from './create-truck/create-truck.component';
 import {CreateWarehouseComponent} from './create-warehouse/create-warehouse.component';
 import {RoadNetworkComponent} from "./road-network/road-network.component";
+import {TermsOfUseComponent} from "./terms-of-use/terms-of-use.component";
+import {PrivacyPolicyComponent} from "./privacy-policy/privacy-policy.component";
 
 @NgModule({
   imports: [
@@ -38,7 +40,9 @@ import {RoadNetworkComponent} from "./road-network/road-network.component";
     CreateRouteComponent,
     CreateTruckComponent,
     CreateWarehouseComponent,
-    RoadNetworkComponent
+    RoadNetworkComponent,
+    TermsOfUseComponent,
+    PrivacyPolicyComponent
   ],
   bootstrap: [AppComponent]
 })

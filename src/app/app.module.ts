@@ -20,13 +20,16 @@ import {RoadNetworkComponent} from "./road-network/road-network.component";
 import {TermsOfUseComponent} from "./terms-of-use/terms-of-use.component";
 import {PrivacyPolicyComponent} from "./privacy-policy/privacy-policy.component";
 
+import {GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule} from '@abacritt/angularx-social-login';
+
 @NgModule({
   imports: [
     BrowserModule,
     FormsModule,
     AppRoutingModule,
     HttpClientModule,
-    SharedModule
+    SharedModule,
+    SocialLoginModule
   ],
   declarations: [
     AppComponent,
@@ -43,6 +46,21 @@ import {PrivacyPolicyComponent} from "./privacy-policy/privacy-policy.component"
     RoadNetworkComponent,
     TermsOfUseComponent,
     PrivacyPolicyComponent
+  ],
+  providers: [
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider('130051265539-iqqg4sl2l1bum9t6ketuop7llr0tbltt.apps.googleusercontent.com')
+          }
+        ],
+        onError: (err) => console.error(err)
+      } as SocialAuthServiceConfig,
+    }
   ],
   bootstrap: [AppComponent]
 })

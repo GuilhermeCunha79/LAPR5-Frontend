@@ -34,7 +34,9 @@ const routes: Routes = [
       {path: 'privacy-policy', component: PrivacyPolicyComponent},
       {path: 'road-network', component: RoadNetworkComponent},
     ]
-  }
+  },
+
+  {path: '**', redirectTo: '/login', pathMatch: 'full'},
 ];
 
 @NgModule({

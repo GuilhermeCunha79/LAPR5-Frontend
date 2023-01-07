@@ -11,10 +11,11 @@
       <input class="input" type="password" placeholder="Password" [(ngModel)]="password" id="input-password">
     </div>
     <div style="margin-bottom: 40px">
-      <button class="button" type="submit" (click)="login()" id="button-login">Login</button>
+      <button class="button" type="submit" (click)="login(email, password)" id="button-login">Login</button>
     </div>
     <div>
       <button class="button" type="submit" [routerLink]="['/signup']" id="button-signup">Sign Up</button>
     </div>
+    <asl-google-signin-button></asl-google-signin-button>
   </div>
 </div>

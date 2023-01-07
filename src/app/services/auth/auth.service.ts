@@ -153,13 +153,17 @@ export class AuthService {
 
   redirectToHome(): void {
     if (sessionStorage.getItem("user-data")) {
-      this.router.navigate(['/home']).then();
+      this.redirect('/home');
     }
   }
 
   redirectToLogin(): void {
     if (!sessionStorage.getItem("user-data")) {
-      this.router.navigate(['/login']).then();
+      this.redirect('/login');
     }
+  }
+
+  redirect(url: string): void {
+    this.router.navigate([url]).then();
   }
 }

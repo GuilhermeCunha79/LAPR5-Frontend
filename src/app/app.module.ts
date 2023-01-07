@@ -18,13 +18,16 @@ import {CreateTruckComponent} from './create-truck/create-truck.component';
 import {CreateWarehouseComponent} from './create-warehouse/create-warehouse.component';
 import {RoadNetworkComponent} from "./road-network/road-network.component";
 
+import {GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule} from '@abacritt/angularx-social-login';
+
 @NgModule({
   imports: [
     BrowserModule,
     FormsModule,
     AppRoutingModule,
     HttpClientModule,
-    SharedModule
+    SharedModule,
+    SocialLoginModule
   ],
   declarations: [
     AppComponent,
@@ -39,6 +42,21 @@ import {RoadNetworkComponent} from "./road-network/road-network.component";
     CreateTruckComponent,
     CreateWarehouseComponent,
     RoadNetworkComponent
+  ],
+  providers: [
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider('130051265539-iqqg4sl2l1bum9t6ketuop7llr0tbltt.apps.googleusercontent.com')
+          }
+        ],
+        onError: (err) => console.error(err)
+      } as SocialAuthServiceConfig,
+    }
   ],
   bootstrap: [AppComponent]
 })

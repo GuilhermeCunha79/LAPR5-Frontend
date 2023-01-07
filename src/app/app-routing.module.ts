@@ -32,7 +32,9 @@ const routes: Routes = [
 
       {path: 'road-network', component: RoadNetworkComponent},
     ]
-  }
+  },
+
+  {path: '**', redirectTo: '/login', pathMatch: 'full'},
 ];
 
 @NgModule({

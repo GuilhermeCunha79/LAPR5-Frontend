@@ -11,6 +11,8 @@ import {CreateRouteComponent} from "./create-route/create-route.component";
 import {CreateTruckComponent} from "./create-truck/create-truck.component";
 import {CreateWarehouseComponent} from "./create-warehouse/create-warehouse.component";
 import {RoadNetworkComponent} from "./road-network/road-network.component";
+import {TermsOfUseComponent} from "./terms-of-use/terms-of-use.component";
+import {PrivacyPolicyComponent} from "./privacy-policy/privacy-policy.component";
 
 const routes: Routes = [
   {path: '', redirectTo: '/login', pathMatch: 'full'},
@@ -23,13 +25,13 @@ const routes: Routes = [
     component: DefaultLayoutComponent,
     children: [
       {path: 'home', component: HomepageComponent},
-
       {path: 'delivery', component: CreateDeliveryComponent},
       {path: 'planning', component: CreatePlanningComponent},
       {path: 'route', component: CreateRouteComponent},
       {path: 'truck', component: CreateTruckComponent},
       {path: 'warehouse', component: CreateWarehouseComponent},
-
+      {path: 'terms-of-use', component: TermsOfUseComponent},
+      {path: 'privacy-policy', component: PrivacyPolicyComponent},
       {path: 'road-network', component: RoadNetworkComponent},
     ]
   },

@@ -1,0 +1,27 @@
+a {
+  text-decoration: none;
+  color: #0073ff;
+}
+/*
+ * Terms / Privacy
+ */
+h2 {
+  color: black;
+  text-align: left;
+}
+
+h3 {
+  color: black;
+  text-align: left;
+}
+
+p {
+  color: black;
+  text-align: left;
+  margin-bottom: 50px;
+}
+
+ul {
+  color: black;
+  text-align: left;
+}

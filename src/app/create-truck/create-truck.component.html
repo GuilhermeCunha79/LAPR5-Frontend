@@ -28,6 +28,8 @@
       <label>Tare</label>
       <input class="input" type="number" name="tare" required [(ngModel)]="tare">
     </div>
+
+
     <div>
       <button class="button" id="button-truck" type="submit" (click)="createValidTruck()">Submit</button>
     </div>
@@ -42,19 +44,34 @@
         <th><input type="text" class="header-filter" placeholder="Capacity Cargo" [(ngModel)]="searchCapacityCargo"></th>
         <th><input type="text" class="header-filter" placeholder="Capacity Transportation" [(ngModel)]="searchCapacityTransportation"></th>
         <th><input type="text" class="header-filter" placeholder="Battery" [(ngModel)]="searchBattery"></th>
-        <th style="border-radius: 0 5px 0 0"><input type="text" class="header-filter" placeholder="Tare" [(ngModel)]="searchTare"></th>
+        <th><input type="text" class="header-filter" placeholder="Tare" [(ngModel)]="searchTare"></th>
+        <th><input type="text" class="header-filter" placeholder="Status" [(ngModel)]="searchStatus"></th>
+        <th style="border-radius: 0 5px 0 0">Change Status</th>
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let truck of trucks | filter:'truck':{licensePlate: searchLicensePlate,autonomy: searchAutonomy,capacityCargo: searchCapacityCargo,capacityTransportation: searchCapacityTransportation,battery: searchBattery,tare: searchTare}">
+      <tr *ngFor="let truck of trucks | filter:'truck':{licensePlate: searchLicensePlate,autonomy: searchAutonomy,capacityCargo: searchCapacityCargo,capacityTransportation: searchCapacityTransportation,battery: searchBattery,tare: searchTare }:listSize:pageNumber">
         <td>{{truck.licensePlate}}</td>
         <td>{{truck.autonomy}}</td>
         <td>{{truck.capacityCargo}}</td>
         <td>{{truck.capacityTransportation}}</td>
         <td>{{truck.battery}}</td>
         <td>{{truck.tare}}</td>
+        <td>{{truck.status}}</td>
+        <td>
+          <button class="button" (click)="activateTruck(truck.licensePlate)">Activate/Deactivate</button>
+
+        </td>
       </tr>
       </tbody>
     </table>
+    <div class="page-number-container">
+      <button (click)="changePage(false)" class="button"><</button>
+      <span>{{pageNumber}}</span>
+      <button (click)="changePage(true)" class="button">></button>
+    </div>
+    <div class="list-size-container">
+      <input class="input" type="number" [(ngModel)]="listSize">
+    </div>
   </div>
 </div>

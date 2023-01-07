@@ -51,7 +51,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let route of routes | filter:'route':{routeId: searchRouteId,origin: searchOrigin,destination: searchDestination,distance: searchDistance,timeDistance: searchTimeDistance,energySpent: searchEnergySpent, extraBatteryTime: searchExtraBatteryTime}">
+        <tr *ngFor="let route of routes | filter:'route':{routeId: searchRouteId,origin: searchOrigin,destination: searchDestination,distance: searchDistance,timeDistance: searchTimeDistance,energySpent: searchEnergySpent, extraBatteryTime: searchExtraBatteryTime}:listSize:pageNumber">
           <td>{{route.routeId}}</td>
           <td>{{route.origin}}</td>
           <td>{{route.destination}}</td>
@@ -62,5 +62,13 @@
         </tr>
       </tbody>
     </table>
+    <div class="page-number-container">
+      <button (click)="changePage(false)" class="button"><</button>
+      <span>{{pageNumber}}</span>
+      <button (click)="changePage(true)" class="button">></button>
+    </div>
+    <div class="list-size-container">
+      <input class="input" type="number" [(ngModel)]="listSize">
+    </div>
   </div>
 </div>

@@ -82,8 +82,13 @@ export class TruckService {
     });
 
     return array;
+  }
 
+  activateByIdentifier(licensePlate: string): Observable<any> {
 
+    const body = {
+    };
+    return this.httpClient.patch(this.Url + '/del?licensePlate=' + licensePlate,body).pipe(map(this.extractData));
   }
 
 

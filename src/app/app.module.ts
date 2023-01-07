@@ -17,6 +17,8 @@ import {CreateRouteComponent} from './create-route/create-route.component';
 import {CreateTruckComponent} from './create-truck/create-truck.component';
 import {CreateWarehouseComponent} from './create-warehouse/create-warehouse.component';
 import {RoadNetworkComponent} from "./road-network/road-network.component";
+import {TermsOfUseComponent} from "./terms-of-use/terms-of-use.component";
+import {PrivacyPolicyComponent} from "./privacy-policy/privacy-policy.component";
 
 import {GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule} from '@abacritt/angularx-social-login';
 
@@ -41,7 +43,9 @@ import {GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule} from '@
     CreateRouteComponent,
     CreateTruckComponent,
     CreateWarehouseComponent,
-    RoadNetworkComponent
+    RoadNetworkComponent,
+    TermsOfUseComponent,
+    PrivacyPolicyComponent
   ],
   providers: [
     {

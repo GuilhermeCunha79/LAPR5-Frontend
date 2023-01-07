@@ -6,6 +6,7 @@ export default class Truck {
   public object: THREE.Group;
   public position: THREE.Vector3;
   public direction: number;
+  public acceleration: number = 0;
 
   constructor() {
 

@@ -24,10 +24,10 @@ export class RoadNetworkComponent implements AfterViewInit {
   private renderer: THREE.WebGLRenderer;
   private controls: OrbitControls;
   private clock: THREE.Clock;
-  private truck: Truck;
 
   private warehouseArray: Warehouse[];
-  private acceleration: number = 0;
+  private truck: Truck;
+
   private keyCodes = {
     forward: "ArrowUp",
     backward: "ArrowDown",
@@ -42,7 +42,7 @@ export class RoadNetworkComponent implements AfterViewInit {
     left: false
   };
 
-  private createScene(warehouseData: any[]) {
+  private createNetwork(warehouseData: any[]) {
 
     this.warehouseArray = [];
 
@@ -83,39 +83,22 @@ export class RoadNetworkComponent implements AfterViewInit {
     // Clock
     this.clock = new THREE.Clock;
 
-    // Scene
-    this.sceneSetup(warehouseData);
-
     // Truck
     this.truck = new Truck();
     this.scene.add(this.truck.object);
 
+    // Scene
+    this.buildScene(warehouseData);
+
     // Setup event listeners
     window.addEventListener('resize', () => this.windowResize());
-
     window.addEventListener("keydown", event => this.keyChange(event, true));
     window.addEventListener("keyup", event => this.keyChange(event, false));
   }
 
-  keyChange(event: any, state: any) {
+  buildScene(warehouseData: any[]) {
 
-    if (document.activeElement == document.body) {
-      if (event.code == this.keyCodes.left) {
-        this.keyStates.left = state;
-      } else if (event.code == this.keyCodes.right) {
-        this.keyStates.right = state;
-      }
-      if (event.code == this.keyCodes.backward) {
-        this.keyStates.backward = state;
-      } else if (event.code == this.keyCodes.forward) {
-        this.keyStates.forward = state;
-      }
-    }
-  }
-
-  sceneSetup(warehouseData: any[]) {
-
-    let mesh;
+    let mesh, texture;
 
     //////////////
     // Lighting //
@@ -140,9 +123,19 @@ export class RoadNetworkComponent implements AfterViewInit {
     ////////////////////////////
     // Create the graph plane //
     ////////////////////////////
+    texture = new THREE.TextureLoader().load("/assets/textures/ground.jpg");
+
+    texture.magFilter = THREE.LinearFilter;
+    texture.minFilter = THREE.LinearMipMapLinearFilter;
+
+    texture.wrapS = THREE.RepeatWrapping;
+    texture.wrapT = THREE.RepeatWrapping;
+
+    texture.repeat.set(10, 10);
+
     mesh = new THREE.Mesh(
       new THREE.CylinderGeometry(77, 77, 0.1, 64),
-      new THREE.MeshStandardMaterial({color: 0xffffff})
+      new THREE.MeshStandardMaterial({color: 0xffffff, map: texture})
     );
 
     mesh.position.y = -0.1;
@@ -461,6 +454,22 @@ export class RoadNetworkComponent implements AfterViewInit {
     this.renderer.setSize(window.innerWidth, window.innerHeight - 90);
   }
 
+  keyChange(event: any, state: any) {
+
+    if (document.activeElement == document.body) {
+      if (event.code == this.keyCodes.left) {
+        this.keyStates.left = state;
+      } else if (event.code == this.keyCodes.right) {
+        this.keyStates.right = state;
+      }
+      if (event.code == this.keyCodes.backward) {
+        this.keyStates.backward = state;
+      } else if (event.code == this.keyCodes.forward) {
+        this.keyStates.forward = state;
+      }
+    }
+  }
+
   private startRenderingLoop() {
 
     let component: RoadNetworkComponent = this;
@@ -470,20 +479,24 @@ export class RoadNetworkComponent implements AfterViewInit {
       component.renderer.render(component.scene, component.camera);
 
       const deltaTime = component.clock.getDelta();
-      const coveredDistance = deltaTime * 5;
       const currentDirection = THREE.MathUtils.degToRad(component.truck.direction);
 
       if (component.keyStates.forward) {
-        component.truck.position = new THREE.Vector3(coveredDistance * Math.sin(currentDirection), 0, coveredDistance * Math.cos(currentDirection)).add(component.truck.position);
+        component.truck.acceleration = interpolate(component.truck.acceleration, 5 * deltaTime, deltaTime * 5);
       } else if (component.keyStates.backward) {
-        component.truck.position = new THREE.Vector3(-coveredDistance * Math.sin(currentDirection), 0, -coveredDistance * Math.cos(currentDirection)).add(component.truck.position);
+        component.truck.acceleration = interpolate(component.truck.acceleration, -2.5 * deltaTime, deltaTime * 5);
+      } else {
+        component.truck.acceleration = interpolate(component.truck.acceleration, 0, deltaTime * 5);
       }
 
-      if (component.keyStates.right && (component.keyStates.forward || component.keyStates.backward) && !(component.keyStates.forward && component.keyStates.backward)) {
-        component.truck.direction -= 100 * deltaTime;
-      } else if (component.keyStates.left && (component.keyStates.forward || component.keyStates.backward) && !(component.keyStates.forward && component.keyStates.backward)) {
-        component.truck.direction += 100 * deltaTime;
+      component.truck.position = new THREE.Vector3(component.truck.acceleration * Math.sin(currentDirection), 0, component.truck.acceleration * Math.cos(currentDirection)).add(component.truck.position);
+
+      if (component.keyStates.right && (component.truck.acceleration > 0.001 || component.truck.acceleration < -0.001)) {
+        component.truck.direction -= 1000 * deltaTime * component.truck.acceleration;
+      } else if (component.keyStates.left && (component.truck.acceleration > 0.001 || component.truck.acceleration < -0.001)) {
+        component.truck.direction += 1000 * deltaTime * component.truck.acceleration;
       }
+
       component.truck.updatePosition();
     }());
 
@@ -493,7 +506,7 @@ export class RoadNetworkComponent implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.createScene([
+    this.createNetwork([
       {"id": 1, "name": "Arouca", "lat": 40.9321, "lon": 8.2451, "alt": 250, "links": [6, 13]},                          // 0
       {"id": 2, "name": "Espinho", "lat": 41.0072, "lon": 8.6410, "alt": 550, "links": [4, 9, 16]},                      // 1
       {"id": 3, "name": "Gondomar", "lat": 42.1115, "lon": 8.7613, "alt": 200, "links": [3, 8, 10, 12]},                 // 2
@@ -512,6 +525,7 @@ export class RoadNetworkComponent implements AfterViewInit {
       {"id": 16, "name": "Vila do Conde", "lat": 41.3517, "lon": 8.7479, "alt": 150, "links": []},                       // 15
       {"id": 17, "name": "Vila Nova de Gaia", "lat": 41.1239, "lon": 8.6118, "alt": 500, "links": []}                    // 16
     ]);
+
     this.startRenderingLoop();
   }
 }

@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {RouteService} from "../services/route/route.service";
 import {Route} from "../domain/Route";
+import {AuthService} from "../services/auth/auth.service";
 
 @Component({
   selector: 'app-route',
@@ -31,11 +32,21 @@ export class CreateRouteComponent implements OnInit {
 
   routes: Route[] = [];
 
-  constructor(private routesService: RouteService) {
+  permissions: number[] = [1,4]
+
+  constructor(private routesService: RouteService, private authService: AuthService) {
   }
 
   ngOnInit(): void {
     this.routesService.getRoutes().subscribe((obj) => this.routes = obj);
+
+    const token = JSON.parse(sessionStorage.getItem("user-data")!);
+
+    if (token) {
+      if (!this.permissions.includes(token.role)){
+        this.authService.redirect("/home")
+      }
+    }
   }
 
   public createRoute(): void {

@@ -9,6 +9,9 @@ import {DeliveryService} from "../services/delivery/delivery.service";
 })
 
 export class CreateDeliveryComponent implements OnInit {
+
+  pipe=false;
+
   delivery: Delivery;
   deliveryIdentifier: string;
   day: number;
@@ -67,5 +70,15 @@ export class CreateDeliveryComponent implements OnInit {
     this.deliveryService.listTable();
 
   }
+
+  public onPipe(){
+    this.pipe=true;
+  }
+
+  public ofPipe(){
+    this.pipe=false;
+  }
+
+
 
 }

@@ -1,11 +1,12 @@
-import {Component, AfterViewInit} from '@angular/core';
+import {AfterViewInit, Component} from '@angular/core';
 
 import * as THREE from 'three';
-import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js';
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
-import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js';
+import {FontLoader} from 'three/examples/jsm/loaders/FontLoader.js';
+import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader.js';
+import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls.js';
+import {TextGeometry} from 'three/examples/jsm/geometries/TextGeometry.js';
 import Warehouse from "./src/warehouse";
+import Truck from "./src/truck";
 
 @Component({
   selector: 'app-road-network',
@@ -22,14 +23,30 @@ export class RoadNetworkComponent implements AfterViewInit {
   private camera: THREE.PerspectiveCamera;
   private renderer: THREE.WebGLRenderer;
   private controls: OrbitControls;
+  private clock: THREE.Clock;
+  private truck: Truck;
 
   private warehouseArray: Warehouse[];
+  private acceleration: number = 0;
+  private keyCodes = {
+    forward: "ArrowUp",
+    backward: "ArrowDown",
+    right: "ArrowRight",
+    left: "ArrowLeft",
+    tab: "Tab"
+  }
+  public keyStates = {
+    forward: false,
+    backward: false,
+    right: false,
+    left: false
+  };
 
   private createScene(warehouseData: any[]) {
 
     this.warehouseArray = [];
 
-    // Create Scene
+    // Scene
     this.scene = new THREE.Scene();
     this.scene.fog = new THREE.FogExp2(0x34583d, 0.005);
     this.scene.background = new THREE.CubeTextureLoader().load([
@@ -42,14 +59,12 @@ export class RoadNetworkComponent implements AfterViewInit {
     ]);
 
     // Camera
-    this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / (window.innerHeight-90), 0.1, 10000);
+    this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / (window.innerHeight - 90), 0.1, 10000);
     this.camera.position.set(0, 90, 0);
 
-    window.addEventListener('resize', () => this.windowResize());
-
     // Renderer
-    this.renderer = new THREE.WebGLRenderer({ antialias: true });
-    this.renderer.setSize(window.innerWidth, window.innerHeight-90);
+    this.renderer = new THREE.WebGLRenderer({antialias: true});
+    this.renderer.setSize(window.innerWidth, window.innerHeight - 90);
 
     this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     this.renderer.shadowMap.enabled = true;
@@ -65,8 +80,37 @@ export class RoadNetworkComponent implements AfterViewInit {
     this.controls.target.set(0, 2, 0);
     this.controls.update();
 
+    // Clock
+    this.clock = new THREE.Clock;
+
     // Scene
     this.sceneSetup(warehouseData);
+
+    // Truck
+    this.truck = new Truck();
+    this.scene.add(this.truck.object);
+
+    // Setup event listeners
+    window.addEventListener('resize', () => this.windowResize());
+
+    window.addEventListener("keydown", event => this.keyChange(event, true));
+    window.addEventListener("keyup", event => this.keyChange(event, false));
+  }
+
+  keyChange(event: any, state: any) {
+
+    if (document.activeElement == document.body) {
+      if (event.code == this.keyCodes.left) {
+        this.keyStates.left = state;
+      } else if (event.code == this.keyCodes.right) {
+        this.keyStates.right = state;
+      }
+      if (event.code == this.keyCodes.backward) {
+        this.keyStates.backward = state;
+      } else if (event.code == this.keyCodes.forward) {
+        this.keyStates.forward = state;
+      }
+    }
   }
 
   sceneSetup(warehouseData: any[]) {
@@ -98,7 +142,7 @@ export class RoadNetworkComponent implements AfterViewInit {
     ////////////////////////////
     mesh = new THREE.Mesh(
       new THREE.CylinderGeometry(77, 77, 0.1, 64),
-      new THREE.MeshStandardMaterial({ color: 0xffffff })
+      new THREE.MeshStandardMaterial({color: 0xffffff})
     );
 
     mesh.position.y = -0.1;
@@ -111,7 +155,7 @@ export class RoadNetworkComponent implements AfterViewInit {
     /////////////////////////////////////////////////////////
     mesh = new THREE.Mesh(
       new THREE.CylinderGeometry(78, 78, 0.1, 64),
-      new THREE.MeshStandardMaterial({ color: 0x000000 })
+      new THREE.MeshStandardMaterial({color: 0x000000})
     );
 
     mesh.position.y = -0.2;
@@ -126,7 +170,7 @@ export class RoadNetworkComponent implements AfterViewInit {
       new THREE.Vector3(0, 0, -70),
       new THREE.Vector3(70, 0, 0),
       new THREE.Vector3(-70, 0, 0)
-    ], new THREE.LineBasicMaterial({ color: 0x000000 }));
+    ], new THREE.LineBasicMaterial({color: 0x000000}));
 
     //////////////////////////////
     // Draw dashed helper lines //
@@ -204,7 +248,7 @@ export class RoadNetworkComponent implements AfterViewInit {
     // 3D Title //
     //////////////
     this.add3DTitle(
-      new THREE.MeshStandardMaterial({ color: 0x141414 })
+      new THREE.MeshStandardMaterial({color: 0x141414})
     );
   }
 
@@ -412,40 +456,61 @@ export class RoadNetworkComponent implements AfterViewInit {
   // Updates the camera aspect ratio and the renderer size when the window is resized
   windowResize() {
 
-    this.camera.aspect = window.innerWidth / (window.innerHeight-90);
+    this.camera.aspect = window.innerWidth / (window.innerHeight - 90);
     this.camera.updateProjectionMatrix();
-    this.renderer.setSize(window.innerWidth, window.innerHeight-90);
+    this.renderer.setSize(window.innerWidth, window.innerHeight - 90);
   }
 
-  private startRenderingLoop(){
+  private startRenderingLoop() {
 
     let component: RoadNetworkComponent = this;
 
     (function render() {
       requestAnimationFrame(render);
       component.renderer.render(component.scene, component.camera);
+
+      const deltaTime = component.clock.getDelta();
+      const coveredDistance = deltaTime * 5;
+      const currentDirection = THREE.MathUtils.degToRad(component.truck.direction);
+
+      if (component.keyStates.forward) {
+        component.truck.position = new THREE.Vector3(coveredDistance * Math.sin(currentDirection), 0, coveredDistance * Math.cos(currentDirection)).add(component.truck.position);
+      } else if (component.keyStates.backward) {
+        component.truck.position = new THREE.Vector3(-coveredDistance * Math.sin(currentDirection), 0, -coveredDistance * Math.cos(currentDirection)).add(component.truck.position);
+      }
+
+      if (component.keyStates.right && (component.keyStates.forward || component.keyStates.backward) && !(component.keyStates.forward && component.keyStates.backward)) {
+        component.truck.direction -= 100 * deltaTime;
+      } else if (component.keyStates.left && (component.keyStates.forward || component.keyStates.backward) && !(component.keyStates.forward && component.keyStates.backward)) {
+        component.truck.direction += 100 * deltaTime;
+      }
+      component.truck.updatePosition();
     }());
+
+    function interpolate(start: number, end: number, amount: number) {
+      return (1 - amount) * start + amount * end;
+    }
   }
 
   ngAfterViewInit(): void {
     this.createScene([
-      { "id": 1, "name": "Arouca", "lat": 40.9321, "lon": 8.2451, "alt": 250, "links": [6, 13] },                          // 0
-      { "id": 2, "name": "Espinho", "lat": 41.0072, "lon": 8.6410, "alt": 550, "links": [4, 9, 16] },                      // 1
-      { "id": 3, "name": "Gondomar", "lat": 42.1115, "lon": 8.7613, "alt": 200, "links": [3, 8, 10, 12] },                 // 2
-      { "id": 4, "name": "Maia", "lat": 41.2279, "lon": 8.6210, "alt": 700, "links": [4, 7, 12, 15, 16] },                 // 3
-      { "id": 5, "name": "Matosinhos", "lat": 41.1844, "lon": 8.6963, "alt": 350, "links": [15] },                         // 4
-      { "id": 6, "name": "Oliveira de Azeméis", "lat": 40.8387, "lon": 8.4770, "alt": 750, "links": [9, 11, 13] },         // 5
-      { "id": 7, "name": "Paredes", "lat": 41.2052, "lon": 8.3304, "alt": 0, "links": [10, 13, 14] },                      // 6
-      { "id": 8, "name": "Porto", "lat": 41.1579, "lon": 8.6291, "alt": 600, "links": [16] },                              // 7
-      { "id": 9, "name": "Póvoa de Varzim", "lat": 41.3804, "lon": 8.7609, "alt": 400, "links": [15] },                    // 8
-      { "id": 10, "name": "Santa Maria da Feira", "lat": 40.9268, "lon": 8.5483, "alt": 100, "links": [11, 12, 14, 16] },  // 9
-      { "id": 11, "name": "Santo Tirso", "lat": 41.3431, "lon": 8.4738, "alt": 650, "links": [12, 14] },                   // 10
-      { "id": 12, "name": "São João da Madeira", "lat": 40.9005, "lon": 8.4907, "alt": 300, "links": [13, 14] },           // 11
-      { "id": 13, "name": "Trofa", "lat": 41.3391, "lon": 8.5600, "alt": 450, "links": [14] },                             // 12
-      { "id": 14, "name": "Vale de Cambra", "lat": 40.8430, "lon": 8.3956, "alt": 50, "links": [] },                       // 13
-      { "id": 15, "name": "Valongo", "lat": 41.1887, "lon": 8.4983, "alt": 800, "links": [] },                             // 14
-      { "id": 16, "name": "Vila do Conde", "lat": 41.3517, "lon": 8.7479, "alt": 150, "links": [] },                       // 15
-      { "id": 17, "name": "Vila Nova de Gaia", "lat": 41.1239, "lon": 8.6118, "alt": 500, "links": [] }                    // 16
+      {"id": 1, "name": "Arouca", "lat": 40.9321, "lon": 8.2451, "alt": 250, "links": [6, 13]},                          // 0
+      {"id": 2, "name": "Espinho", "lat": 41.0072, "lon": 8.6410, "alt": 550, "links": [4, 9, 16]},                      // 1
+      {"id": 3, "name": "Gondomar", "lat": 42.1115, "lon": 8.7613, "alt": 200, "links": [3, 8, 10, 12]},                 // 2
+      {"id": 4, "name": "Maia", "lat": 41.2279, "lon": 8.6210, "alt": 700, "links": [4, 7, 12, 15, 16]},                 // 3
+      {"id": 5, "name": "Matosinhos", "lat": 41.1844, "lon": 8.6963, "alt": 350, "links": [15]},                         // 4
+      {"id": 6, "name": "Oliveira de Azeméis", "lat": 40.8387, "lon": 8.4770, "alt": 750, "links": [9, 11, 13]},         // 5
+      {"id": 7, "name": "Paredes", "lat": 41.2052, "lon": 8.3304, "alt": 0, "links": [10, 13, 14]},                      // 6
+      {"id": 8, "name": "Porto", "lat": 41.1579, "lon": 8.6291, "alt": 600, "links": [16]},                              // 7
+      {"id": 9, "name": "Póvoa de Varzim", "lat": 41.3804, "lon": 8.7609, "alt": 400, "links": [15]},                    // 8
+      {"id": 10, "name": "Santa Maria da Feira", "lat": 40.9268, "lon": 8.5483, "alt": 100, "links": [11, 12, 14, 16]},  // 9
+      {"id": 11, "name": "Santo Tirso", "lat": 41.3431, "lon": 8.4738, "alt": 650, "links": [12, 14]},                   // 10
+      {"id": 12, "name": "São João da Madeira", "lat": 40.9005, "lon": 8.4907, "alt": 300, "links": [13, 14]},           // 11
+      {"id": 13, "name": "Trofa", "lat": 41.3391, "lon": 8.5600, "alt": 450, "links": [14]},                             // 12
+      {"id": 14, "name": "Vale de Cambra", "lat": 40.8430, "lon": 8.3956, "alt": 50, "links": []},                       // 13
+      {"id": 15, "name": "Valongo", "lat": 41.1887, "lon": 8.4983, "alt": 800, "links": []},                             // 14
+      {"id": 16, "name": "Vila do Conde", "lat": 41.3517, "lon": 8.7479, "alt": 150, "links": []},                       // 15
+      {"id": 17, "name": "Vila Nova de Gaia", "lat": 41.1239, "lon": 8.6118, "alt": 500, "links": []}                    // 16
     ]);
     this.startRenderingLoop();
   }

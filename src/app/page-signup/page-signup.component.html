@@ -5,22 +5,21 @@
     </span>
     <p class="domain-title">Sign Up</p>
     <div class="input-field">
-      <input class="input" type="text" placeholder="Email" [(ngModel)]="email" id="input-email">
+      <input [readOnly]="blockInput" class="input" type="text" placeholder="Email" [(ngModel)]="email" id="input-email">
     </div>
     <div class="input-field">
-      <input class="input" type="password" placeholder="Password" [(ngModel)]="password" id="input-password">
+      <input [readOnly]="blockInput" class="input" type="password" placeholder="Password" [(ngModel)]="password" id="input-password">
     </div>
     <div class="input-field">
-      <input class="input" type="text" placeholder="Fist Name" [(ngModel)]="firstName" id="input-firstName">
+      <input [readOnly]="blockInput" class="input" type="text" placeholder="Fist Name" [(ngModel)]="firstName" id="input-firstName">
     </div>
     <div class="input-field">
-      <input class="input" type="text" placeholder="Last Name" [(ngModel)]="lastName" id="input-lastName">
+      <input [readOnly]="blockInput" class="input" type="text" placeholder="Last Name" [(ngModel)]="lastName" id="input-lastName">
     </div>
     <div class="input-field">
-      <input class="input" type="text" placeholder="Phone Number" [(ngModel)]="phoneNumber" id="input-phoneNumber">
+      <input [readOnly]="blockInput" class="input" type="text" placeholder="Phone Number" [(ngModel)]="phoneNumber" id="input-phoneNumber">
     </div>
     <div class="input-field">
-      <!--<label>Role</label>-->
       <select [(ngModel)]="role" id="input-role">
         <option value="1">Warehouse Manager</option>
         <option value="2">Logistics Manager</option>
@@ -28,11 +27,15 @@
         <option value="4">Administrator</option>
       </select>
     </div>
+    <div class="input-field" style="display: flex; justify-content: space-between">
+      <input class="input" type="checkbox" style="display: inline-block; width: auto; border-bottom: 10px" [(ngModel)]="blockSignup" id="input-rgpd">
+      <label style="display: inline-block; max-width: 85%">I agree to the <a href="http://youtube.com" style="color: blue">terms of service</a> and <a href="http://youtube.com" style="color: blue">privacy policy</a>.</label>
+    </div>
     <div style="margin-bottom: 40px">
-      <button class="button" type="submit" (click)="signup()" id="button-login">Sign Up</button>
+      <button class="button" type="submit" (click)="signup()" [disabled]="!blockSignup" id="button-login">Sign Up</button>
     </div>
     <div>
-      <button class="button" type="submit" [routerLink]="['/login']" id="button-signup">Go back</button>
+      <button class="button" type="submit" (click)="returnToLogin()" id="button-signup">Go back</button>
     </div>
   </div>
 </div>

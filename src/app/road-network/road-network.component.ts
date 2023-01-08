@@ -31,7 +31,7 @@ export class RoadNetworkComponent implements AfterViewInit {
   private clock: THREE.Clock;
   private postProcessing: EffectComposer;
 
-  private tpsCamera: boolean = true;
+  private tpsCamera: boolean = false;
   private warehouseArray: Warehouse[];
   private truck: Truck;
 

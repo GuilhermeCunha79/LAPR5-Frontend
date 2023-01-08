@@ -13,6 +13,7 @@ import {CreateWarehouseComponent} from "./create-warehouse/create-warehouse.comp
 import {RoadNetworkComponent} from "./road-network/road-network.component";
 import {TermsOfUseComponent} from "./terms-of-use/terms-of-use.component";
 import {PrivacyPolicyComponent} from "./privacy-policy/privacy-policy.component";
+import {UsersComponent} from "./users/users.component";
 
 const routes: Routes = [
   {path: '', redirectTo: '/login', pathMatch: 'full'},
@@ -33,6 +34,7 @@ const routes: Routes = [
       {path: 'terms-of-use', component: TermsOfUseComponent},
       {path: 'privacy-policy', component: PrivacyPolicyComponent},
       {path: 'road-network', component: RoadNetworkComponent},
+      {path: 'user', component: UsersComponent}
     ]
   },
 

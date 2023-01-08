@@ -34,6 +34,12 @@ export class AuthService {
     return errorFlag;
   }
 
+
+  getUsers(): Observable<any> {
+    return this.httpClient.get(this.URL + '/all').pipe(
+      map(this.extractData));
+  }
+
   getUser(email: string, password: string): Observable<any> {
     const params = "email=" + email + "&password=" + password;
     return this.httpClient.get(this.URL + "?" + params).pipe(map(this.extractData));
@@ -165,5 +171,23 @@ export class AuthService {
 
   redirect(url: string): void {
     this.router.navigate([url]).then();
+  }
+
+  cancelUser1(email: string, firstName: string, lastName: string, phoneNumber: string, role: number): Observable<any> {
+    const body = {
+      "email": email,
+      "firstName": firstName,
+      "lastName": lastName,
+      "phoneNumber": phoneNumber,
+      "role": role,
+    };
+    console.log(body);
+    return this.httpClient.put(this.URL, body).pipe(map(this.extractData));
+  }
+
+  activateByIdentifier(): Observable<any> {
+    const body = {
+    };
+    return this.httpClient.patch(this.URL,body).pipe(map(this.extractData));
   }
 }

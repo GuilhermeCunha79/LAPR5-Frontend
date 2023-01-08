@@ -1,5 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from "../services/auth/auth.service";
+import {map, Observable} from "rxjs";
+import {Delivery} from "../domain/Delivery";
+import {User} from "../domain/User";
 
 @Component({
   selector: 'app-signup-screen',
@@ -8,6 +11,7 @@ import {AuthService} from "../services/auth/auth.service";
 })
 
 export class PageSignupComponent implements OnInit {
+
 
   email: string;
   password: string;
@@ -19,12 +23,13 @@ export class PageSignupComponent implements OnInit {
   blockInput: boolean = false;
   blockSignup: boolean = false;
 
+  users: User[];
   constructor(private signupService: AuthService) {
   }
 
   ngOnInit(): void {
     this.signupService.redirectToHome();
-
+    this.getUsers();
     const googleUser = JSON.parse(sessionStorage.getItem("google-user")!);
     if (googleUser) {
       this.blockInput = true;
@@ -34,6 +39,12 @@ export class PageSignupComponent implements OnInit {
       this.lastName = googleUser.lastName;
       this.phoneNumber = "939347107";
     }
+  }
+  public getUsers(): void {
+
+    this.signupService.getUsers().subscribe(data => {
+      this.users = data;
+    });
   }
 
   signup(): void {

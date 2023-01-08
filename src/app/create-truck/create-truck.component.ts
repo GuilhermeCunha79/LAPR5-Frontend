@@ -67,12 +67,6 @@ export class CreateTruckComponent implements OnInit {
     setTimeout(window.location.reload.bind(window.location), 200);
   }
 
-  public listTable(): void {
-
-    this.truckService.listTable().subscribe(data => {
-      this.trucks = data  });
-   // this.trucks= this.truckService.listTable();
-  }
 
   public activateTruck(licensePlate: string): void {
 

@@ -1,4 +1,4 @@
-﻿export interface Delivery {
+﻿export class Delivery {
   deliveryIdentifier: string;
   day: number;
   month: string;

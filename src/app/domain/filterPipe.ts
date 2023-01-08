@@ -305,8 +305,39 @@ export class FilterPipe implements PipeTransform {
           singleItem['warehouse'].toLowerCase().includes(params.warehouse.toLowerCase())
         );
       }
-    }
+    } else if(domainType === 'user') {
+      if (!params.email && !params.firstName && !params.lastName && !params.phoneNumber && !params.role) {
+        return items;
+      }
 
+      if (params.email) {
+        finalList = finalList.filter((singleItem) =>
+          singleItem['email'].toLowerCase().includes(params.email.toLowerCase())
+        );
+      }
+      if (params.firstName) {
+        finalList = finalList.filter((singleItem) =>
+          singleItem['firstName'].toLowerCase().includes(params.firstName.toLowerCase())
+        );
+      }
+      if (params.lastName) {
+        finalList = finalList.filter((singleItem) =>
+          singleItem['lastName'].toLowerCase().includes(params.lastName.toLowerCase())
+        );
+      }
+
+      if (params.phoneNumber) {
+        finalList = finalList.filter((singleItem) =>
+          singleItem['phoneNumber'].toLowerCase().includes(params.phoneNumber.toLowerCase())
+        );
+      }
+
+      if (params.role) {
+        finalList = finalList.filter((singleItem) =>
+          singleItem['role'].toLowerCase().includes(params.role.toLowerCase())
+        );
+      }
+    }
     return finalList;
   }
 

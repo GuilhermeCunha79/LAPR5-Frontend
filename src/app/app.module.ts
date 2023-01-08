@@ -21,6 +21,7 @@ import {TermsOfUseComponent} from "./terms-of-use/terms-of-use.component";
 import {PrivacyPolicyComponent} from "./privacy-policy/privacy-policy.component";
 
 import {GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule} from '@abacritt/angularx-social-login';
+import {UsersComponent} from "./users/users.component";
 
 @NgModule({
   imports: [
@@ -45,7 +46,8 @@ import {GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule} from '@
     CreateWarehouseComponent,
     RoadNetworkComponent,
     TermsOfUseComponent,
-    PrivacyPolicyComponent
+    PrivacyPolicyComponent,
+    UsersComponent
   ],
   providers: [
     {

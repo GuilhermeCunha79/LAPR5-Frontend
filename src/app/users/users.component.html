@@ -1,0 +1,31 @@
+﻿<div class="container">
+
+  <div class="menu-window">
+    <h1>User list</h1>
+    <table id="tbody">
+      <thead>
+      <tr>
+        <th style="border-radius: 5px 0 0 0">
+        <input type="text" class="header-filter" placeholder="Email" [(ngModel)]="searchEmail"></th>
+        <th><input type="text" class="header-filter" placeholder="First Name" [(ngModel)]="searchFirstName"></th>
+        <th><input type="text" class="header-filter" placeholder="Last Name" [(ngModel)]="searchLastName"></th>
+        <th><input type="text" class="header-filter" placeholder="Phone Number" [(ngModel)]="searchPhoneNumber"></th>
+        <th><input type="text" class="header-filter" placeholder="Role" [(ngModel)]="searchRole"></th>
+        <th style="border-radius: 0 5px 0 0"></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let user of users | filter:'user':{email: searchEmail,firstName: searchFirstName,lastName: searchLastName,phoneNumber: searchPhoneNumber,role: searchRole }">
+        <td>{{user.email}}</td>
+        <td>{{user.firstName}}</td>
+        <td>{{user.lastName}}</td>
+        <td>{{user.phoneNumber}}</td>
+        <td>{{user.role}}</td>
+        <td>
+          <button class="button" (click)="cancelUser(user.email,user.firstName,user.lastName,user.phoneNumber,user.role)" onclick="window.location.reload()">Cancel Account</button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -11,7 +11,7 @@
       <input [readOnly]="blockInput" class="input" type="password" placeholder="Password" [(ngModel)]="password" id="input-password">
     </div>
     <div class="input-field">
-      <input [readOnly]="blockInput" class="input" type="text" placeholder="Fist Name" [(ngModel)]="firstName" id="input-firstName">
+      <input [readOnly]="blockInput" class="input" type="text" placeholder="First Name" [(ngModel)]="firstName" id="input-firstName">
     </div>
     <div class="input-field">
       <input [readOnly]="blockInput" class="input" type="text" placeholder="Last Name" [(ngModel)]="lastName" id="input-lastName">
@@ -29,7 +29,7 @@
     </div>
     <div class="input-field" style="display: flex; justify-content: space-between">
       <input class="input" type="checkbox" style="display: inline-block; width: auto; border-bottom: 10px" [(ngModel)]="blockSignup" id="input-rgpd">
-      <label style="display: inline-block; max-width: 85%">I agree to the <a href="http://youtube.com" style="color: blue">terms of service</a> and <a href="http://youtube.com" style="color: blue">privacy policy</a>.</label>
+      <label style="display: inline-block; max-width: 85%">I agree to the <a [routerLink]="['/terms-of-use']" style="color: blue">terms and conditions</a> and <a [routerLink]="['/privacy-policy']" style="color: blue">privacy policy</a>.</label>
     </div>
     <div style="margin-bottom: 40px">
       <button class="button" type="submit" (click)="signup()" [disabled]="!blockSignup" id="button-login">Sign Up</button>

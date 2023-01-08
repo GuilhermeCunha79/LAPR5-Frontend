@@ -54,35 +54,7 @@ export class TruckService {
     return this.httpClient.get(this.Url + '?ls=' + licensePlate).pipe(map(this.extractData));
   }
 
-  listTable():Observable<any>  {
 
-    let tbody = document.getElementById('tbody') as HTMLTableElement;
-    let array = this.getTrucks();
-
-    array.forEach(function (i) {
-      for (let j = 0; j < i.length; j++) {
-        let tr = tbody.insertRow();
-
-        let td_licensePlate = tr.insertCell();
-        let td_autonomy = tr.insertCell();
-        let td_capacityCargo = tr.insertCell();
-        let td_capacityTransportation = tr.insertCell();
-        let td_battery = tr.insertCell();
-        let td_tare = tr.insertCell();
-
-        td_licensePlate.innerText = i[j].licensePlate;
-        td_autonomy.innerText = i[j].autonomy;
-        td_capacityCargo.innerText = i[j].capacityCargo;
-        td_capacityTransportation.innerText = i[j].capacityTransportation;
-        td_battery.innerText = i[j].battery;
-        td_tare.innerText = i[j].tare;
-      }
-
-
-    });
-
-    return array;
-  }
 
   activateByIdentifier(licensePlate: string): Observable<any> {
 

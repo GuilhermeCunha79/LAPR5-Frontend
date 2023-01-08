@@ -14,7 +14,8 @@ export class HomepageComponent implements OnInit {
     {"route": "/route", "icon": "icon-route.png", "description": "Routes", "roles": [2,4]},
     {"route": "/truck", "icon": "icon-truck.png", "description": "Trucks", "roles": [3,4]},
     {"route": "/warehouse", "icon": "icon-warehouse.png", "description": "Warehouses", "roles": [1,4]},
-    {"route": "/road-network", "icon": "icon-network.png", "description": "Network", "roles": [2,4]}
+    {"route": "/road-network", "icon": "icon-network.png", "description": "Network", "roles": [2,4]},
+    {"route": "/user", "icon": "icon-users.png", "description": "Users", "roles": [4]}
   ];
 
   roles: string[] = [
@@ -22,7 +23,6 @@ export class HomepageComponent implements OnInit {
     "Logistics Manager",
     "Fleet Manager",
     "Administrator",
-    "Client"
   ];
 
   userData: any;

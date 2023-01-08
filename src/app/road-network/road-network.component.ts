@@ -5,6 +5,11 @@ import {FontLoader} from 'three/examples/jsm/loaders/FontLoader.js';
 import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader.js';
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls.js';
 import {TextGeometry} from 'three/examples/jsm/geometries/TextGeometry.js';
+import {EffectComposer} from 'three/examples/jsm/postprocessing/EffectComposer';
+import {RenderPass} from 'three/examples/jsm/postprocessing/RenderPass.js';
+import {UnrealBloomPass} from 'three/examples/jsm/postprocessing/UnrealBloomPass';
+import {FilmPass} from 'three/examples/jsm/postprocessing/FilmPass';
+
 import Warehouse from "./src/warehouse";
 import Truck from "./src/truck";
 
@@ -24,7 +29,9 @@ export class RoadNetworkComponent implements AfterViewInit {
   private renderer: THREE.WebGLRenderer;
   private controls: OrbitControls;
   private clock: THREE.Clock;
+  private postProcessing: EffectComposer;
 
+  private tpsCamera: boolean = true;
   private warehouseArray: Warehouse[];
   private truck: Truck;
 
@@ -32,8 +39,7 @@ export class RoadNetworkComponent implements AfterViewInit {
     forward: "ArrowUp",
     backward: "ArrowDown",
     right: "ArrowRight",
-    left: "ArrowLeft",
-    tab: "Tab"
+    left: "ArrowLeft"
   }
   public keyStates = {
     forward: false,
@@ -60,7 +66,8 @@ export class RoadNetworkComponent implements AfterViewInit {
 
     // Camera
     this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / (window.innerHeight - 90), 0.1, 10000);
-    this.camera.position.set(0, 90, 0);
+    if (!this.tpsCamera) this.camera.position.set(0, 90, 0);
+    else this.camera.position.set(-5, 3, 0);
 
     // Renderer
     this.renderer = new THREE.WebGLRenderer({antialias: true});
@@ -82,6 +89,44 @@ export class RoadNetworkComponent implements AfterViewInit {
 
     // Clock
     this.clock = new THREE.Clock;
+
+    // Post Processing
+    this.postProcessing = new EffectComposer(this.renderer);
+    this.postProcessing.addPass(new RenderPass(this.scene, this.camera));
+    this.postProcessing.addPass(new UnrealBloomPass(
+      new THREE.Vector2(window.innerWidth, window.innerHeight - 90),
+      0.1,
+      0.1,
+      0.1
+    ));
+    this.postProcessing.addPass(new FilmPass(
+      0.1,
+      0.025,
+      648,
+      0,
+    ));
+
+    // Audio
+    const listener = new THREE.AudioListener();
+    this.camera.add(listener);
+
+    const ambiance = new THREE.Audio(listener);
+    new THREE.AudioLoader().load('/assets/sounds/ambience.mp3', function (buffer) {
+      ambiance.setBuffer(buffer);
+      ambiance.setLoop(true);
+      ambiance.setVolume(0.5);
+      ambiance.play();
+    });
+
+    if (this.tpsCamera) {
+      const truckEngine = new THREE.Audio(listener);
+      new THREE.AudioLoader().load('/assets/sounds/truck_idling.mp3', function (buffer) {
+        truckEngine.setBuffer(buffer);
+        truckEngine.setLoop(true);
+        truckEngine.setVolume(0.2);
+        truckEngine.play();
+      });
+    }
 
     // Truck
     this.truck = new Truck();
@@ -235,7 +280,7 @@ export class RoadNetworkComponent implements AfterViewInit {
       new THREE.Vector3(-53.1, 0, -10.2),
       new THREE.Vector3(20.6, 0, 37.1),
       new THREE.Vector3(32.4, 0, 50)
-    ]);
+    ], '/assets/models/tree1.gltf');
 
     //////////////
     // 3D Title //
@@ -405,12 +450,12 @@ export class RoadNetworkComponent implements AfterViewInit {
   }
 
   // Imports and adds a trees to the scene
-  createTrees(array: THREE.Vector3[]) {
+  createTrees(array: THREE.Vector3[], model: string) {
 
     const loader = new GLTFLoader();
 
     array.forEach((pos) => {
-      loader.load('/assets/models/tree1.gltf', (model) => {
+      loader.load(model, (model) => {
 
         model.scene.traverse((node) => {
           // @ts-ignore
@@ -476,7 +521,10 @@ export class RoadNetworkComponent implements AfterViewInit {
 
     (function render() {
       requestAnimationFrame(render);
-      component.renderer.render(component.scene, component.camera);
+
+      if (component.tpsCamera) {
+        component.camera.position.set(component.truck.position.x - 5, component.truck.position.y + 3, component.truck.position.z);
+      }
 
       const deltaTime = component.clock.getDelta();
       const currentDirection = THREE.MathUtils.degToRad(component.truck.direction);
@@ -498,6 +546,7 @@ export class RoadNetworkComponent implements AfterViewInit {
       }
 
       component.truck.updatePosition();
+      component.postProcessing.render(deltaTime);
     }());
 
     function interpolate(start: number, end: number, amount: number) {

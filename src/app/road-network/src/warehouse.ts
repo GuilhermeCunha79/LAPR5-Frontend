@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader.js';
 
 export default class Warehouse {
 
@@ -17,14 +17,26 @@ export default class Warehouse {
     this.radius = 0.75 + this.links.length * 0.15;
     this.object = new THREE.Group();
 
-    let geometry, material, mesh;
+    const segments = 32;
 
-    // Create the main cylinder (blue) that represents the warehouse
-    geometry = new THREE.CylinderGeometry(this.radius, this.radius, 0.1, 10);
-    material = new THREE.MeshStandardMaterial({ color: 0x004961 });
+    let geometry, material, mesh, texture;
+
+    texture = new THREE.TextureLoader().load("/assets/textures/road_seamless.jpg");
+
+    texture.magFilter = THREE.LinearFilter;
+    texture.minFilter = THREE.LinearMipMapLinearFilter;
+
+    texture.wrapS = THREE.RepeatWrapping;
+    texture.wrapT = THREE.RepeatWrapping;
+
+    texture.repeat.set(this.radius * 5, this.radius * 5);
+
+    // Create the main cylinder that represents the warehouse
+    geometry = new THREE.CylinderGeometry(this.radius, this.radius, 0.1, segments);
+    material = new THREE.MeshStandardMaterial({color: 0xffffff, map: texture});
     mesh = new THREE.Mesh(geometry, material);
 
-    mesh.position.y += 0.1;
+    mesh.position.y += 0.01;
 
     mesh.receiveShadow = true;
     mesh.castShadow = true;
@@ -32,13 +44,30 @@ export default class Warehouse {
     this.object.add(mesh);
 
     // Create a slightly larger cylinder (black) to serve as a border
-    geometry = new THREE.CylinderGeometry(this.radius * 1.2, this.radius * 1.2, 0.1, 10);
-    material = new THREE.MeshStandardMaterial({ color: 0x000000 });
+    geometry = new THREE.CylinderGeometry(this.radius * 1.05, this.radius * 1.05, 0.1, segments);
+    material = new THREE.MeshStandardMaterial({color: 0x000000});
     mesh = new THREE.Mesh(geometry, material);
 
     mesh.receiveShadow = true;
     mesh.castShadow = true;
 
+    this.object.add(mesh);
+
+    // Lines
+    geometry = new THREE.CircleGeometry(this.radius, segments);
+    geometry = new THREE.EdgesGeometry(geometry);
+    material = new THREE.LineBasicMaterial({color: 0xd29800});
+    mesh = new THREE.LineLoop(geometry, material);
+    mesh.position.y += 0.065;
+    mesh.rotation.set(Math.PI / 2, 0, 0);
+    this.object.add(mesh);
+
+    geometry = new THREE.CircleGeometry(this.radius * 0.85, segments);
+    geometry = new THREE.EdgesGeometry(geometry);
+    material = new THREE.LineBasicMaterial({color: 0xffffff});
+    mesh = new THREE.LineLoop(geometry, material);
+    mesh.position.y += 0.065;
+    mesh.rotation.set(Math.PI / 2, 0, 0);
     this.object.add(mesh);
 
     // Create the label
@@ -47,7 +76,8 @@ export default class Warehouse {
     this.object.add(mesh);
 
     // Add the warehouse model
-    this.createWarehouse();
+    if (this.radius < 1.2) this.createWarehouse('/assets/models/warehouse1.gltf');
+    else this.createWarehouse('/assets/models/warehouse2.gltf');
 
     // Sets the position of the warehouse
     this.object.position.set(this.position.x, this.position.y, this.position.z);
@@ -63,11 +93,11 @@ export default class Warehouse {
   }
 
   // Creates the warehouse model
-  createWarehouse() {
+  createWarehouse(model: string) {
 
     const loader = new GLTFLoader();
 
-    loader.load('/assets/models/warehouse1.gltf', (model) => {
+    loader.load(model, (model) => {
 
       model.scene.traverse((node) => {
         // @ts-ignore
@@ -86,19 +116,15 @@ export default class Warehouse {
     const canvas = document.createElement('canvas');
     const context = canvas.getContext('2d');
 
-    // @ts-ignore
-    context.font = fontSize + 'px Arial';
-    // @ts-ignore
-    context.textAlign = "center";
-    // @ts-ignore
-    context.textBaseline = 'middle';
-    // @ts-ignore
-    context.fillText(str, 150, 100);
+    context!.font = fontSize + 'px Arial';
+    context!.textAlign = "center";
+    context!.textBaseline = 'middle';
+    context!.fillText(str, 150, 100);
 
     const texture = new THREE.Texture(canvas);
     texture.needsUpdate = true;
 
-    const material = new THREE.SpriteMaterial({ map: texture });
+    const material = new THREE.SpriteMaterial({map: texture});
 
     const sprite = new THREE.Sprite(material);
     sprite.scale.set(0.25 * fontSize, 0.125 * fontSize, 0);

@@ -4,11 +4,11 @@
         <img src="../../assets/icon-account.png" alt="account-icon">
     </span>
     <p class="domain-title">Sign In</p>
-    <div class="input-field">
-      <input class="input" type="text" placeholder="Email" [(ngModel)]="email" id="input-email">
+    <div class="input-field" id="input-email">
+      <input class="input" type="text" placeholder="Email" [(ngModel)]="email">
     </div>
-    <div class="input-field">
-      <input class="input" type="password" placeholder="Password" [(ngModel)]="password" id="input-password">
+    <div class="input-field" id="input-password">
+      <input class="input" type="password" placeholder="Password" [(ngModel)]="password">
     </div>
     <div style="margin-bottom: 40px">
       <button class="button" type="submit" (click)="login(email, password)" id="button-login">Login</button>

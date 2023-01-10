@@ -83,17 +83,17 @@ export class AuthService {
   }
 
   checkEmail(email: string): boolean {
-    //const regexEmail = new RegExp(/[a-zA-Z]+@[a-zA-Z]+\.[a-zA-Z]+/);
+    const regexEmail = new RegExp(/[a-zA-Z]+@[a-zA-Z]+\.[a-zA-Z]+/);
 
     if (email == null) {
       this.errorMessage += "Email can't be null\n";
       return false;
     }
 
-    /*if (!regexEmail.test(email)){
+    if (!regexEmail.test(email)){
       this.errorMessage += "Invalid email\n";
       return false;
-    }*/
+    }
 
     return true;
   }
@@ -104,10 +104,10 @@ export class AuthService {
       return false;
     }
 
-    /*if (password.length < 8) {
+    if (password.length < 8) {
       this.errorMessage += "Password is not long enough\n";
       return false;
-    }*/
+    }
 
     return true;
   }

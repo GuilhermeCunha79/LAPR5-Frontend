@@ -31,7 +31,7 @@ export class CreatePlanningComponent implements OnInit {
 
   public createPlanning(): void {
     // @ts-ignore
-    this.planningService.createValidPlanning( this.licensePlate, this.date, this.delivery,this.heuristic).subscribe();
+    this.planningService.createValidPlanning( this.licensePlate, this.date,this.heuristic).subscribe();
     setTimeout(window.location.reload.bind(window.location), 200);
   }
 }

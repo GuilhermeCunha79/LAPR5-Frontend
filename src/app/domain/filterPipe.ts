@@ -286,7 +286,7 @@ export class FilterPipe implements PipeTransform {
       }
     } else if (domainType === "planning") {
 
-      if (!params.licensePlate && !params.date && !params.warehouse) {
+      if (!params.licensePlate && !params.date && !params.delivery && !params.warehouse && !listSize && !pageNumber) {
         return items;
       }
 
@@ -300,10 +300,19 @@ export class FilterPipe implements PipeTransform {
           singleItem['date'].toLowerCase().includes(params.date.toLowerCase())
         );
       }
+      if (params.delivery) {
+        finalList = finalList.filter((singleItem) =>
+          singleItem['delivery'].toLowerCase().includes(params.delivery.toLowerCase())
+        );
+      }
       if (params.warehouse) {
         finalList = finalList.filter((singleItem) =>
           singleItem['warehouse'].toLowerCase().includes(params.warehouse.toLowerCase())
         );
+      }
+
+      if (listSize && pageNumber) {
+        finalList = this.sliceArray(finalList, listSize, pageNumber)
       }
     } else if(domainType === 'user') {
       if (!params.email && !params.firstName && !params.lastName && !params.phoneNumber && !params.role) {

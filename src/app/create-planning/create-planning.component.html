@@ -31,14 +31,16 @@
       <label>Order By:</label>
 
       <div>
-        <button class="button" role="button" (click)="ofPipe()"style="margin-bottom: 5px">Reverse chronological order</button>
+        <button class="button" role="button" (click)="ofPipe()" style="margin-bottom: 5px">Reverse chronological order
+        </button>
       </div>
       <div>
-        <button class="button" role="button" (click)="onPipe()" style="margin-bottom: 10px">Ascending Warehouse ID</button>
+        <button class="button" role="button" (click)="onPipe()" style="margin-bottom: 10px">Ascending License Plate
+        </button>
       </div>
 
-    <table id="list-table">
-      <thead>
+      <table id="list-table">
+        <thead>
         <tr>
           <th style="border-radius: 5px 0 0 0"><input type="text" class="header-filter" placeholder="License Plate"
                                                       [(ngModel)]="searchLicensePlate"></th>
@@ -48,17 +50,32 @@
 
           <th style="border-radius: 0 5px 0 0">Warehouses</th>
         </tr>
-      </thead>
-      <tbody>
+        </thead>
+        <tbody>
+        <ng-container *ngIf="pipe">
+          <tr *ngFor="let planning of plannings | orderBy1:'licensePlate'">
+          <tr
+            *ngFor="let planning of plannings | filter:'planning':{licensePlate: searchLicensePlate,date: searchDate, delivery: searchDelivery, warehouse:searchWarehouse}:listSize:pageNumber">
+            <td>{{planning.licensePlate}}</td>
+            <td>{{planning.date}}</td>
+            <td>{{planning.delivery}}</td>
+            <td>{{planning.warehouse}}</td>
+          </tr>
 
-         <tr *ngFor="let planning of plannings | filter:'planning':{licensePlate: searchLicensePlate,date: searchDate, delivery: searchDelivery, warehouse:searchWarehouse}:listSize:pageNumber">
-          <td>{{planning.licensePlate}}</td>
-          <td>{{planning.date}}</td>
-          <td>{{planning.delivery}}</td>
-          <td>{{planning.warehouse}}</td>
-        </tr>
-      </tbody>
-    </table>
+        </ng-container>
+
+        <ng-container *ngIf="!pipe">
+          <tr *ngFor="let planning of plannings | orderBy1:'date'">
+          <tr
+            *ngFor="let planning of plannings | filter:'planning':{licensePlate: searchLicensePlate,date: searchDate, delivery: searchDelivery, warehouse:searchWarehouse}:listSize:pageNumber">
+            <td>{{planning.licensePlate}}</td>
+            <td>{{planning.date}}</td>
+            <td>{{planning.delivery}}</td>
+            <td>{{planning.warehouse}}</td>
+          </tr>
+
+        </ng-container>
+      </table>
       <div class="page-number-container">
         <button (click)="changePage(false)" class="button"><</button>
         <span>{{pageNumber}}</span>
@@ -67,5 +84,6 @@
       <div class="list-size-container">
         <input class="input" type="number" [(ngModel)]="listSize">
       </div>
+    </div>
   </div>
 </div>

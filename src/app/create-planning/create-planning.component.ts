@@ -26,7 +26,6 @@ export class CreatePlanningComponent implements OnInit {
   listSize: number = 10;
   pageNumber: number = 1;
 
-
   plannings: Planning[];
 
   constructor(private planningService: PlanningService) { }

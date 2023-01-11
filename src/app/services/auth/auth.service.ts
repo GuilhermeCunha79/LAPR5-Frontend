@@ -184,10 +184,4 @@ export class AuthService {
     console.log(body);
     return this.httpClient.put(this.URL, body).pipe(map(this.extractData));
   }
-
-  activateByIdentifier(): Observable<any> {
-    const body = {
-    };
-    return this.httpClient.patch(this.URL,body).pipe(map(this.extractData));
-  }
 }

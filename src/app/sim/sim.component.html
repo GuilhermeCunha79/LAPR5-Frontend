@@ -1,0 +1,30 @@
+﻿<div class="container">
+
+  <div class="menu-window">
+    <h1>User list</h1>
+    <div>
+      <div class="topnav">
+        <a class="active" href="#Truck">Home</a>
+        <a href="#contact">Deliveries</a>
+        <input type="text" placeholder="Search..">
+        <button type="submit">Submit</button>
+      </div>
+    <table id="tbody" >
+      <thead>
+
+      </thead>
+      <tbody>
+      <tr *ngFor="let planning of plannings">
+        <td>{{planning.licensePlate}}</td>
+        <td>{{planning.warehouse}}</td>
+      </tr>
+
+      </tbody>
+    </table>
+
+</div>
+
+  </div>
+
+
+</div>

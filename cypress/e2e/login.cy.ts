@@ -12,9 +12,9 @@ describe('empty spec', () => {
     cy.get('#input-email [type="text"]').should('have.value', '4')
 
     // Password
-    cy.get('#input-password [type="text"]').type('4', {force: true})
+    cy.get('#input-password [type="password"]').type('4', {force: true})
 
-    cy.get('#input-password [type="text"]').should('have.value', '4')
+    cy.get('#input-password [type="password"]').should('have.value', '4')
 
     cy.get('#button-login').as('btn').click({force: true})
   })

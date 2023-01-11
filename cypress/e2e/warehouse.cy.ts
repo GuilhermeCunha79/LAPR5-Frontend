@@ -1,14 +1,24 @@
 describe('empty spec', () => {
 
   beforeEach(() => {
-    cy.visit('https://spa-g70-2022.vercel.app/login')
+    cy.visit('http://localhost:4200/login')
+
+    // Email
+    cy.get('#input-email [type="text"]').type('4', {force: true})
+
+    cy.get('#input-email [type="text"]').should('have.value', '4')
+
+    // Password
+    cy.get('#input-password [type="password"]').type('4', {force: true})
+
+    cy.get('#input-password [type="password"]').should('have.value', '4')
+
+    cy.get('#button-login').as('btn').click({force: true})
 
 
-    cy.contains('Warehouse Manager').click({force: true})
+    cy.contains('Warehouses').click({force: true})
 
-    cy.contains('Create Warehouse').click()
-
-    cy.url().should('include', '/create-warehouse')
+    cy.url().should('include', '/warehouse')
   })
 
   it('.createWarehouse() - inputs for warehouse', () => {

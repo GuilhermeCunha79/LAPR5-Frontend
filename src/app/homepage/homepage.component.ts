@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {AuthService} from "../services/auth/auth.service";
 
 @Component({
   selector: 'app-homepage',
@@ -15,7 +16,8 @@ export class HomepageComponent implements OnInit {
     {"route": "/truck", "icon": "icon-truck.png", "description": "Trucks", "roles": [3,4]},
     {"route": "/warehouse", "icon": "icon-warehouse.png", "description": "Warehouses", "roles": [1,4]},
     {"route": "/road-network", "icon": "icon-network.png", "description": "Network", "roles": [2,4]},
-    {"route": "/user", "icon": "icon-users.png", "description": "Users", "roles": [4]}
+    {"route": "/user", "icon": "icon-users.png", "description": "Users", "roles": [4]},
+    {"route": "/sim", "icon": "plan-icon.png", "description": "Simulation", "roles": [4]}
   ];
 
   roles: string[] = [
@@ -28,7 +30,7 @@ export class HomepageComponent implements OnInit {
   userData: any;
   name: string;
 
-  constructor() {
+  constructor(private signupService: AuthService) {
   }
 
   ngOnInit(): void {
@@ -36,5 +38,19 @@ export class HomepageComponent implements OnInit {
       this.userData = JSON.parse(sessionStorage.getItem("user-data")!);
       this.name = this.userData.firstName + " " + this.userData.lastName;
     }
+  }
+
+
+  public cancelUser(email:string,firstName:string,lastName:string,phoneNumber:string,role:number): void {
+    this.signupService.cancelUser1(email,firstName,lastName,phoneNumber,role).subscribe(data => {
+      this.userData = data;
+    });
+    setTimeout(window.location.reload.bind(window.location), 500);
+  }
+
+
+  logout() {
+    sessionStorage.removeItem("user-data");
+    this.signupService.redirectToLogin();
   }
 }

@@ -8,8 +8,13 @@
           <img src="../../assets/{{link.icon}}" alt="account-icon">
         </span>
           <span class="description">{{link.description}}</span>
+
         </li>
       </a>
     </ng-container>
+    <p></p>
+    <div>
+      <button class="button" type="submit" (click)="logout();cancelUser(userData.email,userData.firstName,userData.lastName,userData.phoneNumber,userData.role)" id="button-signup">Cancel Account</button>
+    </div>
   </ul>
 </div>

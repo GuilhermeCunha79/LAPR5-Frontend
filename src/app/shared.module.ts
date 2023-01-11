@@ -3,6 +3,7 @@ import {CommonModule} from '@angular/common';
 import {FilterPipe} from "./domain/filterPipe";
 import {OrderPipe} from "./domain/orderPipe";
 import {IdPipe} from "./domain/orderPipe1";
+import {DayPipe} from "./domain/orderPipe2";
 
 @NgModule({
   imports: [
@@ -12,7 +13,8 @@ import {IdPipe} from "./domain/orderPipe1";
   declarations: [
     FilterPipe,
     OrderPipe,
-    IdPipe
+    IdPipe,
+    DayPipe
   ],
 
   providers: [],
@@ -20,7 +22,8 @@ import {IdPipe} from "./domain/orderPipe1";
   exports: [
     FilterPipe,
     OrderPipe,
-    IdPipe
+    IdPipe,
+    DayPipe
   ]
 })
 

@@ -14,12 +14,17 @@ export class CreatePlanningComponent implements OnInit {
   warehouse: string;
   heuristic: string = "1";
   delivery: string;
+  pipe=false;
 
   searchLicensePlate: string;
   searchDate: string;
 
   searchDelivery: string;
   searchWarehouse: string;
+
+  listSize: number = 10;
+  pageNumber: number = 1;
+
 
   plannings: Planning[];
 
@@ -34,4 +39,33 @@ export class CreatePlanningComponent implements OnInit {
     this.planningService.createValidPlanning( this.licensePlate, this.date,this.heuristic).subscribe();
     setTimeout(window.location.reload.bind(window.location), 200);
   }
+
+
+
+  public onPipe(){
+    this.pipe=true;
+  }
+
+  public ofPipe(){
+    this.pipe=false;
+  }
+
+
+  changePage(right: boolean): void {
+    if (right) {
+      this.pageNumber++;
+
+      const maxPageNumber = Math.ceil(this.plannings.length/this.listSize);
+      if (this.pageNumber > maxPageNumber) this.pageNumber = maxPageNumber;
+    }
+    else {
+      this.pageNumber--;
+
+      if (this.pageNumber < 1) this.pageNumber = 1;
+    }
+  }
+
+
+
+
 }

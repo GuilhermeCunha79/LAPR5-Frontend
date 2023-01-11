@@ -12,6 +12,8 @@ export class CreateTruckComponent implements OnInit {
 
   truck: Truck;
 
+  pipe=false;
+
   searchLicensePlate: string;
   searchAutonomy: string;
   searchCapacityCargo: string;
@@ -89,4 +91,15 @@ export class CreateTruckComponent implements OnInit {
       if (this.pageNumber < 1) this.pageNumber = 1;
     }
   }
+
+
+  public onPipe(){
+    this.pipe=true;
+  }
+
+  public ofPipe(){
+    this.pipe=false;
+  }
+
+
 }

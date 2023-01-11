@@ -27,6 +27,16 @@
   </div>
   <div class="menu-window">
     <h1>Planning list</h1>
+    <div class="input-field">
+      <label>Order By:</label>
+
+      <div>
+        <button class="button" role="button" (click)="ofPipe()"style="margin-bottom: 5px">Reverse chronological order</button>
+      </div>
+      <div>
+        <button class="button" role="button" (click)="onPipe()" style="margin-bottom: 10px">Ascending Warehouse ID</button>
+      </div>
+
     <table id="list-table">
       <thead>
         <tr>
@@ -34,14 +44,14 @@
                                                       [(ngModel)]="searchLicensePlate"></th>
           <th><input type="text" class="header-filter" placeholder="Date" [(ngModel)]="searchDate"></th>
 
-          <th>Deliveries</th>
+          <th>Delivery</th>
 
           <th style="border-radius: 0 5px 0 0">Warehouses</th>
         </tr>
       </thead>
       <tbody>
-        <tr
-          *ngFor="let planning of plannings | filter:'planning':{licensePlate: searchLicensePlate,date: searchDate, delivery: searchDelivery, warehouse:searchWarehouse}">
+
+         <tr *ngFor="let planning of plannings | filter:'planning':{licensePlate: searchLicensePlate,date: searchDate, delivery: searchDelivery, warehouse:searchWarehouse}:listSize:pageNumber">
           <td>{{planning.licensePlate}}</td>
           <td>{{planning.date}}</td>
           <td>{{planning.delivery}}</td>
@@ -49,5 +59,13 @@
         </tr>
       </tbody>
     </table>
+      <div class="page-number-container">
+        <button (click)="changePage(false)" class="button"><</button>
+        <span>{{pageNumber}}</span>
+        <button (click)="changePage(true)" class="button">></button>
+      </div>
+      <div class="list-size-container">
+        <input class="input" type="number" [(ngModel)]="listSize">
+      </div>
   </div>
 </div>

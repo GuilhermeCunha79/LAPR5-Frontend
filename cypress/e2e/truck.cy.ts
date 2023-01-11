@@ -1,5 +1,29 @@
 describe('empty spec', () => {
 
+
+  beforeEach(() => {
+    cy.visit('http://localhost:4200/login')
+
+    // Email
+    cy.get('#input-email [type="text"]').type('4', {force: true})
+
+    cy.get('#input-email [type="text"]').should('have.value', '4')
+
+    // Password
+    cy.get('#input-password [type="password"]').type('4', {force: true})
+
+    cy.get('#input-password [type="password"]').should('have.value', '4')
+
+    cy.get('#button-login').as('btn').click({force: true})
+
+
+    cy.contains('Truck').click({force: true})
+
+    cy.url().should('include', '/truck')
+  })
+
+/*
+
   beforeEach(() => {
     cy.visit('http://localhost:4200/login')
 
@@ -9,6 +33,7 @@ describe('empty spec', () => {
 
     cy.url().should('include', '/create-truck')
   })
+*/
 
   it('.createTruck() - inputs for trucks', () => {
 

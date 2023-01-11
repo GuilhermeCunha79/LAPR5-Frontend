@@ -17,7 +17,7 @@ export class HomepageComponent implements OnInit {
     {"route": "/warehouse", "icon": "icon-warehouse.png", "description": "Warehouses", "roles": [1,4]},
     {"route": "/road-network", "icon": "icon-network.png", "description": "Network", "roles": [2,4]},
     {"route": "/user", "icon": "icon-users.png", "description": "Users", "roles": [4]},
-    {"route": "/sim", "icon": "plan-icon.png", "description": "Simulation", "roles": [4]}
+    {"route": "/sim", "icon": "icon-simulation.png", "description": "Simulation", "roles": [4]}
   ];
 
   roles: string[] = [

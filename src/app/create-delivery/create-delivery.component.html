@@ -58,50 +58,50 @@
 
     </div>
     <table id="tbody">
-      <tr>
-        <th style="border-radius: 5px 0 0 0"><input type="text" class="header-filter" placeholder="Delivery ID" [(ngModel)]="searchDeliveryIdentifier"></th>
-        <th><input type="text" class="header-filter" placeholder="Day" [(ngModel)]="searchDay"></th>
-        <th><input type="text" class="header-filter" placeholder="Month" [(ngModel)]="searchMonth"></th>
-        <th><input type="text" class="header-filter" placeholder="Year" [(ngModel)]="searchYear"></th>
-        <th><input type="text" class="header-filter" placeholder="Mass" [(ngModel)]="searchMass"></th>
-        <th><input type="text" class="header-filter" placeholder="Placing Time" [(ngModel)]="searchPlacingTime"></th>
-        <th><input type="text" class="header-filter" placeholder="Store ID" [(ngModel)]="searchStoreId"></th>
-        <th><input type="text" class="header-filter" placeholder="Withdrawal Time" [(ngModel)]="searchWithdrawalTime">
-        </th>
-      </tr>
-
-      <ng-container *ngIf="pipe">
-        <tr *ngFor="let delivery of deliveries | sortId:'storeId'">
-        <tr
-          *ngFor="let delivery of deliveries | filter:'delivery':{deliveryIdentifier: searchDeliveryIdentifier,day: searchDay,month: searchMonth,year: searchYear,mass: searchMass,placingTime: searchPlacingTime, storeId: searchStoreId, withdrawalTime: searchWithdrawalTime}">
-          <td>{{delivery.deliveryIdentifier}}</td>
-          <td>{{delivery.day}}</td>
-          <td>{{delivery.month}}</td>
-          <td>{{delivery.year}}</td>
-          <td>{{delivery.mass}}</td>
-          <td>{{delivery.placingTime}}</td>
-          <td>{{delivery.storeId}}</td>
-          <td>{{delivery.withdrawalTime}}</td>
+      <thead>
+        <tr>
+          <th style="border-radius: 5px 0 0 0"><input type="text" class="header-filter" placeholder="Delivery ID" [(ngModel)]="searchDeliveryIdentifier"></th>
+          <th><input type="text" class="header-filter" placeholder="Day" [(ngModel)]="searchDay"></th>
+          <th><input type="text" class="header-filter" placeholder="Month" [(ngModel)]="searchMonth"></th>
+          <th><input type="text" class="header-filter" placeholder="Year" [(ngModel)]="searchYear"></th>
+          <th><input type="text" class="header-filter" placeholder="Mass" [(ngModel)]="searchMass"></th>
+          <th><input type="text" class="header-filter" placeholder="Placing Time" [(ngModel)]="searchPlacingTime"></th>
+          <th><input type="text" class="header-filter" placeholder="Store ID" [(ngModel)]="searchStoreId"></th>
+          <th><input type="text" class="header-filter" placeholder="Withdrawal Time" [(ngModel)]="searchWithdrawalTime">
+          </th>
         </tr>
-      </ng-container>
+      </thead>
+      <tbody>
+        <ng-container *ngIf="pipe">
+          <tr *ngFor="let delivery of deliveries | sortId:'storeId'">
+          <tr
+            *ngFor="let delivery of deliveries | filter:'delivery':{deliveryIdentifier: searchDeliveryIdentifier,day: searchDay,month: searchMonth,year: searchYear,mass: searchMass,placingTime: searchPlacingTime, storeId: searchStoreId, withdrawalTime: searchWithdrawalTime}">
+            <td>{{delivery.deliveryIdentifier}}</td>
+            <td>{{delivery.day}}</td>
+            <td>{{delivery.month}}</td>
+            <td>{{delivery.year}}</td>
+            <td>{{delivery.mass}}</td>
+            <td>{{delivery.placingTime}}</td>
+            <td>{{delivery.storeId}}</td>
+            <td>{{delivery.withdrawalTime}}</td>
+          </tr>
+        </ng-container>
 
-      <ng-container *ngIf="!pipe">
-        <tr *ngFor="let delivery of deliveries | orderBy:'day':'month':'year'">
-        <tr
-        *ngFor="let delivery of deliveries | filter:'delivery':{deliveryIdentifier: searchDeliveryIdentifier,day: searchDay,month: searchMonth,year: searchYear,mass: searchMass,placingTime: searchPlacingTime, storeId: searchStoreId, withdrawalTime: searchWithdrawalTime}">
-          <td>{{delivery.deliveryIdentifier}}</td>
-          <td>{{delivery.day}}</td>
-          <td>{{delivery.month}}</td>
-          <td>{{delivery.year}}</td>
-          <td>{{delivery.mass}}</td>
-          <td>{{delivery.placingTime}}</td>
-          <td>{{delivery.storeId}}</td>
-          <td>{{delivery.withdrawalTime}}</td>
-        </tr>
-      </ng-container>
-
-
+        <ng-container *ngIf="!pipe">
+          <tr *ngFor="let delivery of deliveries | orderBy:'day':'month':'year'">
+          <tr
+            *ngFor="let delivery of deliveries | filter:'delivery':{deliveryIdentifier: searchDeliveryIdentifier,day: searchDay,month: searchMonth,year: searchYear,mass: searchMass,placingTime: searchPlacingTime, storeId: searchStoreId, withdrawalTime: searchWithdrawalTime}">
+            <td>{{delivery.deliveryIdentifier}}</td>
+            <td>{{delivery.day}}</td>
+            <td>{{delivery.month}}</td>
+            <td>{{delivery.year}}</td>
+            <td>{{delivery.mass}}</td>
+            <td>{{delivery.placingTime}}</td>
+            <td>{{delivery.storeId}}</td>
+            <td>{{delivery.withdrawalTime}}</td>
+          </tr>
+        </ng-container>
+      </tbody>
     </table>
-
   </div>
 </div>

@@ -16,14 +16,15 @@ export class UsersComponent implements OnInit {
   searchPhoneNumber: string;
   searchRole: string;
 
-
   users: User[];
 
-  constructor(private signupService: AuthService) {
+  permissions: number[] = [4];
+
+  constructor(private signupService: AuthService, private authService: AuthService) {
   }
 
   ngOnInit(): void {
-
+    this.authService.checkPermission(this.permissions);
     this.getUsers();
   }
 

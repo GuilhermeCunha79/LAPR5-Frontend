@@ -1,4 +1,4 @@
-import {AfterViewInit, Component} from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 
 import * as THREE from 'three';
 import {FontLoader} from 'three/examples/jsm/loaders/FontLoader.js';
@@ -12,6 +12,9 @@ import {FilmPass} from 'three/examples/jsm/postprocessing/FilmPass';
 
 import Warehouse from "./src/warehouse";
 import Truck from "./src/truck";
+import {WarehouseService} from "../services/warehouse/warehouse.service";
+import {RouteService} from "../services/route/route.service";
+import {AuthService} from "../services/auth/auth.service";
 
 @Component({
   selector: 'app-road-network',
@@ -19,9 +22,9 @@ import Truck from "./src/truck";
   styleUrls: ['./road-network.component.css']
 })
 
-export class RoadNetworkComponent implements AfterViewInit {
+export class RoadNetworkComponent implements OnInit, AfterViewInit {
 
-  constructor() {
+  constructor(private warehouseService: WarehouseService, private routesService: RouteService, private authService: AuthService) {
   }
 
   private scene: THREE.Scene;
@@ -34,6 +37,8 @@ export class RoadNetworkComponent implements AfterViewInit {
   private tpsCamera: boolean = false;
   private warehouseArray: Warehouse[];
   private truck: Truck;
+
+  permissions: number[] = [2,4];
 
   private keyCodes = {
     forward: "ArrowUp",
@@ -84,7 +89,7 @@ export class RoadNetworkComponent implements AfterViewInit {
     this.controls.dampingFactor = 0.2;
 
     this.controls.maxPolarAngle = Math.PI;
-    this.controls.target.set(0, 2, 0);
+    this.controls.target.set(0, -5, 0);
     this.controls.update();
 
     // Clock
@@ -312,7 +317,7 @@ export class RoadNetworkComponent implements AfterViewInit {
 
   // Creates all the links between each warehouse
   createLinks() {
-    for (let i = 0; i < this.warehouseArray.length - 1; i++) {
+    for (let i = 0; i < this.warehouseArray.length; i++) {
       for (let j = 0; j < this.warehouseArray[i].links.length; j++) {
 
         const warehouseO = this.warehouseArray[i];
@@ -530,11 +535,11 @@ export class RoadNetworkComponent implements AfterViewInit {
       const currentDirection = THREE.MathUtils.degToRad(component.truck.direction);
 
       if (component.keyStates.forward) {
-        component.truck.acceleration = interpolate(component.truck.acceleration, 5 * deltaTime, deltaTime * 5);
+        component.truck.acceleration = interpolate(component.truck.acceleration, 5 * 0.18 * deltaTime, 5 * deltaTime);
       } else if (component.keyStates.backward) {
-        component.truck.acceleration = interpolate(component.truck.acceleration, -2.5 * deltaTime, deltaTime * 5);
+        component.truck.acceleration = interpolate(component.truck.acceleration, -2.5 * 0.18 * deltaTime, 5 * deltaTime);
       } else {
-        component.truck.acceleration = interpolate(component.truck.acceleration, 0, deltaTime * 5);
+        component.truck.acceleration = interpolate(component.truck.acceleration, 0, 5 * deltaTime);
       }
 
       component.truck.position = new THREE.Vector3(component.truck.acceleration * Math.sin(currentDirection), 0, component.truck.acceleration * Math.cos(currentDirection)).add(component.truck.position);
@@ -554,8 +559,12 @@ export class RoadNetworkComponent implements AfterViewInit {
     }
   }
 
+  ngOnInit(): void {
+    this.authService.checkPermission(this.permissions);
+  }
+
   ngAfterViewInit(): void {
-    this.createNetwork([
+    /*this.createNetwork([
       {"id": 1, "name": "Arouca", "lat": 40.9321, "lon": 8.2451, "alt": 250, "links": [6, 13]},                          // 0
       {"id": 2, "name": "Espinho", "lat": 41.0072, "lon": 8.6410, "alt": 550, "links": [4, 9, 16]},                      // 1
       {"id": 3, "name": "Gondomar", "lat": 42.1115, "lon": 8.7613, "alt": 200, "links": [3, 8, 10, 12]},                 // 2
@@ -573,8 +582,47 @@ export class RoadNetworkComponent implements AfterViewInit {
       {"id": 15, "name": "Valongo", "lat": 41.1887, "lon": 8.4983, "alt": 800, "links": []},                             // 14
       {"id": 16, "name": "Vila do Conde", "lat": 41.3517, "lon": 8.7479, "alt": 150, "links": []},                       // 15
       {"id": 17, "name": "Vila Nova de Gaia", "lat": 41.1239, "lon": 8.6118, "alt": 500, "links": []}                    // 16
-    ]);
+    ]);*/
 
-    this.startRenderingLoop();
+    let networkArray: any[] = [];
+
+    this.warehouseService.getWarehouses().subscribe(warehouses => {
+      this.routesService.getRoutes().subscribe(routes => {
+
+        const filteredWarehouses = warehouses.filter((ew: any) => ew.status === "Active")
+
+        filteredWarehouses.forEach((warehouse: any) => {
+          if (warehouse.status == "Active") {
+
+            let links: any[] = [];
+
+            routes.filter((e: any) => e.origin == warehouse.designation).forEach((route: any) => {
+
+              const index = filteredWarehouses.findIndex((element: any) => element.designation == route.destination);
+
+              if (index !== -1 && filteredWarehouses[index].status === "Active") {
+                links.push(index);
+              }
+            });
+
+            const newWarehouse = {
+              "id": warehouse.warehouseIdentifier,
+              "name": warehouse.designation,
+              "lat": warehouse.latitude,
+              "lon": warehouse.longitude,
+              "alt": warehouse.altitude,
+              "links": links
+            };
+
+            networkArray.push(newWarehouse);
+          }
+        })
+
+        console.log(networkArray.length)
+
+        this.createNetwork(networkArray);
+        this.startRenderingLoop();
+      });
+    });
   }
 }

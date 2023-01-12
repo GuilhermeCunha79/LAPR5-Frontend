@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {WarehouseService} from "../services/warehouse/warehouse.service";
 import {Warehouse} from "../domain/Warehouse";
+import {AuthService} from "../services/auth/auth.service";
 
 @Component({
   selector: 'app-create-warehouse',
@@ -33,14 +34,15 @@ export class CreateWarehouseComponent implements OnInit {
   searchAltitude: number;
   searchStatus: string;
 
-
   warehouses: Warehouse[];
 
+  permissions: number[] = [1,4];
 
-  constructor(private warehouseService: WarehouseService) {
+  constructor(private warehouseService: WarehouseService, private authService: AuthService) {
   }
 
   ngOnInit(): void {
+    this.authService.checkPermission(this.permissions);
     this.getWarehouses();
   }
 

@@ -11,8 +11,8 @@ export default class Truck {
   constructor() {
 
     this.object = new THREE.Group();
-    this.position = new THREE.Vector3(0, 0, 0);
-    this.direction = 90;
+    this.position = new THREE.Vector3(-4.7, 4.22, -9.16);
+    this.direction = 42.5;
     this.acceleration = 0;
 
     this.createTruck();
@@ -38,7 +38,7 @@ export default class Truck {
 
       const mesh = model.scene;
       mesh.position.y = 1.05;
-      const scaleFactor = 0.01;
+      const scaleFactor = 0.0018;
       mesh.scale.set(scaleFactor, scaleFactor, scaleFactor);
       this.object.add(mesh);
     });

@@ -9,7 +9,6 @@ import {AuthService} from "../services/auth/auth.service";
 export class HomepageComponent implements OnInit {
 
   links: any[] = [
-    //{"route": "/login", "icon": "icon-account.png", "description": "Login", "roles": [1,2,3,4,5]},
     {"route": "/delivery", "icon": "icon-delivery.png", "description": "Deliveries", "roles": [1,4]},
     {"route": "/planning", "icon": "icon-planning.png", "description": "Planning", "roles": [2,4]},
     {"route": "/route", "icon": "icon-route.png", "description": "Routes", "roles": [2,4]},

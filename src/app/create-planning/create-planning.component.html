@@ -53,7 +53,7 @@
         </thead>
         <tbody>
         <ng-container *ngIf="pipe">
-          <tr *ngFor="let planning of plannings | orderBy1:'licensePlate'">
+          <tr *ngFor="let planning of plannings |  orderBy1:'licensePlate'">
           <tr
             *ngFor="let planning of plannings | filter:'planning':{licensePlate: searchLicensePlate,date: searchDate, delivery: searchDelivery, warehouse:searchWarehouse}:listSize:pageNumber">
             <td>{{planning.licensePlate}}</td>

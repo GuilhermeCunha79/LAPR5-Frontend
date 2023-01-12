@@ -11,7 +11,7 @@ import {DeliveryService} from "../services/delivery/delivery.service";
 export class CreateDeliveryComponent implements OnInit {
 
   pipe=false;
-
+  listSize: number = 10;
   delivery: Delivery;
   deliveryIdentifier: string;
   day: number;
@@ -33,7 +33,7 @@ export class CreateDeliveryComponent implements OnInit {
 
   deliveries: Delivery[] = [];
 
-
+  pageNumber: number = 1;
   constructor(private deliveryService: DeliveryService) {
 
   }
@@ -79,6 +79,18 @@ export class CreateDeliveryComponent implements OnInit {
     this.pipe=false;
   }
 
+  changePage(right: boolean): void {
+    if (right) {
+      this.pageNumber++;
 
+      const maxPageNumber = Math.ceil(this.deliveries.length/this.listSize);
+      if (this.pageNumber > maxPageNumber) this.pageNumber = maxPageNumber;
+    }
+    else {
+      this.pageNumber--;
+
+      if (this.pageNumber < 1) this.pageNumber = 1;
+    }
+  }
 
 }

@@ -1,6 +1,7 @@
 ﻿import {Component, OnInit} from '@angular/core';
 import {Delivery} from "../domain/Delivery";
 import {DeliveryService} from "../services/delivery/delivery.service";
+import {AuthService} from "../services/auth/auth.service";
 
 @Component({
   selector: 'app-create-warehouse',
@@ -11,7 +12,7 @@ import {DeliveryService} from "../services/delivery/delivery.service";
 export class CreateDeliveryComponent implements OnInit {
 
   pipe=false;
-
+  listSize: number = 10;
   delivery: Delivery;
   deliveryIdentifier: string;
   day: number;
@@ -79,7 +80,19 @@ export class CreateDeliveryComponent implements OnInit {
   public ofPipe(){
     this.pipe=false;
   }
+  changePage(right: boolean): void {
+    if (right) {
+      this.pageNumber++;
 
+      const maxPageNumber = Math.ceil(this.deliveries.length/this.listSize);
+      if (this.pageNumber > maxPageNumber) this.pageNumber = maxPageNumber;
+    }
+    else {
+      this.pageNumber--;
+
+      if (this.pageNumber < 1) this.pageNumber = 1;
+    }
+  }
 
 
 }

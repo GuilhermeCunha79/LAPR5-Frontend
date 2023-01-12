@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {TruckService} from "../services/truck/truck.service";
 import {Truck} from "../domain/Truck";
+import {AuthService} from "../services/auth/auth.service";
 
 @Component({
   selector: 'app-create-truck',
@@ -33,12 +34,14 @@ export class CreateTruckComponent implements OnInit {
   listSize: number = 10;
   pageNumber: number = 1;
 
+  permissions: number[] = [3,4];
 
-  constructor(private truckService: TruckService) {
+  constructor(private truckService: TruckService, private authService: AuthService) {
   }
 
   ngOnInit(): void {
    // this.listTable();
+    this.authService.checkPermission(this.permissions);
     this.getTrucks();
   }
 

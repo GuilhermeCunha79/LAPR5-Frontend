@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Planning} from "../domain/Planning";
 import {PlanningService} from "../services/planning/planning.service";
+import {AuthService} from "../services/auth/auth.service";
 
 @Component({
   selector: 'app-create-planning',
@@ -28,9 +29,13 @@ export class CreatePlanningComponent implements OnInit {
 
   plannings: Planning[];
 
-  constructor(private planningService: PlanningService) { }
+  permissions: number[] = [2,4];
+
+  constructor(private planningService: PlanningService, private authService: AuthService) {
+  }
 
   ngOnInit(): void {
+    this.authService.checkPermission(this.permissions);
     this.planningService.getPlanning().subscribe((obj) => this.plannings = obj);
   }
 

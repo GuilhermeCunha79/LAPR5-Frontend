@@ -22,6 +22,9 @@ const routes: Routes = [
   {path: 'login', component: PageLoginComponent},
   {path: 'signup', component: PageSignupComponent},
 
+  {path: 'terms-of-use', component: TermsOfUseComponent},
+  {path: 'privacy-policy', component: PrivacyPolicyComponent},
+
   {
     path: '',
     component: DefaultLayoutComponent,
@@ -32,8 +35,6 @@ const routes: Routes = [
       {path: 'route', component: CreateRouteComponent},
       {path: 'truck', component: CreateTruckComponent},
       {path: 'warehouse', component: CreateWarehouseComponent},
-      {path: 'terms-of-use', component: TermsOfUseComponent},
-      {path: 'privacy-policy', component: PrivacyPolicyComponent},
       {path: 'road-network', component: RoadNetworkComponent},
       {path: 'user', component: UsersComponent},
       {path: 'sim', component: SimComponent}

@@ -27,26 +27,19 @@ export class CreateRouteComponent implements OnInit {
   searchEnergySpent: number;
   searchExtraBatteryTime: number;
 
-  listSize: number = 10;
+  listSize: number = 16;
   pageNumber: number = 1;
 
   routes: Route[] = [];
 
-  permissions: number[] = [1,4]
+  permissions: number[] = [2,4];
 
   constructor(private routesService: RouteService, private authService: AuthService) {
   }
 
   ngOnInit(): void {
+    this.authService.checkPermission(this.permissions);
     this.routesService.getRoutes().subscribe((obj) => this.routes = obj);
-
-    const token = JSON.parse(sessionStorage.getItem("user-data")!);
-
-    if (token) {
-      if (!this.permissions.includes(token.role)){
-        this.authService.redirect("/home")
-      }
-    }
   }
 
   public createRoute(): void {

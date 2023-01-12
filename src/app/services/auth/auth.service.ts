@@ -173,6 +173,17 @@ export class AuthService {
     this.router.navigate([url]).then();
   }
 
+  checkPermission(permissions: number[]): void {
+
+    const token = JSON.parse(sessionStorage.getItem("user-data")!);
+
+    if (token) {
+      if (!permissions.includes(token.role)){
+        this.redirect("/home");
+      }
+    }
+  }
+
   cancelUser1(email: string, firstName: string, lastName: string, phoneNumber: string, role: number): Observable<any> {
     const body = {
       "email": email,

@@ -1,6 +1,7 @@
 ﻿import {Component, OnInit} from '@angular/core';
 import {Delivery} from "../domain/Delivery";
 import {DeliveryService} from "../services/delivery/delivery.service";
+import {AuthService} from "../services/auth/auth.service";
 
 @Component({
   selector: 'app-create-warehouse',
@@ -33,12 +34,13 @@ export class CreateDeliveryComponent implements OnInit {
 
   deliveries: Delivery[] = [];
 
+  permissions: number[] = [1,4];
 
-  constructor(private deliveryService: DeliveryService) {
-
+  constructor(private deliveryService: DeliveryService, private authService: AuthService) {
   }
 
   ngOnInit(): void {
+    this.authService.checkPermission(this.permissions);
     this.getDeliveries();
   }
 
